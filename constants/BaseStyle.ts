@@ -11,6 +11,10 @@ export const CommonStyle = StyleSheet.create({
     FlexContainer: {
         flex: 1
     },
+    FlexRow: {
+        flex: 1,
+        flexDirection: "row"
+    },
     Bordered: {
         borderWidth: 1,
         borderRadius: 15,
@@ -23,9 +27,26 @@ export const TextStyle = StyleSheet.create({
         fontSize: 15,
         textAlign: "center",
         color: ColorsTheme.SecondaryColor
+    },
+    HeaderText: {
+        textAlign: "center",
+        fontSize: 21,
+        color: ColorsTheme.SecondaryColor,
+        fontWeight: "bold"
     }
 });
 
 export const ImageStyle = StyleSheet.create({
     CardImage: {...CommonStyle.Bordered}
+});
+
+export const ContainerStyle = StyleSheet.create({
+    OuterContainerStyle: {
+        flex: 1,
+        backgroundColor: ColorsTheme.PrimaryColor
+    },
+    InnerContainerStyle: {
+        backgroundColor: ColorsTheme.LightColor,
+        flex: 1
+    }
 });

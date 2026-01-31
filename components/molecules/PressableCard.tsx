@@ -12,9 +12,9 @@ export const PressableCard = ({ color, title }: PressableCardProps) => {
     const modelStyle: ViewStyle = {
         paddingVertical: 10,
         paddingHorizontal: 15,
-        minHeight: 120,
         flexDirection: "column",
-        gap: 10
+        gap: 10,
+        flexGrow: 1
     };
 
     return (

@@ -8,7 +8,7 @@ type CardImageProps = {
 export const CardImage = ({ color }: CardImageProps) => {
     const modelStyle: ViewStyle = {
         backgroundColor: color,
-        flex: 2
+        aspectRatio: 2
     };
 
     return (
