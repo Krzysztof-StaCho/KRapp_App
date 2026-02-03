@@ -1,5 +1,5 @@
 import { ViewStyle, View, Text } from "react-native";
-import { ColorsTheme, TextStyle } from "../../constants/BaseStyle";
+import { ColorsTheme, TextStyle } from "../../utils/BaseStyle";
 
 export const PageFooter = () => {
     const modelStyle: ViewStyle = {

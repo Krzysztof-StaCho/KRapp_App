@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ColorsTheme, CommonStyle, ContainerStyle } from './constants/BaseStyle';
+
+import { ColorsTheme, ContainerStyle } from './utils/BaseStyle';
 import { CardShelf } from './components/molecules/CardShelf';
 import { ScrollView, View } from 'react-native';
 import { PageHeader } from './components/atoms/PageHeader';
@@ -13,17 +14,9 @@ export default function App() {
         <PageHeader title='Strona główna' />
         <ScrollView style={{ backgroundColor: ColorsTheme.LightColor }}>
           <CardShelf cardObj={[
-            { color: ColorsTheme.PrimaryColor, title: "Raporty" },
-            { color: ColorsTheme.SecondaryColor, title: "Czas Pracy" },
-            { color: ColorsTheme.BodyColor, title: "Panel Admina" }]} />
-          <CardShelf cardObj={[
-            { color: ColorsTheme.PrimaryColor, title: "Raporty" },
-            { color: ColorsTheme.SecondaryColor, title: "Czas Pracy" },
-            { color: ColorsTheme.BodyColor, title: "Panel Admina" }]} />
-          <CardShelf cardObj={[
-            { color: ColorsTheme.PrimaryColor, title: "Raporty" },
-            { color: ColorsTheme.SecondaryColor, title: "Czas Pracy" },
-            { color: ColorsTheme.BodyColor, title: "Panel Admina" }]} />
+            { title: "Raporty", iconProp: { color: ColorsTheme.PrimaryColor, iconName: "area-chart" }},
+            { title: "Czas Pracy", iconProp: { color: ColorsTheme.SecondaryColor, iconName: "bar-chart" }},
+            { title: "Konfiguracja", iconProp: { color: ColorsTheme.BodyColor, iconName: "setting" }}]} />
         </ScrollView>
         <PageFooter />
       </View>

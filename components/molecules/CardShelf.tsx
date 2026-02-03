@@ -1,6 +1,6 @@
 import { View, ViewStyle } from "react-native";
 import { PressableCard, PressableCardProps } from "./PressableCard";
-import { ColorsTheme, CommonStyle } from "../../constants/BaseStyle";
+import { ColorsTheme, CommonStyle } from "../../utils/BaseStyle";
 
 type CardShelfProps = {
     cardObj: PressableCardProps[]
@@ -19,7 +19,7 @@ export const CardShelf = ({ cardObj }: CardShelfProps) => {
     return (
         <View style={[CommonStyle.FlexRow, modelStyle]}>
             {cardObj.map((item, index) => (
-                <PressableCard key={index} color={item.color} title={item.title} />
+                <PressableCard key={index} title={item.title} iconProp={item.iconProp} />
             ))}
         </View>
     );
