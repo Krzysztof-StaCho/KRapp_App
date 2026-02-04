@@ -1,14 +1,14 @@
 import { Pressable, ViewStyle } from "react-native"
-import { CommonStyle } from "../../constants/BaseStyle";
-import { CardImage } from "../atoms/CardImage";
+import { CommonStyle } from "../../utils/BaseStyle";
+import { CardImage, CardImageProps } from "../atoms/CardImage";
 import { CardTitle } from "../atoms/CardTitle";
 
 export type PressableCardProps = {
-    color: string,
-    title: string
+    title: string,
+    iconProp: CardImageProps
 }
 
-export const PressableCard = ({ color, title }: PressableCardProps) => {
+export const PressableCard = ({ title, iconProp }: PressableCardProps) => {
     const modelStyle: ViewStyle = {
         paddingVertical: 10,
         paddingHorizontal: 15,
@@ -19,7 +19,7 @@ export const PressableCard = ({ color, title }: PressableCardProps) => {
 
     return (
         <Pressable style={[CommonStyle.FlexContainer, CommonStyle.Bordered, modelStyle]}>
-            <CardImage color={color} />
+            <CardImage color={iconProp.color} iconName={iconProp.iconName} />
             <CardTitle text={title} />
         </Pressable>
     );

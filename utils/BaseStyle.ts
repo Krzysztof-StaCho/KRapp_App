@@ -24,15 +24,21 @@ export const CommonStyle = StyleSheet.create({
 
 export const TextStyle = StyleSheet.create({
     CardTitle: {
-        fontSize: 15,
+        fontSize: 12,
         textAlign: "center",
-        color: ColorsTheme.SecondaryColor
+        color: ColorsTheme.SecondaryColor,
+        fontFamily: "Bangers"
     },
     HeaderText: {
         textAlign: "center",
-        fontSize: 21,
+        fontSize: 25,
         color: ColorsTheme.SecondaryColor,
-        fontWeight: "bold"
+        fontFamily: "Zalando"
+    },
+    ParagraphText: {
+        fontSize: 18,
+        color: ColorsTheme.SecondaryColor,
+        fontFamily: "Macondo"
     }
 });
 

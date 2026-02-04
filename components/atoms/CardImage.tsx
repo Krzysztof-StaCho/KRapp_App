@@ -1,17 +1,22 @@
 import { View, ViewStyle } from "react-native";
-import { ImageStyle } from "../../constants/BaseStyle";
+import { ImageStyle } from "../../utils/BaseStyle";
+import { AntDesign } from "@expo/vector-icons";
 
-type CardImageProps = {
-    color: string
+export type CardImageProps = {
+    color: string,
+    iconName?: keyof typeof AntDesign.glyphMap
 };
 
-export const CardImage = ({ color }: CardImageProps) => {
+export const CardImage = ({ color, iconName }: CardImageProps) => {
     const modelStyle: ViewStyle = {
         backgroundColor: color,
         aspectRatio: 2
     };
 
     return (
-        <View style={[ ImageStyle.CardImage, modelStyle ]}></View>
+        <View style={[ ImageStyle.CardImage, modelStyle ]}>
+            { iconName ?
+            <AntDesign style={{margin: "auto"}} name={iconName} size={24} color="white" /> : <></> }
+        </View>
     );
 };
