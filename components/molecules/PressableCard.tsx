@@ -4,11 +4,11 @@ import { CardImage, CardImageProps } from "../atoms/CardImage";
 import { CardTitle } from "../atoms/CardTitle";
 
 export type PressableCardProps = {
-    title: string,
-    iconProp: CardImageProps
+    iconProp: CardImageProps,
+    children: string
 }
 
-export const PressableCard = ({ title, iconProp }: PressableCardProps) => {
+export const PressableCard = ({ children, iconProp }: PressableCardProps) => {
     const modelStyle: ViewStyle = {
         paddingVertical: 10,
         paddingHorizontal: 15,
@@ -20,7 +20,7 @@ export const PressableCard = ({ title, iconProp }: PressableCardProps) => {
     return (
         <Pressable style={[CommonStyle.FlexContainer, CommonStyle.Bordered, modelStyle]}>
             <CardImage color={iconProp.color} iconName={iconProp.iconName} />
-            <CardTitle text={title} />
+            <CardTitle>{children}</CardTitle>
         </Pressable>
     );
 }

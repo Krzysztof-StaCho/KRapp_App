@@ -7,6 +7,12 @@ export const ColorsTheme = {
     LightColor: "#EAEFEF"
 };
 
+export const FontFamilies = {
+    HeaderFamily: "Zalando",
+    TitleFamily: "Bangers",
+    ParagraphFamily: "Macondo"
+};
+
 export const CommonStyle = StyleSheet.create({
     FlexContainer: {
         flex: 1
@@ -27,18 +33,18 @@ export const TextStyle = StyleSheet.create({
         fontSize: 12,
         textAlign: "center",
         color: ColorsTheme.SecondaryColor,
-        fontFamily: "Bangers"
+        fontFamily: FontFamilies.TitleFamily
     },
     HeaderText: {
         textAlign: "center",
         fontSize: 25,
         color: ColorsTheme.SecondaryColor,
-        fontFamily: "Zalando"
+        fontFamily: FontFamilies.HeaderFamily
     },
     ParagraphText: {
         fontSize: 18,
         color: ColorsTheme.SecondaryColor,
-        fontFamily: "Macondo"
+        fontFamily: FontFamilies.ParagraphFamily
     }
 });
 
