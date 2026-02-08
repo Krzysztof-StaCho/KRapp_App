@@ -14,7 +14,6 @@ export const HomePageLayout = () => {
                     { children: "Czas Pracy", iconProp: { color: ColorsTheme.SecondaryColor, iconName: "bar-chart" } },
                     { children: "Konfiguracja", iconProp: { color: ColorsTheme.BodyColor, iconName: "setting" } }]} />
             </ScrollView>
-            <PageFooter />
         </View>
     );
 };

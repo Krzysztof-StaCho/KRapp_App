@@ -35,6 +35,12 @@ export const TextStyle = StyleSheet.create({
         color: ColorsTheme.SecondaryColor,
         fontFamily: FontFamilies.TitleFamily
     },
+    SectionTitle: {
+        textAlign: "center",
+        fontSize: 20,
+        color: ColorsTheme.SecondaryColor,
+        fontFamily: FontFamilies.ParagraphFamily
+    },
     HeaderText: {
         textAlign: "center",
         fontSize: 25,
@@ -60,5 +66,9 @@ export const ContainerStyle = StyleSheet.create({
     InnerContainerStyle: {
         backgroundColor: ColorsTheme.LightColor,
         flex: 1
+    },
+    PressedContainer: {
+        backgroundColor: ColorsTheme.LightColor,
+        opacity: 0.5
     }
 });

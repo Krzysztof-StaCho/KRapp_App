@@ -5,7 +5,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { ContainerStyle } from './utils/BaseStyle';
 import { useFonts } from 'expo-font';
 import { useEffect } from 'react';
-import { HomePageLayout } from './screens/HomePageLayout';
+import { ItemSelectionLayout } from './screens/Raports/ItemSelectionLayout';
+import { PageFooter } from './components/atoms/PageFooter';
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -24,7 +25,8 @@ export default function App() {
 
   return (
     <SafeAreaView style={ContainerStyle.OuterContainerStyle}>
-      <HomePageLayout />
+      <ItemSelectionLayout />
+      <PageFooter />
       <StatusBar style="auto" />
     </SafeAreaView>
   );
