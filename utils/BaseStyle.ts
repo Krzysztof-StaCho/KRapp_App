@@ -25,6 +25,13 @@ export const CommonStyle = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 15,
         borderColor: ColorsTheme.SecondaryColor
+    },
+    ShadowProp: {
+        shadowColor: "#171717",
+        shadowOffset: {width: 10, height: 10},
+        shadowOpacity: 0.25,
+        shadowRadius: 3,
+        elevation: 5
     }
 });
 
