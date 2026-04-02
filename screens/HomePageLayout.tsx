@@ -2,7 +2,6 @@ import { View, ScrollView } from "react-native";
 import { ColorsTheme, ContainerStyle } from "../utils/BaseStyle";
 import { PageHeader } from "../components/atoms/PageHeader";
 import { CardShelf } from "../components/molecules/CardShelf";
-import { PageFooter } from "../components/atoms/PageFooter";
 
 export const HomePageLayout = () => {
     return (

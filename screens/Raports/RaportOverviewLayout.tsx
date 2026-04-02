@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { ColorsTheme, ContainerStyle } from "../../utils/BaseStyle";
 import { PageHeader } from "../../components/atoms/PageHeader";
 import { CardGroup } from "../../components/atoms/CardGroup";
