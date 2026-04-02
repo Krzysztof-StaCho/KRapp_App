@@ -7,6 +7,12 @@ export const ColorsTheme = {
     LightColor: "#EAEFEF"
 };
 
+export const FontFamilies = {
+    HeaderFamily: "Zalando",
+    TitleFamily: "Bangers",
+    ParagraphFamily: "Macondo"
+};
+
 export const CommonStyle = StyleSheet.create({
     FlexContainer: {
         flex: 1
@@ -19,6 +25,13 @@ export const CommonStyle = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 15,
         borderColor: ColorsTheme.SecondaryColor
+    },
+    ShadowProp: {
+        shadowColor: "#171717",
+        shadowOffset: {width: 10, height: 10},
+        shadowOpacity: 0.25,
+        shadowRadius: 3,
+        elevation: 5
     }
 });
 
@@ -27,18 +40,24 @@ export const TextStyle = StyleSheet.create({
         fontSize: 12,
         textAlign: "center",
         color: ColorsTheme.SecondaryColor,
-        fontFamily: "Bangers"
+        fontFamily: FontFamilies.TitleFamily
+    },
+    SectionTitle: {
+        textAlign: "center",
+        fontSize: 20,
+        color: ColorsTheme.SecondaryColor,
+        fontFamily: FontFamilies.ParagraphFamily
     },
     HeaderText: {
         textAlign: "center",
         fontSize: 25,
         color: ColorsTheme.SecondaryColor,
-        fontFamily: "Zalando"
+        fontFamily: FontFamilies.HeaderFamily
     },
     ParagraphText: {
         fontSize: 18,
         color: ColorsTheme.SecondaryColor,
-        fontFamily: "Macondo"
+        fontFamily: FontFamilies.ParagraphFamily
     }
 });
 
@@ -54,5 +73,9 @@ export const ContainerStyle = StyleSheet.create({
     InnerContainerStyle: {
         backgroundColor: ColorsTheme.LightColor,
         flex: 1
+    },
+    PressedContainer: {
+        backgroundColor: ColorsTheme.LightColor,
+        opacity: 0.5
     }
 });

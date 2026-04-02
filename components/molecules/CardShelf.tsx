@@ -19,7 +19,7 @@ export const CardShelf = ({ cardObj }: CardShelfProps) => {
     return (
         <View style={[CommonStyle.FlexRow, modelStyle]}>
             {cardObj.map((item, index) => (
-                <PressableCard key={index} title={item.title} iconProp={item.iconProp} />
+                <PressableCard key={index} iconProp={item.iconProp}>{item.children}</PressableCard>
             ))}
         </View>
     );

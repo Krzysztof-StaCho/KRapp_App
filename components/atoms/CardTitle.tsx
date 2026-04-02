@@ -2,11 +2,11 @@ import { Text } from "react-native";
 import { TextStyle } from "../../utils/BaseStyle";
 
 type CardTitleProps = {
-    text: string
+    children: string
 };
 
-export const CardTitle = ({ text }: CardTitleProps) => {
+export const CardTitle = ({ children }: CardTitleProps) => {
     return (
-        <Text style={TextStyle.CardTitle} numberOfLines={2}>{text}</Text>
+        <Text style={TextStyle.CardTitle} numberOfLines={2}>{children}</Text>
     );
 };
