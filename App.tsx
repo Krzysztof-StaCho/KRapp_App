@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 import { ContainerStyle } from './utils/BaseStyle';
 import { PageFooter } from './components/atoms/PageFooter';
-import { RaportSheetLayout } from './screens/Raports/RaportSheetLayout';
+import { RaportTableScreen } from './feature/raport/RaportTableScreen';
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={ContainerStyle.OuterContainerStyle}>
-      <RaportSheetLayout />
+      <RaportTableScreen />
       <PageFooter />
       <StatusBar style="auto" />
     </SafeAreaView>
