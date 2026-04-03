@@ -10,6 +10,7 @@ import { PageFooter } from './components/atoms/PageFooter';
 import { RaportTableScreen } from './feature/raport/RaportTableScreen';
 import { RootStackParamList } from './utils/navigation/RootStackParamList';
 import { NavigationContainer } from '@react-navigation/native';
+import { RaportOverviewScreen } from './feature/raport/RaportOverviewScreen';
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -32,6 +33,7 @@ export default function App() {
     <NavigationContainer>
       <SafeAreaView style={ContainerStyle.OuterContainerStyle}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='RaportOverview' component={RaportOverviewScreen} />
           <Stack.Screen name='RaportRTable' component={RaportTableScreen} />
         </Stack.Navigator>
         <PageFooter />
