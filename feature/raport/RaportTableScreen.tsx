@@ -1,6 +1,12 @@
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RaportSheetTemplate, RaportSheetTemplateType } from "../../components/template/RaportSheetTemplate";
+import { RootStackParamList } from "../../utils/navigation/RootStackParamList";
 
-export const RaportTableScreen = () => {
+type Props = NativeStackScreenProps<RootStackParamList, 'RaportRTable'>;
+
+export const RaportTableScreen = ({ route }: Props) => {
+    const raportId = route.params.raportId;
+
     const dummyData: RaportSheetTemplateType = {
         header: "Kierowcy Zamówienie",
         tableData: {
@@ -15,8 +21,9 @@ export const RaportTableScreen = () => {
                 { id: "3", name: "Pudełka - Burgery Woł.", quantity: "0.9 paczka" }
             ],
             onPressFn: (row) => console.log("double click", row)
-        }
+        },
+        addItemFn: () => console.log("Add more pressed")
     }
 
-    return <RaportSheetTemplate header={dummyData.header} tableData={dummyData.tableData} />
+    return <RaportSheetTemplate header={dummyData.header} tableData={dummyData.tableData} addItemFn={dummyData.addItemFn} />
 };

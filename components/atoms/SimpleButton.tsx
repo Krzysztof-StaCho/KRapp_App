@@ -3,10 +3,11 @@ import { ContainerStyle, FontFamilies } from "../../utils/BaseStyle";
 
 export type SimpleButtonProps = {
     title: string,
-    color: string
+    color: string,
+    onPressFn?: () => void
 };
 
-export const SimpleButton = ({title, color}: SimpleButtonProps) => {
+export const SimpleButton = ({title, color, onPressFn}: SimpleButtonProps) => {
     const modelStyle = StyleSheet.create({
         pressable: {
             paddingHorizontal: 10,
@@ -20,7 +21,7 @@ export const SimpleButton = ({title, color}: SimpleButtonProps) => {
     });
 
     return (
-        <Pressable style={({pressed}) => pressed ? [modelStyle.pressable, ContainerStyle.PressedContainer] : modelStyle.pressable}>
+        <Pressable style={({pressed}) => pressed ? [modelStyle.pressable, ContainerStyle.PressedContainer] : modelStyle.pressable} onPress={onPressFn}>
             <Text style={modelStyle.text}>{title}</Text>
         </Pressable>
     );

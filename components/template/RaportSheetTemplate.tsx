@@ -22,10 +22,11 @@ export type RaportSheetTemplateType = {
         }[],
         rows: Rows[],
         onPressFn?: (row: Rows) => void
-    }
+    },
+    addItemFn: () => void
 }
 
-export const RaportSheetTemplate = ({ header, tableData }: RaportSheetTemplateType) => {
+export const RaportSheetTemplate = ({ header, tableData, addItemFn }: RaportSheetTemplateType) => {
     const modelStyle = StyleSheet.create({
         actionHolder: {
             paddingBottom: 15,
@@ -43,7 +44,8 @@ export const RaportSheetTemplate = ({ header, tableData }: RaportSheetTemplateTy
             <View style={modelStyle.actionHolder}>
                 <CardGroup title="Akcje">
                     <ButtonGroup>
-                        <SimpleButton color={ColorsTheme.PrimaryColor} title="Dodaj wpis" />
+                        <SimpleButton color={ColorsTheme.PrimaryColor} title="Dodaj wpis"
+                        onPressFn={addItemFn} />
                     </ButtonGroup>
                 </CardGroup>
             </View>
