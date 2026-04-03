@@ -1,9 +1,19 @@
 export type RootStackParamList = {
 
     /**
-     * Raport -> Raport overview
+     * Home (Startup page)
      */
-    RaportOverview: undefined;
+    Home: undefined
+
+    /**
+     * Raport -> Item selection
+     */
+    RaportSelection: undefined;
+
+    /**
+     * Raport -> Overview
+     */
+    RaportOverview: { raportId: number };
 
     /**
      * Raport -> Raport table

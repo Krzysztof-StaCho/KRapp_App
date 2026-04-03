@@ -7,7 +7,7 @@ import { ButtonGroup } from "../atoms/ButtonGroup";
 import { SimpleButton } from "../atoms/SimpleButton";
 
 type Rows = {
-    id: string,
+    id: number,
     name: string,
     quantity: string
 }

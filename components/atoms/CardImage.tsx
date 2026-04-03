@@ -1,9 +1,9 @@
-import { View, ViewStyle } from "react-native";
+import { ColorValue, View, ViewStyle } from "react-native";
 import { ImageStyle } from "../../utils/BaseStyle";
 import { AntDesign } from "@expo/vector-icons";
 
 export type CardImageProps = {
-    color: string,
+    color: ColorValue,
     iconName?: keyof typeof AntDesign.glyphMap
 };
 

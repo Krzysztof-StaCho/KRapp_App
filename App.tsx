@@ -7,10 +7,12 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { ContainerStyle } from './utils/BaseStyle';
 import { PageFooter } from './components/atoms/PageFooter';
-import { RaportTableScreen } from './feature/raport/RaportTableScreen';
+import { RaportTableScreen } from './feature/raport/screens/RaportTableScreen';
 import { RootStackParamList } from './utils/navigation/RootStackParamList';
 import { NavigationContainer } from '@react-navigation/native';
-import { RaportOverviewScreen } from './feature/raport/RaportOverviewScreen';
+import { RaportOverviewScreen } from './feature/raport/screens/RaportOverviewScreen';
+import { RaportSelectionScreen } from './feature/raport/screens/RaportSelectionScreen';
+import { HomePageScreen } from './feature/shared/screens/HomePageScreen';
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();
@@ -33,6 +35,8 @@ export default function App() {
     <NavigationContainer>
       <SafeAreaView style={ContainerStyle.OuterContainerStyle}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='Home' component={HomePageScreen} />
+          <Stack.Screen name='RaportSelection' component={RaportSelectionScreen} />
           <Stack.Screen name='RaportOverview' component={RaportOverviewScreen} />
           <Stack.Screen name='RaportRTable' component={RaportTableScreen} />
         </Stack.Navigator>

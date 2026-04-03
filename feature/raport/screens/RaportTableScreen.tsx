@@ -1,6 +1,6 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RaportSheetTemplate, RaportSheetTemplateType } from "../../components/template/RaportSheetTemplate";
-import { RootStackParamList } from "../../utils/navigation/RootStackParamList";
+import { RaportSheetTemplate, RaportSheetTemplateType } from "../../../components/template/RaportSheetTemplate";
+import { RootStackParamList } from "../../../utils/navigation/RootStackParamList";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'RaportRTable'>;
 
@@ -16,9 +16,9 @@ export const RaportTableScreen = ({ route }: Props) => {
                 { key: "quantity", title: "Ilość", width: "30%" }
             ],
             rows: [
-                { id: "1", name: "Kartony pizza 32 cm", quantity: "1 paczka" },
-                { id: "2", name: "Kartony pizza 45 cm", quantity: "4 paczka" },
-                { id: "3", name: "Pudełka - Burgery Woł.", quantity: "0.9 paczka" }
+                { id: 1, name: "Kartony pizza 32 cm", quantity: "1 paczka" },
+                { id: 2, name: "Kartony pizza 45 cm", quantity: "4 paczka" },
+                { id: 3, name: "Pudełka - Burgery Woł.", quantity: "0.9 paczka" }
             ],
             onPressFn: (row) => console.log("double click", row)
         },
