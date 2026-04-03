@@ -4,10 +4,12 @@ import { ContainerStyle, TextStyle } from "../../utils/BaseStyle";
 
 export type SelectItemProps = {
     children: string,
-    color: string
+    color: string,
+    navigateFn?: () => void,
+    moreActionFn?: () => void
 };
 
-export const SelectItem = ({children, color}: SelectItemProps) => {
+export const SelectItem = ({children, color, navigateFn, moreActionFn}: SelectItemProps) => {
     const modelStyle = StyleSheet.create({
         view: {
             backgroundColor: color,
@@ -39,12 +41,13 @@ export const SelectItem = ({children, color}: SelectItemProps) => {
             <AntDesign style={modelStyle.icon} name="arrow-right" />
 
             {/* Pressable Text */}
-            <Pressable style={({pressed}) => pressed ? [modelStyle.pressableTitle, ContainerStyle.PressedContainer] : modelStyle.pressableTitle}>
+            <Pressable style={({pressed}) => pressed ? [modelStyle.pressableTitle, ContainerStyle.PressedContainer] : modelStyle.pressableTitle} onPress={navigateFn}>
                 <Text style={[TextStyle.SectionTitle, modelStyle.text]} numberOfLines={2}>{children}</Text>
             </Pressable>
 
             {/* More Action Icon */}
-            <Pressable style={({pressed}) => pressed ? ContainerStyle.PressedContainer : {}}>
+            <Pressable style={({pressed}) => pressed ? ContainerStyle.PressedContainer : {}}
+                onPress={moreActionFn}>
                 <AntDesign style={modelStyle.icon} name="more" />
             </Pressable>
         </View>
