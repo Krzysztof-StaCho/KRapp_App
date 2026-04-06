@@ -1,13 +1,18 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { ColorValue, Pressable, StyleSheet, Text } from "react-native";
 import { ContainerStyle, FontFamilies } from "../../utils/BaseStyle";
+import { useTheme } from "../../utils/ThemeContext";
 
 export type SimpleButtonProps = {
     title: string,
-    color: string,
+    color?: ColorValue,
     onPressFn?: () => void
 };
 
 export const SimpleButton = ({title, color, onPressFn}: SimpleButtonProps) => {
+    const theme = useTheme();
+
+    color = color ?? theme.primary;
+
     const modelStyle = StyleSheet.create({
         pressable: {
             paddingHorizontal: 10,

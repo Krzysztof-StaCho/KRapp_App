@@ -1,8 +1,9 @@
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ColorsTheme, ContainerStyle } from "../../utils/BaseStyle";
+import { ContainerStyle } from "../../utils/BaseStyle";
+
 import { PageHeader } from "../atoms/PageHeader";
-import { CardGroup } from "../atoms/CardGroup";
-import { ButtonGroup } from "../atoms/ButtonGroup";
+import Card from "../atoms/Card"
+import ButtonGroup from "../atoms/ButtonGroup";
 import { SimpleButton } from "../atoms/SimpleButton";
 
 export type RaportOverviewTemplateType = {
@@ -34,29 +35,24 @@ export const RaportOverviewTemplate = ({ header, buttonFn }: RaportOverviewTempl
         <View style={ContainerStyle.InnerContainerStyle}>
             <PageHeader>{header}</PageHeader>
             <ScrollView style={modelStyle.scrollOuter} contentContainerStyle={modelStyle.scrollInner}>
-                <CardGroup title="Akcje"></CardGroup>
-                <CardGroup title="Przegląd">
+                <Card title="Akcje"></Card>
+                <Card title="Przegląd">
                     <ButtonGroup>
-                        <SimpleButton color={ColorsTheme.PrimaryColor} title="Zobacz więcej..."
-                        onPressFn={buttonFn.seeMoreRaportFn} />
-                        <SimpleButton color={ColorsTheme.PrimaryColor} title="Dodaj"
-                        onPressFn={buttonFn.addRaportItemFn} />
+                        <SimpleButton title="Zobacz więcej..." onPressFn={buttonFn.seeMoreRaportFn} />
+                        <SimpleButton title="Dodaj" onPressFn={buttonFn.addRaportItemFn} />
                     </ButtonGroup>
-                </CardGroup>
-                <CardGroup title="Uwagi">
+                </Card>
+                <Card title="Uwagi">
                     <ButtonGroup>
-                        <SimpleButton color={ColorsTheme.PrimaryColor} title="Zobacz więcej..."
-                        onPressFn={buttonFn.seeMoreWarningFn} />
+                        <SimpleButton title="Zobacz więcej..." onPressFn={buttonFn.seeMoreWarningFn} />
                     </ButtonGroup>
-                </CardGroup>
-                <CardGroup title="Zamówienie">
+                </Card>
+                <Card title="Zamówienie">
                     <ButtonGroup>
-                        <SimpleButton color={ColorsTheme.PrimaryColor} title="Zobacz więcej..."
-                        onPressFn={buttonFn.seeMoreOrderFn} />
-                        <SimpleButton color={ColorsTheme.PrimaryColor} title="Wygeneruj"
-                        onPressFn={buttonFn.generateOrderFn} />
+                        <SimpleButton title="Zobacz więcej..." onPressFn={buttonFn.seeMoreOrderFn} />
+                        <SimpleButton title="Wygeneruj" onPressFn={buttonFn.generateOrderFn} />
                     </ButtonGroup>
-                </CardGroup>
+                </Card>
             </ScrollView>
         </View>
     );

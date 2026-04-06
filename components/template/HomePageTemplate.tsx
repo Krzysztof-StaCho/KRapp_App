@@ -1,9 +1,10 @@
 import { ColorValue, ScrollView, View } from "react-native";
-import { ColorsTheme, ContainerStyle } from "../../utils/BaseStyle";
+import { ContainerStyle } from "../../utils/BaseStyle";
 import { PageHeader } from "../atoms/PageHeader";
 import { CardShelf } from "../molecules/CardShelf";
 import { AntDesign } from "@expo/vector-icons";
 import { PressableCardProps } from "../molecules/PressableCard";
+import { useTheme } from "../../utils/ThemeContext";
 
 type RowDataType = {
     title: string,
@@ -34,7 +35,7 @@ export const HomePageTemplate = ({ header, rows }: HomePageTemplateType) => {
     return (
         <View style={ContainerStyle.InnerContainerStyle}>
             <PageHeader>{header}</PageHeader>
-            <ScrollView style={{ backgroundColor: ColorsTheme.LightColor }}>
+            <ScrollView>
                 {rows.map((item, index) => (
                     <CardShelf key={index} cardObj={item.data.map((item) => changeType(item))} />
                 ))}

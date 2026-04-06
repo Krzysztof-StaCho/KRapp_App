@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { ContainerStyle } from './utils/BaseStyle';
 import { PageFooter } from './components/atoms/PageFooter';
 import { NavigationContainer } from '@react-navigation/native';
-import { RootStack } from './utils/navigation/RootStack';
+import { RootStack } from './navigation/RootStack';
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();

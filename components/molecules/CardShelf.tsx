@@ -1,19 +1,22 @@
 import { View, ViewStyle } from "react-native";
 import { PressableCard, PressableCardProps } from "./PressableCard";
-import { ColorsTheme, CommonStyle } from "../../utils/BaseStyle";
+import { CommonStyle } from "../../utils/BaseStyle";
+import { useTheme } from "../../utils/ThemeContext";
 
 type CardShelfProps = {
     cardObj: PressableCardProps[]
 };
 
 export const CardShelf = ({ cardObj }: CardShelfProps) => {
+    const theme = useTheme();
+
     const modelStyle: ViewStyle = {
         gap: 10,
         marginHorizontal: 30,
         flexWrap: "wrap",
         paddingVertical: 10,
         borderTopWidth: 2,
-        borderColor: ColorsTheme.SecondaryColor
+        borderColor: theme.border
     };
 
     return (

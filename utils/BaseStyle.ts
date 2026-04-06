@@ -43,7 +43,7 @@ export const TextStyle = StyleSheet.create({
         fontFamily: FontFamilies.TitleFamily
     },
     SectionTitle: {
-        textAlign: "center",
+        textAlign: "left",
         fontSize: 20,
         color: ColorsTheme.SecondaryColor,
         fontFamily: FontFamilies.ParagraphFamily

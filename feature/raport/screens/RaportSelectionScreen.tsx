@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../../utils/navigation/RootStackParamList";
+import { RootStackParamList } from "../../../navigation/RootStackParamList";
 import { RaportSelectionTemplate, RaportSelectionTemplateType } from "../../../components/template/RaportSelectionTemplate";
+import { ThemeProvider } from "../../../utils/ThemeContext";
+import { RaportTheme } from "../Theme";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'RaportSelection'>;
 
@@ -20,6 +22,10 @@ export const RaportSelectionScreen = ({ navigation }: Props) => {
         moreActionFn: (id: number) => {}
     };
 
-    return <RaportSelectionTemplate header={dummyData.header} data={dummyData.data}
-        navigateFn={dummyData.navigateFn} moreActionFn={dummyData.moreActionFn} />
+    return (
+        <ThemeProvider theme={RaportTheme}>
+            <RaportSelectionTemplate header={dummyData.header} data={dummyData.data}
+            navigateFn={dummyData.navigateFn} moreActionFn={dummyData.moreActionFn} />
+        </ThemeProvider>
+    );
 };

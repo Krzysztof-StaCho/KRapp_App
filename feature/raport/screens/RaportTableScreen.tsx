@@ -1,6 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RaportSheetTemplate, RaportSheetTemplateType } from "../../../components/template/RaportSheetTemplate";
-import { RootStackParamList } from "../../../utils/navigation/RootStackParamList";
+import { RootStackParamList } from "../../../navigation/RootStackParamList";
+import { ThemeProvider } from "../../../utils/ThemeContext";
+import { RaportTheme } from "../Theme";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'RaportRTable'>;
 
@@ -25,5 +27,10 @@ export const RaportTableScreen = ({ route }: Props) => {
         addItemFn: () => console.log("Add more pressed")
     }
 
-    return <RaportSheetTemplate header={dummyData.header} tableData={dummyData.tableData} addItemFn={dummyData.addItemFn} />
+    return (
+        <ThemeProvider theme={RaportTheme}>
+            <RaportSheetTemplate header={dummyData.header} tableData={dummyData.tableData}
+            addItemFn={dummyData.addItemFn} />
+        </ThemeProvider>
+    );
 };

@@ -1,7 +1,8 @@
 import { StyleSheet, View, ScrollView } from "react-native";
-import { ColorsTheme, ContainerStyle } from "../../utils/BaseStyle";
+import { CommonStyle, ContainerStyle } from "../../utils/BaseStyle";
 import { PageHeader } from "../atoms/PageHeader";
 import { SelectItem } from "../atoms/SelectItem";
+import { useTheme } from "../../utils/ThemeContext";
 
 export type RaportSelectionTemplateType = {
     header: string,
@@ -14,12 +15,10 @@ export type RaportSelectionTemplateType = {
 };
 
 export const RaportSelectionTemplate = ({ header, data, navigateFn, moreActionFn }: RaportSelectionTemplateType) => {
+
     const modelStyle = StyleSheet.create({
-        scrollView: {
-            backgroundColor: ColorsTheme.LightColor,
-            paddingHorizontal: 5
-        },
         scrollContent: {
+            paddingHorizontal: 5,
             paddingVertical: 10,
             gap: 10
         }
@@ -28,10 +27,10 @@ export const RaportSelectionTemplate = ({ header, data, navigateFn, moreActionFn
     return (
         <View style={ContainerStyle.InnerContainerStyle}>
             <PageHeader>{header}</PageHeader>
-            <ScrollView style={modelStyle.scrollView} contentContainerStyle={modelStyle.scrollContent}>
+            <ScrollView style={CommonStyle.FlexContainer} contentContainerStyle={modelStyle.scrollContent}>
                 {data.map((item) => (
-                    <SelectItem key={item.id} color={ColorsTheme.PrimaryColor}
-                    navigateFn={() => navigateFn(item.id)} moreActionFn={() => moreActionFn(item.id)}>
+                    <SelectItem key={item.id} navigateFn={() => navigateFn(item.id)}
+                    moreActionFn={() => moreActionFn(item.id)}>
                         {item.title}
                     </SelectItem>
                 ))}

@@ -1,9 +1,9 @@
 import { DimensionValue, StyleSheet, View } from "react-native";
-import { ColorsTheme, CommonStyle, ContainerStyle } from "../../utils/BaseStyle";
+import { CommonStyle, ContainerStyle } from "../../utils/BaseStyle";
 import { PageHeader } from "../atoms/PageHeader";
 import { SimpleTable } from "../molecules/SimpleTable";
-import { CardGroup } from "../atoms/CardGroup";
-import { ButtonGroup } from "../atoms/ButtonGroup";
+import Card from "../atoms/Card";
+import ButtonGroup from "../atoms/ButtonGroup";
 import { SimpleButton } from "../atoms/SimpleButton";
 
 type Rows = {
@@ -42,12 +42,11 @@ export const RaportSheetTemplate = ({ header, tableData, addItemFn }: RaportShee
                 onRowDoublePress={tableData.onPressFn} />
             </View>
             <View style={modelStyle.actionHolder}>
-                <CardGroup title="Akcje">
+                <Card title="Akcje">
                     <ButtonGroup>
-                        <SimpleButton color={ColorsTheme.PrimaryColor} title="Dodaj wpis"
-                        onPressFn={addItemFn} />
+                        <SimpleButton title="Dodaj wpis" onPressFn={addItemFn} />
                     </ButtonGroup>
-                </CardGroup>
+                </Card>
             </View>
         </View>
     );

@@ -1,7 +1,7 @@
 import { DimensionValue, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { ColorsTheme, FontFamilies } from "../../utils/BaseStyle";
 import { useRef } from "react";
 import { FlatList } from "react-native";
+import { useTheme } from "../../utils/ThemeContext";
 
 type Column<T> = {
     key: keyof T;
@@ -16,6 +16,8 @@ export type SimpleTableType<T> = {
 };
 
 export const SimpleTable = <T extends { id: number }>({columns, rows, onRowDoublePress}: SimpleTableType<T>) => {
+    const theme = useTheme();
+
     const modelStyle = StyleSheet.create({
         tableContainer: {
             margin: 15,
@@ -23,18 +25,19 @@ export const SimpleTable = <T extends { id: number }>({columns, rows, onRowDoubl
         },
         tableHead: {
             flexDirection: "row",
-            backgroundColor: ColorsTheme.PrimaryColor,
+            backgroundColor: theme.primary,
             padding: 10
         },
         tableBody: {
             flexDirection: "row",
             padding: 10,
             borderBottomWidth: 1,
-            borderBottomColor: ColorsTheme.SecondaryColor
+            borderBottomColor: theme.border
         },
         tableCaption: {
-            color: ColorsTheme.SecondaryColor,
-            fontWeight: "bold"
+            color: theme.text,
+            fontWeight: "bold",
+            textAlign: "center"
         }
     });
 

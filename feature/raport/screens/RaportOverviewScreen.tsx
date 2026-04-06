@@ -1,6 +1,10 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../../utils/navigation/RootStackParamList";
+
+import { RootStackParamList } from "../../../navigation/RootStackParamList";
 import { RaportOverviewTemplate, RaportOverviewTemplateType } from "../../../components/template/RaportOverviewTemplate";
+
+import { ThemeProvider } from "../../../utils/ThemeContext";
+import { RaportTheme } from "../Theme"
 
 type Props = NativeStackScreenProps<RootStackParamList, 'RaportOverview'>;
 
@@ -18,5 +22,9 @@ export const RaportOverviewScreen = ({ navigation, route }: Props) => {
         }
     };
 
-    return <RaportOverviewTemplate header={dummyData.header} buttonFn={dummyData.buttonFn} />
+    return (
+        <ThemeProvider theme={RaportTheme}>
+            <RaportOverviewTemplate header={dummyData.header} buttonFn={dummyData.buttonFn} />
+        </ThemeProvider>
+    );
 };

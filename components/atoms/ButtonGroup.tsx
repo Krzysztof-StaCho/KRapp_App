@@ -1,22 +1,21 @@
-import { StyleSheet, View } from "react-native";
+import { ViewStyle, View } from "react-native";
 
-export type ButtonGroupProps = {
+type ButtonGroupProps = {
     children: React.ReactNode
 };
 
-export const ButtonGroup = ({children}: ButtonGroupProps) => {
-    const modelStyle = StyleSheet.create({
-        outerView: {
-            flexDirection: "row",
-            gap: 5,
-            flexWrap: "wrap",
-            justifyContent: "space-between"
-        }
-    });
+const ButtonGroup = ({children}: ButtonGroupProps) => {
+    const modelStyle: ViewStyle = {
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-between"
+    };
 
     return (
-        <View style={modelStyle.outerView}>
+        <View style={modelStyle}>
             {children}
         </View>
     );
 };
+
+export default ButtonGroup;
