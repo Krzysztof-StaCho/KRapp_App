@@ -1,13 +1,13 @@
 import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { RootStackParamList } from "../../../navigation/RootStackParamList";
+import { RootParamList } from "../../../navigation/RootParamList";
 import { RaportOverviewTemplate, RaportOverviewTemplateType } from "../../../components/template/RaportOverviewTemplate";
 
 import { ThemeProvider } from "../../../utils/ThemeContext";
 import { RaportTheme } from "../Theme"
 import { useEffect } from "react";
 
-type Props = NativeStackScreenProps<RootStackParamList, 'RaportOverview'>;
+type Props = NativeStackScreenProps<RootParamList, 'RaportOverview'>;
 
 export const RaportOverviewScreen = ({ navigation, route }: Props) => {
     const raportId = route.params.raportId;

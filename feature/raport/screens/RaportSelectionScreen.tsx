@@ -1,11 +1,11 @@
 import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../../navigation/RootStackParamList";
+import { RootParamList } from "../../../navigation/RootParamList";
 import { RaportSelectionTemplate, RaportSelectionTemplateType } from "../../../components/template/RaportSelectionTemplate";
 import { ThemeProvider } from "../../../utils/ThemeContext";
 import { RaportTheme } from "../Theme";
 import { useEffect } from "react";
 
-type Props = NativeStackScreenProps<RootStackParamList, 'RaportSelection'>;
+type Props = NativeStackScreenProps<RootParamList, 'RaportSelection'>;
 
 export const RaportSelectionScreen = ({ navigation }: Props) => {
     useEffect(() => {

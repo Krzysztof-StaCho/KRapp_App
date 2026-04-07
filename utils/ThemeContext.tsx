@@ -1,19 +1,10 @@
 import { createContext, ReactNode, useContext } from "react";
+import { DefaultTheme } from "./BaseStyle";
 import { Theme } from "./Theme.types";
 
 type ThemeProviderType = {
     theme: Theme,
     children?: ReactNode
-};
-
-const DefaultTheme: Theme = {
-    primary: "#AAA",
-    secondary: "#555",
-    border: "#222",
-    body: "#FFF",
-    light: "#CCC",
-    dark: "#000",
-    text: "#000"
 };
 
 const ThemeContext = createContext<Theme | null>(null);

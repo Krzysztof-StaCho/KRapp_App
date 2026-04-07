@@ -1,4 +1,4 @@
-export type RootStackParamList = {
+export type RootParamList = {
 
     /**
      * Home (Startup page)

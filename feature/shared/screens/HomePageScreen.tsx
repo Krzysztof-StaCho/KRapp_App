@@ -1,10 +1,11 @@
 import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../../../navigation/RootStackParamList";
+import { RootParamList } from "../../../navigation/RootParamList";
 import { HomePageTemplate, HomePageTemplateType } from "../../../components/template/HomePageTemplate";
-import { ColorsTheme } from "../../../utils/BaseStyle";
 import { useEffect } from "react";
+import { RaportTheme } from "../../raport/Theme";
+import { DefaultTheme } from "../../../utils/BaseStyle";
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+type Props = NativeStackScreenProps<RootParamList, 'Home'>;
 
 export const HomePageScreen = ({ navigation }: Props) => {
     useEffect(() => {
@@ -19,19 +20,19 @@ export const HomePageScreen = ({ navigation }: Props) => {
             data: [
                 {
                     title: "Raporty",
-                    color: ColorsTheme.PrimaryColor,
+                    color: RaportTheme.primary,
                     iconName: "area-chart",
                     onPressFn: () => navigation.navigate("RaportSelection")
                 },
                 {
                     title: "Czas Pracy",
-                    color: ColorsTheme.SecondaryColor,
+                    color: DefaultTheme.primary,
                     iconName: "bar-chart",
                     onPressFn: () => {}
                 },
                 {
                     title: "Konfiguracja",
-                    color: ColorsTheme.BodyColor,
+                    color: DefaultTheme.border,
                     iconName: "setting",
                     onPressFn: () => {}
                 }

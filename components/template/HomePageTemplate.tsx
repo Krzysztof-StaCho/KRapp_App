@@ -1,6 +1,5 @@
 import { ColorValue, ScrollView, View } from "react-native";
 import { ContainerStyle } from "../../utils/BaseStyle";
-import { PageHeader } from "../atoms/PageHeader";
 import { CardShelf } from "../molecules/CardShelf";
 import { AntDesign } from "@expo/vector-icons";
 import { PressableCardProps } from "../molecules/PressableCard";

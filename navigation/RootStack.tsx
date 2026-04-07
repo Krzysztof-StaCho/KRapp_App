@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { RootStackParamList } from "./RootStackParamList";
+import { RootParamList } from "./RootParamList";
 
 import { HomePageScreen } from "../feature/shared/screens/HomePageScreen";
 import { RaportSelectionScreen } from "../feature/raport/screens/RaportSelectionScreen";
 import { RaportOverviewScreen } from "../feature/raport/screens/RaportOverviewScreen";
 import { RaportTableScreen } from "../feature/raport/screens/RaportTableScreen";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<RootParamList>();
 
 export const RootStack = () => {
 

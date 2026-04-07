@@ -1,8 +1,6 @@
 import { StyleSheet, View, ScrollView } from "react-native";
 import { CommonStyle, ContainerStyle } from "../../utils/BaseStyle";
-import { PageHeader } from "../atoms/PageHeader";
 import { SelectItem } from "../atoms/SelectItem";
-import { useTheme } from "../../utils/ThemeContext";
 
 export type RaportSelectionTemplateType = {
     data: {

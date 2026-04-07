@@ -8,6 +8,7 @@ import { ContainerStyle } from './utils/BaseStyle';
 import { PageFooter } from './components/atoms/PageFooter';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStack } from './navigation/RootStack';
+import { RootTab } from './navigation/RootTab';
 
 export default function App() {
   SplashScreen.preventAutoHideAsync();

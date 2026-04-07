@@ -1,7 +1,6 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 import { ContainerStyle } from "../../utils/BaseStyle";
 
-import { PageHeader } from "../atoms/PageHeader";
 import Card from "../atoms/Card"
 import ButtonGroup from "../atoms/ButtonGroup";
 import { SimpleButton } from "../atoms/SimpleButton";

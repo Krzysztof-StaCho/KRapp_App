@@ -1,6 +1,5 @@
 import { DimensionValue, StyleSheet, View } from "react-native";
 import { CommonStyle, ContainerStyle } from "../../utils/BaseStyle";
-import { PageHeader } from "../atoms/PageHeader";
 import { SimpleTable } from "../molecules/SimpleTable";
 import Card from "../atoms/Card";
 import ButtonGroup from "../atoms/ButtonGroup";

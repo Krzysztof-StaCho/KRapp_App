@@ -1,4 +1,4 @@
-import { Text, ViewStyle } from "react-native";
+import { Text, TextStyle as Style } from "react-native";
 import { TextStyle } from "../../utils/BaseStyle";
 import { useTheme } from "../../utils/ThemeContext";
 
@@ -9,7 +9,7 @@ type CardHeaderProps = {
 const CardHeader = ({ children }: CardHeaderProps) => {
     const theme = useTheme();
 
-    const modelStyle: ViewStyle = {
+    const modelStyle: Style = {
         borderColor: theme.border,
         borderBottomWidth: 1,
         marginBottom: 10
