@@ -5,7 +5,6 @@ import { SelectItem } from "../atoms/SelectItem";
 import { useTheme } from "../../utils/ThemeContext";
 
 export type RaportSelectionTemplateType = {
-    header: string,
     data: {
         id: number,
         title: string
@@ -14,7 +13,7 @@ export type RaportSelectionTemplateType = {
     moreActionFn: (id: number) => void
 };
 
-export const RaportSelectionTemplate = ({ header, data, navigateFn, moreActionFn }: RaportSelectionTemplateType) => {
+export const RaportSelectionTemplate = ({ data, navigateFn, moreActionFn }: RaportSelectionTemplateType) => {
 
     const modelStyle = StyleSheet.create({
         scrollContent: {
@@ -26,7 +25,6 @@ export const RaportSelectionTemplate = ({ header, data, navigateFn, moreActionFn
 
     return (
         <View style={ContainerStyle.InnerContainerStyle}>
-            <PageHeader>{header}</PageHeader>
             <ScrollView style={CommonStyle.FlexContainer} contentContainerStyle={modelStyle.scrollContent}>
                 {data.map((item) => (
                     <SelectItem key={item.id} navigateFn={() => navigateFn(item.id)}

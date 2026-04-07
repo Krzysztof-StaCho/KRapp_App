@@ -13,7 +13,6 @@ type Rows = {
 }
 
 export type RaportSheetTemplateType = {
-    header: string,
     tableData: {
         columns: {
             key: keyof Rows,
@@ -26,7 +25,7 @@ export type RaportSheetTemplateType = {
     addItemFn: () => void
 }
 
-export const RaportSheetTemplate = ({ header, tableData, addItemFn }: RaportSheetTemplateType) => {
+export const RaportSheetTemplate = ({ tableData, addItemFn }: RaportSheetTemplateType) => {
     const modelStyle = StyleSheet.create({
         actionHolder: {
             paddingBottom: 15,
@@ -36,7 +35,6 @@ export const RaportSheetTemplate = ({ header, tableData, addItemFn }: RaportShee
 
     return (
         <View style={ContainerStyle.InnerContainerStyle}>
-            <PageHeader>{header}</PageHeader>
             <View style={CommonStyle.FlexContainer}>
                 <SimpleTable columns={tableData.columns} rows={tableData.rows}
                 onRowDoublePress={tableData.onPressFn} />

@@ -7,7 +7,6 @@ import ButtonGroup from "../atoms/ButtonGroup";
 import { SimpleButton } from "../atoms/SimpleButton";
 
 export type RaportOverviewTemplateType = {
-    header: string,
     buttonFn: {
         seeMoreRaportFn: () => void,
         addRaportItemFn: () => void,
@@ -17,7 +16,7 @@ export type RaportOverviewTemplateType = {
     }
 };
 
-export const RaportOverviewTemplate = ({ header, buttonFn }: RaportOverviewTemplateType) => {
+export const RaportOverviewTemplate = ({ buttonFn }: RaportOverviewTemplateType) => {
     const modelStyle = StyleSheet.create({
         scrollOuter: {
             flex: 1,
@@ -33,7 +32,6 @@ export const RaportOverviewTemplate = ({ header, buttonFn }: RaportOverviewTempl
 
     return (
         <View style={ContainerStyle.InnerContainerStyle}>
-            <PageHeader>{header}</PageHeader>
             <ScrollView style={modelStyle.scrollOuter} contentContainerStyle={modelStyle.scrollInner}>
                 <Card title="Akcje"></Card>
                 <Card title="Przegląd">

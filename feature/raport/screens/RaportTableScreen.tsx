@@ -1,16 +1,25 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RaportSheetTemplate, RaportSheetTemplateType } from "../../../components/template/RaportSheetTemplate";
 import { RootStackParamList } from "../../../navigation/RootStackParamList";
 import { ThemeProvider } from "../../../utils/ThemeContext";
 import { RaportTheme } from "../Theme";
+import { useEffect } from "react";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'RaportRTable'>;
 
-export const RaportTableScreen = ({ route }: Props) => {
+export const RaportTableScreen = ({ navigation, route }: Props) => {
     const raportId = route.params.raportId;
 
+    useEffect(() => {
+        const navHeaderOptions: NativeStackNavigationOptions = {
+            headerStyle: { backgroundColor: RaportTheme.primary.toString() },
+            title: "Kierowcy Zamówienie",
+            headerTintColor: RaportTheme.text.toString()
+        };
+        navigation.setOptions(navHeaderOptions);
+    }, [navigation]);
+
     const dummyData: RaportSheetTemplateType = {
-        header: "Kierowcy Zamówienie",
         tableData: {
             columns: [
                 { key: "id", title: "Sr. No", width: "15%" },
@@ -29,7 +38,7 @@ export const RaportTableScreen = ({ route }: Props) => {
 
     return (
         <ThemeProvider theme={RaportTheme}>
-            <RaportSheetTemplate header={dummyData.header} tableData={dummyData.tableData}
+            <RaportSheetTemplate tableData={dummyData.tableData}
             addItemFn={dummyData.addItemFn} />
         </ThemeProvider>
     );

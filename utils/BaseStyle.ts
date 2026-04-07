@@ -68,7 +68,7 @@ export const ImageStyle = StyleSheet.create({
 export const ContainerStyle = StyleSheet.create({
     OuterContainerStyle: {
         flex: 1,
-        backgroundColor: ColorsTheme.PrimaryColor
+        backgroundColor: ColorsTheme.SecondaryColor
     },
     InnerContainerStyle: {
         backgroundColor: ColorsTheme.LightColor,

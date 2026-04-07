@@ -14,7 +14,6 @@ type RowDataType = {
 }
 
 export type HomePageTemplateType = {
-    header: string,
     rows: {
         data: RowDataType[]
     }[]
@@ -31,10 +30,9 @@ function changeType(item: RowDataType): PressableCardProps {
     };
 }
 
-export const HomePageTemplate = ({ header, rows }: HomePageTemplateType) => {
+export const HomePageTemplate = ({ rows }: HomePageTemplateType) => {
     return (
         <View style={ContainerStyle.InnerContainerStyle}>
-            <PageHeader>{header}</PageHeader>
             <ScrollView>
                 {rows.map((item, index) => (
                     <CardShelf key={index} cardObj={item.data.map((item) => changeType(item))} />

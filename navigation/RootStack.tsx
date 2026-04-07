@@ -9,8 +9,9 @@ import { RaportTableScreen } from "../feature/raport/screens/RaportTableScreen";
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootStack = () => {
+
     return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator>
             <Stack.Screen name='Home' component={HomePageScreen} />
             <Stack.Screen name='RaportSelection' component={RaportSelectionScreen} />
             <Stack.Screen name='RaportOverview' component={RaportOverviewScreen} />

@@ -1,13 +1,20 @@
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../../navigation/RootStackParamList";
 import { HomePageTemplate, HomePageTemplateType } from "../../../components/template/HomePageTemplate";
 import { ColorsTheme } from "../../../utils/BaseStyle";
+import { useEffect } from "react";
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export const HomePageScreen = ({ navigation }: Props) => {
+    useEffect(() => {
+        const navHeaderOptions: NativeStackNavigationOptions = {
+            title: "Strona Główna"
+        };
+        navigation.setOptions(navHeaderOptions);
+    }, [navigation])
+
     const navigationItems: HomePageTemplateType = {
-        header: "Strona główna",
         rows: [{
             data: [
                 {
@@ -32,5 +39,5 @@ export const HomePageScreen = ({ navigation }: Props) => {
         }]
     };
 
-    return <HomePageTemplate header={navigationItems.header} rows={navigationItems.rows} />
+    return <HomePageTemplate rows={navigationItems.rows} />
 };

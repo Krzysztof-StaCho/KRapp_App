@@ -31,7 +31,7 @@ export default function App() {
       <SafeAreaView style={ContainerStyle.OuterContainerStyle}>
         <RootStack />
         <PageFooter />
-        <StatusBar style="auto" />
+        <StatusBar style="light" />
       </SafeAreaView>
     </NavigationContainer>
   );
