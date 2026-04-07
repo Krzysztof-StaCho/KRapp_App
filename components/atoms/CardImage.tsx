@@ -1,15 +1,18 @@
 import { ColorValue, View, ViewStyle } from "react-native";
 import { ImageStyle } from "../../utils/BaseStyle";
 import { AntDesign } from "@expo/vector-icons";
+import { useTheme } from "../../utils/ThemeContext";
 
 export type CardImageProps = {
-    color: ColorValue,
+    color?: ColorValue,
     iconName?: keyof typeof AntDesign.glyphMap
 };
 
 export const CardImage = ({ color, iconName }: CardImageProps) => {
+    const theme = useTheme();
+
     const modelStyle: ViewStyle = {
-        backgroundColor: color,
+        backgroundColor: color ?? theme.primary,
         aspectRatio: 2
     };
 

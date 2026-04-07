@@ -1,19 +1,23 @@
 import { View, ViewStyle } from "react-native";
-import { ColorsTheme, CommonStyle } from "../../utils/BaseStyle";
-import { CardHeader } from "./CardHeader";
+import { CommonStyle } from "../../utils/BaseStyle";
+import { useTheme } from "../../utils/ThemeContext";
 
-export type CardGroupProps = {
+import CardHeader from "./CardHeader";
+
+type CardGroupProps = {
     title: string,
     children?: React.ReactNode
 };
 
-export const CardGroup = ({title, children}: CardGroupProps) => {
+const CardGroup = ({title, children}: CardGroupProps) => {
+    const theme = useTheme();
+
     const modelStyle: ViewStyle = {
         borderRadius: 10,
         borderWidth: 1,
-        borderColor: ColorsTheme.SecondaryColor,
+        borderColor: theme.border,
         padding: 15,
-        backgroundColor: ColorsTheme.LightColor
+        backgroundColor: theme.light
     };
 
     return (
@@ -23,3 +27,5 @@ export const CardGroup = ({title, children}: CardGroupProps) => {
         </View>
     );
 };
+
+export default CardGroup;

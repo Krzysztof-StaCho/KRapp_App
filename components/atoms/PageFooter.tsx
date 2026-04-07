@@ -1,14 +1,18 @@
 import { StyleSheet, View, Text } from "react-native";
-import { ColorsTheme, TextStyle } from "../../utils/BaseStyle";
+import { TextStyle } from "../../utils/BaseStyle";
+import { useTheme } from "../../utils/ThemeContext";
 
 export const PageFooter = () => {
+    const theme = useTheme();
+
     const modelStyle = StyleSheet.create({
         viewStyle: {
             padding: 10,
-            backgroundColor: ColorsTheme.PrimaryColor
+            backgroundColor: theme.primary
         },
         textStyle: {
-            textAlign: "center"
+            textAlign: "center",
+            color: theme.text
         }
     });
 
