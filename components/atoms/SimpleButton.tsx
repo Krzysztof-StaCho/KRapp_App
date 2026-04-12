@@ -26,7 +26,8 @@ export const SimpleButton = ({title, color, onPressFn}: SimpleButtonProps) => {
     });
 
     return (
-        <Pressable style={({pressed}) => pressed ? [modelStyle.pressable, ContainerStyle.PressedContainer] : modelStyle.pressable} onPress={onPressFn}>
+        <Pressable android_ripple={{color: color, foreground: true}}
+        style={modelStyle.pressable} onPress={onPressFn}>
             <Text style={modelStyle.text}>{title}</Text>
         </Pressable>
     );

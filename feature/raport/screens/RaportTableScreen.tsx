@@ -4,6 +4,7 @@ import { RootParamList } from "../../../navigation/RootParamList";
 import { ThemeProvider } from "../../../utils/ThemeContext";
 import { RaportTheme } from "../Theme";
 import { useEffect } from "react";
+import { GetRaportDetails } from "../../../data/FakeData";
 
 type Props = NativeStackScreenProps<RootParamList, 'RaportRTable'>;
 
@@ -19,6 +20,14 @@ export const RaportTableScreen = ({ navigation, route }: Props) => {
         navigation.setOptions(navHeaderOptions);
     }, [navigation]);
 
+    const data = GetRaportDetails(raportId).map((item) => {
+        return {
+            id: item.id,
+            name: item.name,
+            quantity: item.amount + " " + item.quantity
+        };
+    });
+
     const dummyData: RaportSheetTemplateType = {
         tableData: {
             columns: [
@@ -26,11 +35,7 @@ export const RaportTableScreen = ({ navigation, route }: Props) => {
                 { key: "name", title: "Nazwa", width: "55%" },
                 { key: "quantity", title: "Ilość", width: "30%" }
             ],
-            rows: [
-                { id: 1, name: "Kartony pizza 32 cm", quantity: "1 paczka" },
-                { id: 2, name: "Kartony pizza 45 cm", quantity: "4 paczka" },
-                { id: 3, name: "Pudełka - Burgery Woł.", quantity: "0.9 paczka" }
-            ],
+            rows: data,
             onPressFn: (row) => console.log("double click", row)
         },
         addItemFn: () => console.log("Add more pressed")

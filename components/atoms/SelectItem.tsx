@@ -16,9 +16,14 @@ export type SelectItemProps = {
 export const SelectItem = ({children, color, navigateFn, moreActionFn}: SelectItemProps) => {
     const theme = useTheme();
 
+    color = color ?? {
+        background: theme.primary,
+        text: theme.text
+    };
+
     const modelStyle = StyleSheet.create({
         view: {
-            backgroundColor: color?.background ?? theme.primary,
+            backgroundColor: color.background,
             paddingVertical: 10,
             flexDirection: "row",
             borderRadius: 10
@@ -26,19 +31,19 @@ export const SelectItem = ({children, color, navigateFn, moreActionFn}: SelectIt
         icon: {
             paddingHorizontal: 15,
             textAlign: "center",
-            color: color?.text ?? theme.text,
+            color: color.text,
             fontSize: 25
         },
         text: {
             textAlign: "center",
             paddingHorizontal: 5,
-            color: color?.text ?? theme.text,
+            color: color.text,
         },
         pressableTitle: {
             flex: 1,
             borderLeftWidth: 2,
             borderRightWidth: 2,
-            borderColor: color?.text ?? theme.text
+            borderColor: color.text
         }
     });
 
@@ -48,12 +53,13 @@ export const SelectItem = ({children, color, navigateFn, moreActionFn}: SelectIt
             <AntDesign style={modelStyle.icon} name="arrow-right" />
 
             {/* Pressable Text */}
-            <Pressable style={({pressed}) => pressed ? [modelStyle.pressableTitle, ContainerStyle.PressedContainer] : modelStyle.pressableTitle} onPress={navigateFn}>
+            <Pressable android_ripple={{color: color.text, foreground: true}}
+            style={modelStyle.pressableTitle} onPress={navigateFn}>
                 <Text style={[TextStyle.SectionTitle, modelStyle.text]} numberOfLines={2}>{children}</Text>
             </Pressable>
 
             {/* More Action Icon */}
-            <Pressable style={({pressed}) => pressed ? ContainerStyle.PressedContainer : {}}
+            <Pressable android_ripple={{color: color.text, foreground: true}}
                 onPress={moreActionFn}>
                 <AntDesign style={modelStyle.icon} name="more" />
             </Pressable>

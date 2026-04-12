@@ -4,6 +4,8 @@ import { RaportSelectionTemplate, RaportSelectionTemplateType } from "../../../c
 import { ThemeProvider } from "../../../utils/ThemeContext";
 import { RaportTheme } from "../Theme";
 import { useEffect } from "react";
+import { GetRaports } from "../../../data/FakeData";
+import { SimpleButton } from "../../../components/atoms/SimpleButton";
 
 type Props = NativeStackScreenProps<RootParamList, 'RaportSelection'>;
 
@@ -12,7 +14,10 @@ export const RaportSelectionScreen = ({ navigation }: Props) => {
         const navHeaderOptions: NativeStackNavigationOptions = {
             headerStyle: { backgroundColor: RaportTheme.primary.toString() },
             title: "Wybierz raport",
-            headerTintColor: RaportTheme.text.toString()
+            headerTintColor: RaportTheme.text.toString(),
+            headerRight: () => (
+                <SimpleButton title="Utwórz" color={RaportTheme.text} />
+            )
         };
         navigation.setOptions(navHeaderOptions);
     }, [navigation]);
@@ -21,12 +26,12 @@ export const RaportSelectionScreen = ({ navigation }: Props) => {
         navigation.navigate("RaportOverview", { raportId: id });
     };
 
+    const data = GetRaports().map((item) => {
+        return { id: item.id, title: item.title };
+    });
+
     const dummyData: RaportSelectionTemplateType = {
-        data: [
-            { id: 1, title: "Kierowcy Zamówienie" },
-            { id: 2, title: "Szafka" },
-            { id: 3, title: "Napoje" }
-        ],
+        data: data,
         navigateFn: navigateHandler,
         moreActionFn: (id: number) => {}
     };
