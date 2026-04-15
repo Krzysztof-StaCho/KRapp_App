@@ -11,12 +11,6 @@ export const DefaultTheme: Theme = {
     text: "#FFF"
 };
 
-export const FontFamilies = {
-    HeaderFamily: "Zalando",
-    TitleFamily: "Bangers",
-    ParagraphFamily: "Macondo"
-};
-
 export const CommonStyle = StyleSheet.create({
     FlexContainer: {
         flex: 1
@@ -39,26 +33,46 @@ export const CommonStyle = StyleSheet.create({
     }
 });
 
-export const TextStyle = StyleSheet.create({
-    CardTitle: {
-        fontSize: 12,
-        textAlign: "center",
-        fontFamily: FontFamilies.TitleFamily
-    },
-    SectionTitle: {
-        textAlign: "left",
-        fontSize: 20,
-        fontFamily: FontFamilies.ParagraphFamily
-    },
-    HeaderText: {
-        textAlign: "center",
-        fontSize: 25,
-        fontFamily: FontFamilies.HeaderFamily
-    },
-    ParagraphText: {
-        fontSize: 18,
-        fontFamily: FontFamilies.ParagraphFamily
-    }
+export const Typography = StyleSheet.create({
+    H1: {
+    fontFamily: 'System',
+    fontSize: 32,
+    fontWeight: '700',
+    letterSpacing: -0.5,
+  },
+  H2: {
+    fontFamily: 'System',
+    fontSize: 24,
+    fontWeight: '600',
+    letterSpacing: -0.3,
+  },
+  H3: {
+    fontFamily: 'System',
+    fontSize: 20,
+    fontWeight: '600',
+  },
+  Body: {
+    fontFamily: 'System',
+    fontSize: 16,
+    fontWeight: '400',
+  },
+  BodyBold: {
+    fontFamily: 'System',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  Caption: {
+    fontFamily: 'System',
+    fontSize: 12,
+    fontWeight: '400',
+    letterSpacing: 0.2,
+  },
+  Button: {
+    fontFamily: 'System',
+    fontSize: 16,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+  }
 });
 
 export const ImageStyle = StyleSheet.create({

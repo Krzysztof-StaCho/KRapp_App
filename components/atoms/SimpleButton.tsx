@@ -1,5 +1,5 @@
 import { ColorValue, Pressable, StyleSheet, Text } from "react-native";
-import { ContainerStyle, FontFamilies } from "../../utils/BaseStyle";
+import { Typography } from "../../utils/BaseStyle";
 import { useTheme } from "../../utils/ThemeContext";
 
 export type SimpleButtonProps = {
@@ -19,16 +19,14 @@ export const SimpleButton = ({title, color, onPressFn}: SimpleButtonProps) => {
             paddingVertical: 5
         },
         text: {
-            color: color,
-            fontSize: 18,
-            fontFamily: FontFamilies.HeaderFamily
+            color: color
         }
     });
 
     return (
         <Pressable android_ripple={{color: color, foreground: true}}
         style={modelStyle.pressable} onPress={onPressFn}>
-            <Text style={modelStyle.text}>{title}</Text>
+            <Text style={[Typography.Button, modelStyle.text]}>{title}</Text>
         </Pressable>
     );
 };

@@ -1,6 +1,6 @@
 import { ColorValue, Pressable, StyleSheet, Text, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { ContainerStyle, TextStyle } from "../../utils/BaseStyle";
+import { ContainerStyle, Typography } from "../../utils/BaseStyle";
 import { useTheme } from "../../utils/ThemeContext";
 
 export type SelectItemProps = {
@@ -55,7 +55,7 @@ export const SelectItem = ({children, color, navigateFn, moreActionFn}: SelectIt
             {/* Pressable Text */}
             <Pressable android_ripple={{color: color.text, foreground: true}}
             style={modelStyle.pressableTitle} onPress={navigateFn}>
-                <Text style={[TextStyle.SectionTitle, modelStyle.text]} numberOfLines={2}>{children}</Text>
+                <Text style={[Typography.H2, modelStyle.text]} numberOfLines={2}>{children}</Text>
             </Pressable>
 
             {/* More Action Icon */}
