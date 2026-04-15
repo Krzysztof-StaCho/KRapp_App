@@ -1,4 +1,4 @@
-import { Text, TextStyle as Style } from "react-native";
+import { Text, TextStyle } from "react-native";
 import { Typography } from "../../utils/BaseStyle";
 import { useTheme } from "../../utils/ThemeContext";
 
@@ -6,14 +6,17 @@ type CardTitleProps = {
     children: string
 };
 
-export const CardTitle = ({ children }: CardTitleProps) => {
+const CardTitle = ({ children }: CardTitleProps) => {
     const theme = useTheme();
 
-    const modelStyle: Style = {
-        color: theme.primary
-    }
+    const modelStyle: TextStyle = {
+        color: theme.primary,
+        textAlign: "center"
+    };
 
     return (
-        <Text style={[Typography.Caption, modelStyle]} numberOfLines={2}>{children}</Text>
+        <Text style={[Typography.H3, modelStyle]} numberOfLines={2}>{children}</Text>
     );
 };
+
+export default CardTitle;

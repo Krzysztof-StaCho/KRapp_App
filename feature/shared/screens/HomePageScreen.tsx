@@ -34,7 +34,7 @@ export const HomePageScreen = ({ navigation }: Props) => {
                     title: "Konfiguracja",
                     color: DefaultTheme.border,
                     iconName: "setting",
-                    onPressFn: () => {}
+                    onPressFn: () => navigation.navigate("RaportRUpsert", {})
                 }
             ]
         }]

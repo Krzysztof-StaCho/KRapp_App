@@ -5,6 +5,7 @@ import { HomePageScreen } from "../feature/shared/screens/HomePageScreen";
 import { RaportSelectionScreen } from "../feature/raport/screens/RaportSelectionScreen";
 import { RaportOverviewScreen } from "../feature/raport/screens/RaportOverviewScreen";
 import { RaportTableScreen } from "../feature/raport/screens/RaportTableScreen";
+import { UpsertRaportScreen } from "../feature/raport/screens/UpsertRaportScreen";
 
 const Stack = createNativeStackNavigator<RootParamList>();
 
@@ -16,6 +17,8 @@ export const RootStack = () => {
             <Stack.Screen name='RaportSelection' component={RaportSelectionScreen} />
             <Stack.Screen name='RaportOverview' component={RaportOverviewScreen} />
             <Stack.Screen name='RaportRTable' component={RaportTableScreen} />
+
+            <Stack.Screen name='RaportRUpsert' component={UpsertRaportScreen} />
         </Stack.Navigator>
     );
 };

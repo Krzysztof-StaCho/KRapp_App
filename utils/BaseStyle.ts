@@ -48,7 +48,7 @@ export const Typography = StyleSheet.create({
   },
   H3: {
     fontFamily: 'System',
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '600',
   },
   Body: {
@@ -75,18 +75,10 @@ export const Typography = StyleSheet.create({
   }
 });
 
-export const ImageStyle = StyleSheet.create({
-    CardImage: {...CommonStyle.Bordered}
-});
-
 export const ContainerStyle = StyleSheet.create({
     OuterContainerStyle: {
         flex: 1,
         backgroundColor: DefaultTheme.primary
-    },
-    InnerContainerStyle: {
-        backgroundColor: DefaultTheme.body,
-        flex: 1
     },
     PressedContainer: {
         backgroundColor: DefaultTheme.light,

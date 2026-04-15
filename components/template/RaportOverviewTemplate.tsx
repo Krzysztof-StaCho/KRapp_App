@@ -1,5 +1,5 @@
 import { ScrollView, StyleSheet, View } from "react-native";
-import { ContainerStyle } from "../../utils/BaseStyle";
+import InnerContainer from "../atoms/InnerContainer";
 
 import Card from "../atoms/Card"
 import ButtonGroup from "../atoms/ButtonGroup";
@@ -31,7 +31,7 @@ export const RaportOverviewTemplate = ({ buttonFn }: RaportOverviewTemplateType)
     });
 
     return (
-        <View style={ContainerStyle.InnerContainerStyle}>
+        <InnerContainer>
             <ScrollView style={modelStyle.scrollOuter} contentContainerStyle={modelStyle.scrollInner}>
                 <Card title="Akcje"></Card>
                 <Card title="Przegląd">
@@ -53,6 +53,6 @@ export const RaportOverviewTemplate = ({ buttonFn }: RaportOverviewTemplateType)
                     </ButtonGroup>
                 </Card>
             </ScrollView>
-        </View>
+        </InnerContainer>
     );
 };

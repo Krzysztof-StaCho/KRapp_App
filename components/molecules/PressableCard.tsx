@@ -1,10 +1,10 @@
 import { Pressable, ViewStyle } from "react-native"
 import { CommonStyle } from "../../utils/BaseStyle";
-import { CardImage, CardImageProps } from "../atoms/CardImage";
-import { CardTitle } from "../atoms/CardTitle";
+import { CardIcon, CardIconProps } from "../atoms/CardIcon";
+import CardTitle from "../atoms/CardTitle";
 
 export type PressableCardProps = {
-    iconProp: CardImageProps,
+    iconProp: CardIconProps,
     children: string,
     onPressFn?: () => void
 }
@@ -21,7 +21,7 @@ export const PressableCard = ({ children, iconProp, onPressFn }: PressableCardPr
     return (
         <Pressable style={[CommonStyle.FlexContainer, CommonStyle.Bordered, modelStyle]}
         onPress={onPressFn}>
-            <CardImage color={iconProp.color} iconName={iconProp.iconName} />
+            <CardIcon color={iconProp.color} iconName={iconProp.iconName} />
             <CardTitle>{children}</CardTitle>
         </Pressable>
     );

@@ -19,4 +19,9 @@ export type RootParamList = {
      * Raport -> Raport table
      */
     RaportRTable: { raportId: number };
+
+    /**
+     * Raport -> Create Raport
+     */
+    RaportRUpsert: { raportId?: number }
 }
