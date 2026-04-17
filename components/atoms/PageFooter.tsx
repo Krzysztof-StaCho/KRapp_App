@@ -12,7 +12,7 @@ export const PageFooter = () => {
         },
         textStyle: {
             textAlign: "center",
-            color: theme.text
+            color: theme.primaryText
         }
     });
 

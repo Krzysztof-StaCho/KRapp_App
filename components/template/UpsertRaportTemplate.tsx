@@ -13,7 +13,9 @@ export const UpsertRaportTemplate = ({}: UpsertRaportTemplateType) => {
         <InnerContainer>
             <Text>UpsertRaportScreen</Text>
             <PressableCard iconProp={{iconName: "appstore-add"}}>
-                Test Pressable Card
+                <PressableCard.Title>Test Pressable Card</PressableCard.Title>
+                <Text>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt aut aliquid enim eaque dolore? Autem necessitatibus sequi quia, reiciendis odit adipisci rerum esse voluptatem facilis, alias incidunt aut molestiae asperiores harum officia, molestias nemo similique reprehenderit delectus itaque. Eos rem optio consectetur corrupti, est quisquam velit facilis! Qui, placeat maiores!</Text>
+                <PressableCard.Footer>Test footer</PressableCard.Footer>
             </PressableCard>
         </InnerContainer>
     );

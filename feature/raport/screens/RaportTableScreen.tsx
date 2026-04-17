@@ -15,7 +15,7 @@ export const RaportTableScreen = ({ navigation, route }: Props) => {
         const navHeaderOptions: NativeStackNavigationOptions = {
             headerStyle: { backgroundColor: RaportTheme.primary.toString() },
             title: "Kierowcy Zamówienie",
-            headerTintColor: RaportTheme.text.toString()
+            headerTintColor: RaportTheme.primaryText.toString()
         };
         navigation.setOptions(navHeaderOptions);
     }, [navigation]);

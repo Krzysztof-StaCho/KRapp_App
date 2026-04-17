@@ -1,8 +1,8 @@
 import { ColorValue, ScrollView, View } from "react-native";
 import InnerContainer from "../atoms/InnerContainer";
-import { CardShelf } from "../molecules/CardShelf";
+import CardShelf from "../molecules/CardShelf";
 import { AntDesign } from "@expo/vector-icons";
-import { PressableCardProps } from "../molecules/PressableCard";
+import { CardBaseProps, PressableCard } from "../molecules/PressableCard";
 
 type RowDataType = {
     title: string,
@@ -17,9 +17,9 @@ export type HomePageTemplateType = {
     }[]
 };
 
-function changeType(item: RowDataType): PressableCardProps {
+function changeType(item: RowDataType): CardBaseProps {
     return {
-        children: item.title,
+        children: <PressableCard.Title>{item.title}</PressableCard.Title>,
         iconProp: {
             color: item.color,
             iconName: item.iconName

@@ -7,5 +7,6 @@ export type Theme = {
     body: ColorValue,
     light: ColorValue,
     dark: ColorValue,
+    primaryText: ColorValue,
     text: ColorValue
 };

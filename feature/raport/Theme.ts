@@ -7,5 +7,6 @@ export const RaportTheme: Theme = {
     body: "#F8F9FB",
     light: "#ECEFF4",
     dark: "#323949",
-    text: "#FFFFFF"
+    primaryText: "#FFFFFF",
+    text: "#000000"
 };

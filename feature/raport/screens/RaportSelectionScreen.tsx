@@ -14,9 +14,9 @@ export const RaportSelectionScreen = ({ navigation }: Props) => {
         const navHeaderOptions: NativeStackNavigationOptions = {
             headerStyle: { backgroundColor: RaportTheme.primary.toString() },
             title: "Wybierz raport",
-            headerTintColor: RaportTheme.text.toString(),
+            headerTintColor: RaportTheme.primaryText.toString(),
             headerRight: () => (
-                <SimpleButton title="Utwórz" color={RaportTheme.text} />
+                <SimpleButton title="Utwórz" color={RaportTheme.primaryText} />
             )
         };
         navigation.setOptions(navHeaderOptions);

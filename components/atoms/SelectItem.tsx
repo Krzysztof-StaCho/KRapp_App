@@ -18,7 +18,7 @@ export const SelectItem = ({children, color, navigateFn, moreActionFn}: SelectIt
 
     color = color ?? {
         background: theme.primary,
-        text: theme.text
+        text: theme.primaryText
     };
 
     const modelStyle = StyleSheet.create({

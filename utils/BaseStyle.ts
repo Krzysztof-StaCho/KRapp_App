@@ -8,7 +8,8 @@ export const DefaultTheme: Theme = {
     body: "#FFF",
     light: "#CCC",
     dark: "#000",
-    text: "#FFF"
+    primaryText: "#FFF",
+    text: "#000"
 };
 
 export const CommonStyle = StyleSheet.create({
