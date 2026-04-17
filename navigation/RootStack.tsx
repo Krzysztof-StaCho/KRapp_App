@@ -18,7 +18,8 @@ export const RootStack = () => {
             <Stack.Screen name='RaportOverview' component={RaportOverviewScreen} />
             <Stack.Screen name='RaportRTable' component={RaportTableScreen} />
 
-            <Stack.Screen name='RaportRUpsert' component={UpsertRaportScreen} />
+            <Stack.Screen name='RaportRUpsert' component={UpsertRaportScreen}
+            options={{ presentation: "formSheet" }} />
         </Stack.Navigator>
     );
 };

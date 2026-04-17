@@ -10,21 +10,25 @@ import { SimpleButton } from "../../../components/atoms/SimpleButton";
 type Props = NativeStackScreenProps<RootParamList, 'RaportSelection'>;
 
 export const RaportSelectionScreen = ({ navigation }: Props) => {
+    const navigateHandler = (id: number) => {
+        navigation.navigate("RaportOverview", { raportId: id });
+    };
+    const editHandler = (id?: number) => {
+        navigation.navigate("RaportRUpsert", { raportId: id });
+    };
+
     useEffect(() => {
         const navHeaderOptions: NativeStackNavigationOptions = {
             headerStyle: { backgroundColor: RaportTheme.primary.toString() },
             title: "Wybierz raport",
             headerTintColor: RaportTheme.primaryText.toString(),
             headerRight: () => (
-                <SimpleButton title="Utwórz" color={RaportTheme.primaryText} />
+                <SimpleButton title="Utwórz" color={RaportTheme.primaryText}
+                onPressFn={() => editHandler()} />
             )
         };
         navigation.setOptions(navHeaderOptions);
     }, [navigation]);
-
-    const navigateHandler = (id: number) => {
-        navigation.navigate("RaportOverview", { raportId: id });
-    };
 
     const data = GetRaports().map((item) => {
         return { id: item.id, title: item.title };
@@ -33,7 +37,7 @@ export const RaportSelectionScreen = ({ navigation }: Props) => {
     const dummyData: RaportSelectionTemplateType = {
         data: data,
         navigateFn: navigateHandler,
-        moreActionFn: (id: number) => {}
+        moreActionFn: editHandler
     };
 
     return (

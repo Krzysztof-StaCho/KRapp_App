@@ -6,7 +6,10 @@ import { UpsertRaportTemplate } from "../../../components/template/UpsertRaportT
 
 type Props = NativeStackScreenProps<RootParamList, 'RaportRUpsert'>;
 
-export const UpsertRaportScreen = ({ navigation }: Props) => {
+export const UpsertRaportScreen = ({ route }: Props) => {
+    const { raportId } = route.params;
+    const addNewFlag = (raportId === undefined) ? true : false;
+
     return (
         <ThemeProvider theme={RaportTheme}>
             <UpsertRaportTemplate />
