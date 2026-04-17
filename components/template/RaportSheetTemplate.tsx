@@ -1,5 +1,4 @@
 import { DimensionValue, StyleSheet, View } from "react-native";
-import { CommonStyle } from "../../utils/BaseStyle";
 import InnerContainer from "../atoms/InnerContainer";
 import { SimpleTable } from "../molecules/SimpleTable";
 import Card from "../atoms/Card";
@@ -35,7 +34,7 @@ export const RaportSheetTemplate = ({ tableData, addItemFn }: RaportSheetTemplat
 
     return (
         <InnerContainer>
-            <View style={CommonStyle.FlexContainer}>
+            <View style={{flex: 1}}>
                 <SimpleTable columns={tableData.columns} rows={tableData.rows}
                 onRowDoublePress={tableData.onPressFn} />
             </View>

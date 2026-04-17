@@ -37,13 +37,13 @@ export const CommonStyle = StyleSheet.create({
 export const Typography = StyleSheet.create({
     H1: {
     fontFamily: 'System',
-    fontSize: 32,
+    fontSize: 28,
     fontWeight: '700',
     letterSpacing: -0.5,
   },
   H2: {
     fontFamily: 'System',
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: '600',
     letterSpacing: -0.3,
   },
@@ -54,12 +54,12 @@ export const Typography = StyleSheet.create({
   },
   Body: {
     fontFamily: 'System',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '400',
   },
   BodyBold: {
     fontFamily: 'System',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
   },
   Caption: {
@@ -70,7 +70,7 @@ export const Typography = StyleSheet.create({
   },
   Button: {
     fontFamily: 'System',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
     letterSpacing: 0.5,
   }

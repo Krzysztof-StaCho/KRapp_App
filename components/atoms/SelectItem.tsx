@@ -32,7 +32,8 @@ export const SelectItem = ({children, color, navigateFn, moreActionFn}: SelectIt
             paddingHorizontal: 15,
             textAlign: "center",
             color: color.text,
-            fontSize: 25
+            fontSize: 25,
+            marginVertical: "auto"
         },
         text: {
             textAlign: "center",

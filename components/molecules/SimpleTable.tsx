@@ -2,6 +2,7 @@ import { DimensionValue, StyleSheet, Text, TouchableOpacity, View } from "react-
 import { useRef } from "react";
 import { FlatList } from "react-native";
 import { useTheme } from "../../utils/ThemeContext";
+import { Typography } from "../../utils/BaseStyle";
 
 type Column<T> = {
     key: keyof T;
@@ -35,7 +36,7 @@ export const SimpleTable = <T extends { id: number }>({columns, rows, onRowDoubl
             borderBottomColor: theme.border
         },
         tableCaption: {
-            color: theme.text,
+            color: theme.primaryText,
             fontWeight: "bold",
             textAlign: "center"
         }
@@ -57,10 +58,10 @@ export const SimpleTable = <T extends { id: number }>({columns, rows, onRowDoubl
         <TouchableOpacity key={item.id} onPress={() => handlePress(item)}>
             <View style={modelStyle.tableBody}>
                 { columns.map(col => (
-                    <Text key={String(col.key)} numberOfLines={2} style={{
+                    <Text key={String(col.key)} numberOfLines={2} style={[Typography.Body, {
                         width: col.width || 100,
                         textAlign: "center"
-                    }}>
+                    }]}>
                         { String(item[col.key]) }
                     </Text>
                 )) }
@@ -74,7 +75,7 @@ export const SimpleTable = <T extends { id: number }>({columns, rows, onRowDoubl
             <View style={modelStyle.tableHead}>
                 { columns.map(col => (
                     <View key={String(col.key)} style={{ width: col.width || 100 }}>
-                        <Text style={modelStyle.tableCaption}>
+                        <Text style={[Typography.BodyBold, modelStyle.tableCaption]}>
                             {col.title}
                         </Text>
                     </View>

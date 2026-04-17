@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import InnerContainer from "../atoms/InnerContainer";
 
 import Card from "../atoms/Card"
