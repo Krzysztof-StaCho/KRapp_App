@@ -12,6 +12,11 @@ export const DefaultTheme: Theme = {
     text: "#000"
 };
 
+export const CommonColors = {
+  error: "#F44336",
+  cancel: "#555"
+};
+
 export const CommonStyle = StyleSheet.create({
     FlexContainer: {
         flex: 1

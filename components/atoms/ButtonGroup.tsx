@@ -1,10 +1,11 @@
 import { ViewStyle, View } from "react-native";
 
 type ButtonGroupProps = {
+    style?: ViewStyle,
     children: React.ReactNode
 };
 
-const ButtonGroup = ({children}: ButtonGroupProps) => {
+const ButtonGroup = ({style, children}: ButtonGroupProps) => {
     const modelStyle: ViewStyle = {
         flexDirection: "row",
         flexWrap: "wrap",
@@ -12,7 +13,7 @@ const ButtonGroup = ({children}: ButtonGroupProps) => {
     };
 
     return (
-        <View style={modelStyle}>
+        <View style={[modelStyle, style]}>
             {children}
         </View>
     );
