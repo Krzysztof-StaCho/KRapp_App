@@ -1,16 +1,16 @@
-type RaportHeaderType = {
+export type RaportHeaderType = {
     id: number,
     title: string
 };
 
-type RaportDataType = {
+export type RaportDataType = {
     id: number,
     name: string,
     amount: number,
     quantity: "paczka" | "sztuk"
 };
 
-type RaportType = {
+export type RaportType = {
     id: number,
     title: string,
     data: RaportDataType[]
@@ -79,7 +79,7 @@ export const InitData: RaportType[] = [
     }
 ];
 
-export function GetRaports(): RaportHeaderType[] {
+export function GetRaports(data: RaportType[]): RaportHeaderType[] {
     const getRaportHeaders = (item: RaportType): RaportHeaderType => {
         return {
             id: item.id,
@@ -90,12 +90,22 @@ export function GetRaports(): RaportHeaderType[] {
     return InitData.map(getRaportHeaders);
 };
 
-export function GetRaportOverview(id: number) {
-    return {};
+export function GetRaportOverview(id: number, data: RaportType[]): RaportHeaderType {
+    const raport = data.find((item) => item.id === id);
+    if (typeof raport === "undefined")
+        throw Error(`Error during get raport header. Id: ${id}`);
+
+    return { id: raport.id, title: raport.title };
 }
 
-export function GetRaportDetails(id: number): RaportDataType[] {
+export function GetRaport(id: number, data: RaportType[]): RaportType {
     const target = InitData.find((item) => item.id === id);
+    if (!target) throw Error();
+    return target;
+}
+
+export function GetRaportDetails(id: number, data: RaportType[]): RaportDataType[] {
+    const target = data.find((item) => item.id === id);
     if (!target) throw Error();
     return target.data;
 };

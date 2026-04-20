@@ -1,26 +1,30 @@
 import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RaportSheetTemplate, RaportSheetTemplateType } from "../../../components/template/RaportSheetTemplate";
-import { RootParamList } from "../../../navigation/RootParamList";
-import { ThemeProvider } from "../../../utils/ThemeContext";
-import { RaportTheme } from "../Theme";
-import { useEffect } from "react";
-import { GetRaportDetails } from "../../../data/FakeData";
+import { RaportParamList } from "../../../navigation/RootParamList";
+import { useTheme } from "../../../utils/ThemeContext";
+import { useContext, useEffect } from "react";
+import { GetRaport } from "../../../data/FakeData";
+import { RaportContext } from "../../../store/RaportContext";
 
-type Props = NativeStackScreenProps<RootParamList, 'RaportRTable'>;
+type Props = NativeStackScreenProps<RaportParamList, 'RaportRTable'>;
 
 export const RaportTableScreen = ({ navigation, route }: Props) => {
+    const theme = useTheme();
+    const raportCtx = useContext(RaportContext);
+
     const raportId = route.params.raportId;
+    const raport = GetRaport(raportId, raportCtx.raports);
 
     useEffect(() => {
         const navHeaderOptions: NativeStackNavigationOptions = {
-            headerStyle: { backgroundColor: RaportTheme.primary.toString() },
-            title: "Kierowcy Zamówienie",
-            headerTintColor: RaportTheme.primaryText.toString()
+            headerStyle: { backgroundColor: theme.primary.toString() },
+            title: raport.title,
+            headerTintColor: theme.primaryText.toString()
         };
         navigation.setOptions(navHeaderOptions);
     }, [navigation]);
 
-    const data = GetRaportDetails(raportId).map((item) => {
+    const data = raport.data.map((item) => {
         return {
             id: item.id,
             name: item.name,
@@ -42,9 +46,7 @@ export const RaportTableScreen = ({ navigation, route }: Props) => {
     }
 
     return (
-        <ThemeProvider theme={RaportTheme}>
-            <RaportSheetTemplate tableData={dummyData.tableData}
-            addItemFn={dummyData.addItemFn} />
-        </ThemeProvider>
+        <RaportSheetTemplate tableData={dummyData.tableData}
+        addItemFn={dummyData.addItemFn} />
     );
 };

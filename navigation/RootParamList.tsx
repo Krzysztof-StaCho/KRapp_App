@@ -1,10 +1,16 @@
 export type RootParamList = {
-
     /**
      * Home (Startup page)
      */
     Home: undefined
 
+    /**
+     * Raport Section
+     */
+    RaportStack: undefined
+}
+
+export type RaportParamList = {
     /**
      * Raport -> Item selection
      */

@@ -1,15 +1,18 @@
 import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootParamList } from "../../../navigation/RootParamList";
+import { RaportParamList } from "../../../navigation/RootParamList";
 import { RaportSelectionTemplate, RaportSelectionTemplateType } from "../../../components/template/RaportSelectionTemplate";
-import { ThemeProvider } from "../../../utils/ThemeContext";
-import { RaportTheme } from "../Theme";
-import { useEffect } from "react";
+import { useTheme } from "../../../utils/ThemeContext";
+import { useContext, useEffect } from "react";
 import { GetRaports } from "../../../data/FakeData";
 import { SimpleButton } from "../../../components/atoms/SimpleButton";
+import { RaportContext } from "../../../store/RaportContext";
 
-type Props = NativeStackScreenProps<RootParamList, 'RaportSelection'>;
+type Props = NativeStackScreenProps<RaportParamList, 'RaportSelection'>;
 
 export const RaportSelectionScreen = ({ navigation }: Props) => {
+    const theme = useTheme();
+    const raportCtx = useContext(RaportContext);
+
     const navigateHandler = (id: number) => {
         navigation.navigate("RaportOverview", { raportId: id });
     };
@@ -19,18 +22,18 @@ export const RaportSelectionScreen = ({ navigation }: Props) => {
 
     useEffect(() => {
         const navHeaderOptions: NativeStackNavigationOptions = {
-            headerStyle: { backgroundColor: RaportTheme.primary.toString() },
+            headerStyle: { backgroundColor: theme.primary.toString() },
             title: "Wybierz raport",
-            headerTintColor: RaportTheme.primaryText.toString(),
+            headerTintColor: theme.primaryText.toString(),
             headerRight: () => (
-                <SimpleButton title="Utwórz" color={RaportTheme.primaryText}
+                <SimpleButton title="Utwórz" color={theme.primaryText}
                 onPressFn={() => editHandler()} />
             )
         };
         navigation.setOptions(navHeaderOptions);
     }, [navigation]);
 
-    const data = GetRaports().map((item) => {
+    const data = GetRaports(raportCtx.raports).map((item) => {
         return { id: item.id, title: item.title };
     });
 
@@ -41,9 +44,7 @@ export const RaportSelectionScreen = ({ navigation }: Props) => {
     };
 
     return (
-        <ThemeProvider theme={RaportTheme}>
-            <RaportSelectionTemplate data={dummyData.data} navigateFn={dummyData.navigateFn}
-            moreActionFn={dummyData.moreActionFn} />
-        </ThemeProvider>
+        <RaportSelectionTemplate data={dummyData.data} navigateFn={dummyData.navigateFn}
+        moreActionFn={dummyData.moreActionFn} />
     );
 };

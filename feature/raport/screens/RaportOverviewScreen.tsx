@@ -1,22 +1,28 @@
 import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import { RootParamList } from "../../../navigation/RootParamList";
+import { RaportParamList } from "../../../navigation/RootParamList";
 import { RaportOverviewTemplate, RaportOverviewTemplateType } from "../../../components/template/RaportOverviewTemplate";
 
-import { ThemeProvider } from "../../../utils/ThemeContext";
-import { RaportTheme } from "../Theme"
-import { useEffect } from "react";
+import { useTheme } from "../../../utils/ThemeContext";
+import { useContext, useEffect } from "react";
+import { RaportContext } from "../../../store/RaportContext";
+import { GetRaportOverview } from "../../../data/FakeData";
 
-type Props = NativeStackScreenProps<RootParamList, 'RaportOverview'>;
+type Props = NativeStackScreenProps<RaportParamList, 'RaportOverview'>;
 
 export const RaportOverviewScreen = ({ navigation, route }: Props) => {
+    const theme = useTheme();
+    const raportCtx = useContext(RaportContext);
+
     const raportId = route.params.raportId;
+
+    const raportHeader = GetRaportOverview(raportId, raportCtx.raports);
 
     useEffect(() => {
         const navHeaderOptions: NativeStackNavigationOptions = {
-            headerStyle: { backgroundColor: RaportTheme.primary.toString() },
-            title: "Kierowcy Zamówienie",
-            headerTintColor: RaportTheme.primaryText.toString()
+            headerStyle: { backgroundColor: theme.primary.toString() },
+            title: raportHeader.title,
+            headerTintColor: theme.primaryText.toString()
         };
         navigation.setOptions(navHeaderOptions);
     }, [navigation]);
@@ -33,8 +39,6 @@ export const RaportOverviewScreen = ({ navigation, route }: Props) => {
     };
 
     return (
-        <ThemeProvider theme={RaportTheme}>
-            <RaportOverviewTemplate buttonFn={dummyData.buttonFn} />
-        </ThemeProvider>
+        <RaportOverviewTemplate buttonFn={dummyData.buttonFn} />
     );
 };

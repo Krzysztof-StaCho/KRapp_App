@@ -1,10 +1,8 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootParamList } from "../../../navigation/RootParamList";
-import { ThemeProvider } from "../../../utils/ThemeContext";
-import { RaportTheme } from "../Theme";
+import { RaportParamList } from "../../../navigation/RootParamList";
 import { UpsertRaportTemplate, UpsertRaportTemplateType } from "../../../components/template/UpsertRaportTemplate";
 
-type Props = NativeStackScreenProps<RootParamList, 'RaportRUpsert'>;
+type Props = NativeStackScreenProps<RaportParamList, 'RaportRUpsert'>;
 
 export const UpsertRaportScreen = ({ navigation, route }: Props) => {
     const { raportId } = route.params;
@@ -23,8 +21,6 @@ export const UpsertRaportScreen = ({ navigation, route }: Props) => {
     };
 
     return (
-        <ThemeProvider theme={RaportTheme}>
-            <UpsertRaportTemplate pageInfo={dummyData.pageInfo} handlers={dummyData.handlers} />
-        </ThemeProvider>
+        <UpsertRaportTemplate pageInfo={dummyData.pageInfo} handlers={dummyData.handlers} />
     );
 };

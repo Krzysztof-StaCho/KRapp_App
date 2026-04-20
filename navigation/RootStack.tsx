@@ -2,24 +2,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootParamList } from "./RootParamList";
 
 import { HomePageScreen } from "../feature/shared/screens/HomePageScreen";
-import { RaportSelectionScreen } from "../feature/raport/screens/RaportSelectionScreen";
-import { RaportOverviewScreen } from "../feature/raport/screens/RaportOverviewScreen";
-import { RaportTableScreen } from "../feature/raport/screens/RaportTableScreen";
-import { UpsertRaportScreen } from "../feature/raport/screens/UpsertRaportScreen";
+import { RaportStack } from "./RaportStack";
 
 const Stack = createNativeStackNavigator<RootParamList>();
 
 export const RootStack = () => {
-
     return (
-        <Stack.Navigator>
-            <Stack.Screen name='Home' component={HomePageScreen} />
-            <Stack.Screen name='RaportSelection' component={RaportSelectionScreen} />
-            <Stack.Screen name='RaportOverview' component={RaportOverviewScreen} />
-            <Stack.Screen name='RaportRTable' component={RaportTableScreen} />
-
-            <Stack.Screen name='RaportRUpsert' component={UpsertRaportScreen}
-            options={{ presentation: "formSheet" }} />
+        <Stack.Navigator screenOptions={{
+            headerShown: false
+        }}>
+            <Stack.Screen name='Home' component={HomePageScreen} options={{ headerShown: true }} />
+            <Stack.Screen name="RaportStack" component={RaportStack} />
         </Stack.Navigator>
     );
 };
