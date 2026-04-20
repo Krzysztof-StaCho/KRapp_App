@@ -1,6 +1,8 @@
 import { StyleSheet, Text } from "react-native";
 import InnerContainer from "../atoms/InnerContainer";
 import { FormWrapper } from "../atoms/FormWrapper";
+import Input from "../molecules/Input";
+import { useState } from "react";
 
 export type UpsertRaportTemplateType = {
     pageInfo: {
@@ -17,6 +19,14 @@ export type UpsertRaportTemplateType = {
 export const UpsertRaportTemplate = ({ pageInfo, handlers }: UpsertRaportTemplateType) => {
     const modelStyle = StyleSheet.create({
     });
+
+    const [values, setValues] = useState({
+        title: ""
+    });
+
+    const onChange = (key: keyof typeof values, value: string) => {
+        setValues((prev) => ({...prev, [key]: value}));
+    };
     
     return (
         <InnerContainer>
@@ -24,7 +34,8 @@ export const UpsertRaportTemplate = ({ pageInfo, handlers }: UpsertRaportTemplat
             closeFn={handlers.closeFn}
             deleteFn={handlers.deleteFn}
             confirmFn={handlers.confirmFn}>
-                <Text>Upsert Raport Screen</Text>
+                <Input label="nazwa" placeholder="Wpisz nazwę" iconName="account-book"
+                onChangeHandler={(val) => onChange('title', val)} />
             </FormWrapper>
         </InnerContainer>
     );

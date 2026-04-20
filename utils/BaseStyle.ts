@@ -40,7 +40,7 @@ export const CommonStyle = StyleSheet.create({
 });
 
 export const Typography = StyleSheet.create({
-    H1: {
+  H1: {
     fontFamily: 'System',
     fontSize: 28,
     fontWeight: '700',
