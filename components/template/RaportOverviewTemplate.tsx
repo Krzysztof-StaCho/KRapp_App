@@ -9,6 +9,7 @@ export type RaportOverviewTemplateType = {
     buttonFn: {
         seeMoreRaportFn: () => void,
         addRaportItemFn: () => void,
+        runRaportFn: () => void,
         seeMoreWarningFn: () => void,
         editOrderFn: () => void,
         seeMoreOrderFn: () => void,
@@ -38,6 +39,11 @@ export const RaportOverviewTemplate = ({ buttonFn }: RaportOverviewTemplateType)
                     <ButtonGroup>
                         <SimpleButton title="Zobacz więcej..." onPressFn={buttonFn.seeMoreRaportFn} />
                         <SimpleButton title="Dodaj" onPressFn={buttonFn.addRaportItemFn} />
+                    </ButtonGroup>
+                </Card>
+                <Card title="Raport">
+                    <ButtonGroup>
+                        <SimpleButton title="Wykonaj" onPressFn={buttonFn.runRaportFn} />
                     </ButtonGroup>
                 </Card>
                 <Card title="Uwagi">

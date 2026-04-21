@@ -87,7 +87,7 @@ export function GetRaports(data: RaportType[]): RaportHeaderType[] {
         };
     };
 
-    return InitData.map(getRaportHeaders);
+    return data.map(getRaportHeaders);
 };
 
 export function GetRaportOverview(id: number, data: RaportType[]): RaportHeaderType {
@@ -99,7 +99,7 @@ export function GetRaportOverview(id: number, data: RaportType[]): RaportHeaderT
 }
 
 export function GetRaport(id: number, data: RaportType[]): RaportType {
-    const target = InitData.find((item) => item.id === id);
+    const target = data.find((item) => item.id === id);
     if (!target) throw Error();
     return target;
 }

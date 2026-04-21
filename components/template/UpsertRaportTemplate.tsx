@@ -12,7 +12,7 @@ export type UpsertRaportTemplateType = {
     handlers: {
         closeFn: () => void,
         deleteFn?: () => void,
-        confirmFn: () => void
+        confirmFn: (title: string) => void
     }
 };
 
@@ -27,13 +27,16 @@ export const UpsertRaportTemplate = ({ pageInfo, handlers }: UpsertRaportTemplat
     const onChange = (key: keyof typeof values, value: string) => {
         setValues((prev) => ({...prev, [key]: value}));
     };
+    const confirmHandler = () => {
+        handlers.confirmFn(values.title);
+    };
     
     return (
         <InnerContainer>
             <FormWrapper title={pageInfo.pageTitle} type={pageInfo.type}
             closeFn={handlers.closeFn}
             deleteFn={handlers.deleteFn}
-            confirmFn={handlers.confirmFn}>
+            confirmFn={confirmHandler}>
                 <Input label="nazwa" placeholder="Wpisz nazwę" iconName="account-book"
                 onChangeHandler={(val) => onChange('title', val)} />
             </FormWrapper>

@@ -39,7 +39,7 @@ const raportReducer = (state: RaportType[], action: RaportAction): RaportType[] 
 
         const id = state[state.length - 1].id + 1;
         const newRaport: RaportType = { ...header, id, data: [] };
-        return [newRaport, ...state];
+        return [...state, newRaport];
     };
     const updateHeader = (id?: number, header?: RaportHeaderType): RaportType[] => {
         if (typeof header === "undefined" || typeof id === "undefined")

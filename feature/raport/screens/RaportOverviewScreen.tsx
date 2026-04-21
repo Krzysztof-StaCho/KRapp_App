@@ -31,6 +31,7 @@ export const RaportOverviewScreen = ({ navigation, route }: Props) => {
         buttonFn: {
             seeMoreRaportFn: () => navigation.navigate("RaportRTable", { raportId: raportId }),
             addRaportItemFn: () => {},
+            runRaportFn: () => {},
             seeMoreWarningFn: () => {},
             editOrderFn: () => {},
             seeMoreOrderFn: () => {},
