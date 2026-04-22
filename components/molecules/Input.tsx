@@ -19,7 +19,8 @@ type InputProps = {
         bgColor: ColorValue,
         iconColor: ColorValue,
         iconSize: number
-    }
+    },
+    value?: string
 };
 
 const Input = ({
@@ -33,7 +34,8 @@ const Input = ({
     secure = false,
     validate,
     errorMessage,
-    style
+    style,
+    value = ""
 }: InputProps) => {
     const theme = useTheme();
 
@@ -89,7 +91,7 @@ const Input = ({
                     size={style.iconSize} color={style.iconColor} />
                 ) : undefined}
                 <TextInput secureTextEntry={secure} placeholder={placeholderText}
-                onChangeText={onChangeHandler} onEndEditing={validate}
+                onChangeText={onChangeHandler} onEndEditing={validate} value={value}
                 style={[Typography.Body, styles.textInput]} multiline={numLines > 1 ? true : false} />
                 {rightComponent}
             </View>

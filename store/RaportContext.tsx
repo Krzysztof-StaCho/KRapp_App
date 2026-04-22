@@ -51,7 +51,7 @@ const raportReducer = (state: RaportType[], action: RaportAction): RaportType[] 
 
         const oldRaport = state[raportIndex];
 
-        const newState = {...state};
+        const newState = [...state];
         newState[raportIndex] = {
             ...header,
             id,

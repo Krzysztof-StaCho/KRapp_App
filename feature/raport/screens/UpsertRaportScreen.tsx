@@ -12,7 +12,11 @@ export const UpsertRaportScreen = ({ navigation, route }: Props) => {
     const addNewFlag = (raportId === undefined) ? true : false;
 
     const confirmFormHandler = (title: string) => {
-        raportCtx.addRaportH({id: 0, title});
+        if (raportId === undefined) {
+            raportCtx.addRaportH({id: 0, title});
+        } else {
+            raportCtx.updateRaportH(raportId, {id: raportId, title});
+        }
 
         navigation.goBack();
     };
@@ -26,10 +30,12 @@ export const UpsertRaportScreen = ({ navigation, route }: Props) => {
             closeFn: () => navigation.goBack(),
             confirmFn: confirmFormHandler,
             deleteFn: addNewFlag ? undefined : () => {}
-        }
+        },
+        initData: raportId ? raportCtx.raports.find((item) => item.id === raportId) : undefined
     };
 
     return (
-        <UpsertRaportTemplate pageInfo={dummyData.pageInfo} handlers={dummyData.handlers} />
+        <UpsertRaportTemplate pageInfo={dummyData.pageInfo} handlers={dummyData.handlers}
+        initData={dummyData.initData} />
     );
 };

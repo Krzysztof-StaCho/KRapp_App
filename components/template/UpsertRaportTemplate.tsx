@@ -3,6 +3,7 @@ import InnerContainer from "../atoms/InnerContainer";
 import { FormWrapper } from "../atoms/FormWrapper";
 import Input from "../molecules/Input";
 import { useState } from "react";
+import { RaportHeaderType } from "../../data/FakeData";
 
 export type UpsertRaportTemplateType = {
     pageInfo: {
@@ -13,15 +14,16 @@ export type UpsertRaportTemplateType = {
         closeFn: () => void,
         deleteFn?: () => void,
         confirmFn: (title: string) => void
-    }
+    },
+    initData?: RaportHeaderType
 };
 
-export const UpsertRaportTemplate = ({ pageInfo, handlers }: UpsertRaportTemplateType) => {
+export const UpsertRaportTemplate = ({ pageInfo, handlers, initData }: UpsertRaportTemplateType) => {
     const modelStyle = StyleSheet.create({
     });
 
     const [values, setValues] = useState({
-        title: ""
+        title: initData?.title ?? ""
     });
 
     const onChange = (key: keyof typeof values, value: string) => {
@@ -38,7 +40,7 @@ export const UpsertRaportTemplate = ({ pageInfo, handlers }: UpsertRaportTemplat
             deleteFn={handlers.deleteFn}
             confirmFn={confirmHandler}>
                 <Input label="nazwa" placeholder="Wpisz nazwę" iconName="account-book"
-                onChangeHandler={(val) => onChange('title', val)} />
+                onChangeHandler={(val) => onChange('title', val)} value={values.title} />
             </FormWrapper>
         </InnerContainer>
     );
