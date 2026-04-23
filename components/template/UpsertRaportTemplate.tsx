@@ -1,9 +1,9 @@
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import InnerContainer from "../atoms/InnerContainer";
 import { FormWrapper } from "../atoms/FormWrapper";
 import Input from "../molecules/Input";
-import { useState } from "react";
 import { RaportHeaderType } from "../../data/FakeData";
+import { useInput, ValidateFunctionType } from "../../feature/shared/hooks/useInput";
 
 export type UpsertRaportTemplateType = {
     pageInfo: {
@@ -15,22 +15,31 @@ export type UpsertRaportTemplateType = {
         deleteFn?: () => void,
         confirmFn: (title: string) => void
     },
-    initData?: RaportHeaderType
+    initData?: RaportHeaderType,
+    validations: {
+        title: ValidateFunctionType | undefined
+    }
 };
 
-export const UpsertRaportTemplate = ({ pageInfo, handlers, initData }: UpsertRaportTemplateType) => {
+export const UpsertRaportTemplate = ({ pageInfo, handlers, initData, validations }: UpsertRaportTemplateType) => {
     const modelStyle = StyleSheet.create({
     });
 
-    const [values, setValues] = useState({
-        title: initData?.title ?? ""
+    const titleInput = useInput({
+        name: "Nazwa",
+        initValue: initData?.title,
+        onChange: undefined,
+        validateFn: validations.title
     });
 
-    const onChange = (key: keyof typeof values, value: string) => {
-        setValues((prev) => ({...prev, [key]: value}));
-    };
     const confirmHandler = () => {
-        handlers.confirmFn(values.title);
+        if (typeof titleInput.validateHandler === "undefined") {
+            handlers.confirmFn(titleInput.value);
+            return;
+        }
+
+        if (titleInput.validateHandler())
+            handlers.confirmFn(titleInput.value)
     };
     
     return (
@@ -40,7 +49,8 @@ export const UpsertRaportTemplate = ({ pageInfo, handlers, initData }: UpsertRap
             deleteFn={handlers.deleteFn}
             confirmFn={confirmHandler}>
                 <Input label="nazwa" placeholder="Wpisz nazwę" iconName="account-book"
-                onChangeHandler={(val) => onChange('title', val)} value={values.title} />
+                onChangeHandler={titleInput.onChangeHandler} value={titleInput.value}
+                validate={titleInput.validateHandler} errorMessage={titleInput.error} />
             </FormWrapper>
         </InnerContainer>
     );
