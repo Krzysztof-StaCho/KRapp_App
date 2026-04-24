@@ -2,7 +2,7 @@ import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-nav
 import { RootParamList } from "../../../navigation/RootParamList";
 import { HomePageTemplate, HomePageTemplateType } from "../../../components/template/HomePageTemplate";
 import { useEffect } from "react";
-import { RaportTheme } from "../../raport/Theme";
+import { RaportTheme } from "../../../utils/Theme";
 import { DefaultTheme } from "../../../utils/BaseStyle";
 
 type Props = NativeStackScreenProps<RootParamList, 'Home'>;
@@ -22,7 +22,7 @@ export const HomePageScreen = ({ navigation }: Props) => {
                     title: "Raporty",
                     color: RaportTheme.primary,
                     iconName: "area-chart",
-                    onPressFn: () => navigation.navigate("RaportSelection")
+                    onPressFn: () => navigation.navigate("RaportStack")
                 },
                 {
                     title: "Czas Pracy",

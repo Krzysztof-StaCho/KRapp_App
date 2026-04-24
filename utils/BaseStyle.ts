@@ -8,13 +8,13 @@ export const DefaultTheme: Theme = {
     body: "#FFF",
     light: "#CCC",
     dark: "#000",
-    text: "#FFF"
+    primaryText: "#FFF",
+    text: "#000"
 };
 
-export const FontFamilies = {
-    HeaderFamily: "Zalando",
-    TitleFamily: "Bangers",
-    ParagraphFamily: "Macondo"
+export const CommonColors = {
+  error: "#F44336",
+  cancel: "#555"
 };
 
 export const CommonStyle = StyleSheet.create({
@@ -39,40 +39,52 @@ export const CommonStyle = StyleSheet.create({
     }
 });
 
-export const TextStyle = StyleSheet.create({
-    CardTitle: {
-        fontSize: 12,
-        textAlign: "center",
-        fontFamily: FontFamilies.TitleFamily
-    },
-    SectionTitle: {
-        textAlign: "left",
-        fontSize: 20,
-        fontFamily: FontFamilies.ParagraphFamily
-    },
-    HeaderText: {
-        textAlign: "center",
-        fontSize: 25,
-        fontFamily: FontFamilies.HeaderFamily
-    },
-    ParagraphText: {
-        fontSize: 18,
-        fontFamily: FontFamilies.ParagraphFamily
-    }
-});
-
-export const ImageStyle = StyleSheet.create({
-    CardImage: {...CommonStyle.Bordered}
+export const Typography = StyleSheet.create({
+  H1: {
+    fontFamily: 'System',
+    fontSize: 28,
+    fontWeight: '700',
+    letterSpacing: -0.5,
+  },
+  H2: {
+    fontFamily: 'System',
+    fontSize: 22,
+    fontWeight: '600',
+    letterSpacing: -0.3,
+  },
+  H3: {
+    fontFamily: 'System',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  Body: {
+    fontFamily: 'System',
+    fontSize: 14,
+    fontWeight: '400',
+  },
+  BodyBold: {
+    fontFamily: 'System',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  Caption: {
+    fontFamily: 'System',
+    fontSize: 12,
+    fontWeight: '400',
+    letterSpacing: 0.2,
+  },
+  Button: {
+    fontFamily: 'System',
+    fontSize: 18,
+    fontWeight: '600',
+    letterSpacing: 0.5,
+  }
 });
 
 export const ContainerStyle = StyleSheet.create({
     OuterContainerStyle: {
         flex: 1,
         backgroundColor: DefaultTheme.primary
-    },
-    InnerContainerStyle: {
-        backgroundColor: DefaultTheme.body,
-        flex: 1
     },
     PressedContainer: {
         backgroundColor: DefaultTheme.light,

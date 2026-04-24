@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text } from "react-native";
-import { TextStyle } from "../../utils/BaseStyle";
+import { Typography } from "../../utils/BaseStyle";
 import { useTheme } from "../../utils/ThemeContext";
 
 export const PageFooter = () => {
@@ -12,13 +12,13 @@ export const PageFooter = () => {
         },
         textStyle: {
             textAlign: "center",
-            color: theme.text
+            color: theme.primaryText
         }
     });
 
     return (
         <View style={modelStyle.viewStyle}>
-            <Text style={[TextStyle.ParagraphText, modelStyle.textStyle]}>KRApp's Application</Text>
+            <Text style={[Typography.BodyBold, modelStyle.textStyle]}>KRApp's Application</Text>
         </View>
     );
 };

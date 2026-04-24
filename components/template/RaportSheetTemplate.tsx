@@ -1,5 +1,5 @@
 import { DimensionValue, StyleSheet, View } from "react-native";
-import { CommonStyle, ContainerStyle } from "../../utils/BaseStyle";
+import InnerContainer from "../atoms/InnerContainer";
 import { SimpleTable } from "../molecules/SimpleTable";
 import Card from "../atoms/Card";
 import ButtonGroup from "../atoms/ButtonGroup";
@@ -33,8 +33,8 @@ export const RaportSheetTemplate = ({ tableData, addItemFn }: RaportSheetTemplat
     });
 
     return (
-        <View style={ContainerStyle.InnerContainerStyle}>
-            <View style={CommonStyle.FlexContainer}>
+        <InnerContainer>
+            <View style={{flex: 1}}>
                 <SimpleTable columns={tableData.columns} rows={tableData.rows}
                 onRowDoublePress={tableData.onPressFn} />
             </View>
@@ -45,6 +45,6 @@ export const RaportSheetTemplate = ({ tableData, addItemFn }: RaportSheetTemplat
                     </ButtonGroup>
                 </Card>
             </View>
-        </View>
+        </InnerContainer>
     );
 };

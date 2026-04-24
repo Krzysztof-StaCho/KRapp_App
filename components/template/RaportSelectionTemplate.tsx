@@ -1,5 +1,5 @@
 import { StyleSheet, View, ScrollView } from "react-native";
-import { CommonStyle, ContainerStyle } from "../../utils/BaseStyle";
+import InnerContainer from "../atoms/InnerContainer";
 import { SelectItem } from "../atoms/SelectItem";
 
 export type RaportSelectionTemplateType = {
@@ -22,8 +22,8 @@ export const RaportSelectionTemplate = ({ data, navigateFn, moreActionFn }: Rapo
     });
 
     return (
-        <View style={ContainerStyle.InnerContainerStyle}>
-            <ScrollView style={CommonStyle.FlexContainer} contentContainerStyle={modelStyle.scrollContent}>
+        <InnerContainer>
+            <ScrollView style={{flex: 1}} contentContainerStyle={modelStyle.scrollContent}>
                 {data.map((item) => (
                     <SelectItem key={item.id} navigateFn={() => navigateFn(item.id)}
                     moreActionFn={() => moreActionFn(item.id)}>
@@ -31,6 +31,6 @@ export const RaportSelectionTemplate = ({ data, navigateFn, moreActionFn }: Rapo
                     </SelectItem>
                 ))}
             </ScrollView>
-        </View>
+        </InnerContainer>
     );
 };

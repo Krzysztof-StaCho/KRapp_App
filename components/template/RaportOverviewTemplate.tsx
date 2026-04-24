@@ -1,5 +1,5 @@
-import { ScrollView, StyleSheet, View } from "react-native";
-import { ContainerStyle } from "../../utils/BaseStyle";
+import { ScrollView, StyleSheet } from "react-native";
+import InnerContainer from "../atoms/InnerContainer";
 
 import Card from "../atoms/Card"
 import ButtonGroup from "../atoms/ButtonGroup";
@@ -9,7 +9,10 @@ export type RaportOverviewTemplateType = {
     buttonFn: {
         seeMoreRaportFn: () => void,
         addRaportItemFn: () => void,
+        runRaportFn: () => void,
+        correctRaportFn: () => void,
         seeMoreWarningFn: () => void,
+        editOrderFn: () => void,
         seeMoreOrderFn: () => void,
         generateOrderFn: () => void
     }
@@ -30,7 +33,7 @@ export const RaportOverviewTemplate = ({ buttonFn }: RaportOverviewTemplateType)
     });
 
     return (
-        <View style={ContainerStyle.InnerContainerStyle}>
+        <InnerContainer>
             <ScrollView style={modelStyle.scrollOuter} contentContainerStyle={modelStyle.scrollInner}>
                 <Card title="Akcje"></Card>
                 <Card title="Przegląd">
@@ -39,9 +42,16 @@ export const RaportOverviewTemplate = ({ buttonFn }: RaportOverviewTemplateType)
                         <SimpleButton title="Dodaj" onPressFn={buttonFn.addRaportItemFn} />
                     </ButtonGroup>
                 </Card>
+                <Card title="Raport">
+                    <ButtonGroup>
+                        <SimpleButton title="Wykonaj" onPressFn={buttonFn.runRaportFn} />
+                        <SimpleButton title="Popraw" onPressFn={buttonFn.correctRaportFn} />
+                    </ButtonGroup>
+                </Card>
                 <Card title="Uwagi">
                     <ButtonGroup>
                         <SimpleButton title="Zobacz więcej..." onPressFn={buttonFn.seeMoreWarningFn} />
+                        <SimpleButton title="Edytuj" onPressFn={buttonFn.editOrderFn} />
                     </ButtonGroup>
                 </Card>
                 <Card title="Zamówienie">
@@ -51,6 +61,6 @@ export const RaportOverviewTemplate = ({ buttonFn }: RaportOverviewTemplateType)
                     </ButtonGroup>
                 </Card>
             </ScrollView>
-        </View>
+        </InnerContainer>
     );
 };

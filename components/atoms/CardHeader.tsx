@@ -1,5 +1,5 @@
 import { Text, TextStyle as Style } from "react-native";
-import { TextStyle } from "../../utils/BaseStyle";
+import { Typography } from "../../utils/BaseStyle";
 import { useTheme } from "../../utils/ThemeContext";
 
 type CardHeaderProps = {
@@ -16,7 +16,7 @@ const CardHeader = ({ children }: CardHeaderProps) => {
     };
 
     return (
-        <Text style={[TextStyle.SectionTitle, modelStyle]} numberOfLines={1}>
+        <Text style={[Typography.H2, modelStyle]} numberOfLines={1}>
             {children}
         </Text>
     );

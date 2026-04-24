@@ -2,11 +2,11 @@ import { Text, TextStyle } from "react-native";
 import { Typography } from "../../utils/BaseStyle";
 import { useTheme } from "../../utils/ThemeContext";
 
-type CardTitleProps = {
+type CardFooterProps = {
     children: string
 };
 
-const CardTitle = ({ children }: CardTitleProps) => {
+const CardFooter = ({ children }: CardFooterProps) => {
     const theme = useTheme();
 
     const modelStyle: TextStyle = {
@@ -15,8 +15,8 @@ const CardTitle = ({ children }: CardTitleProps) => {
     };
 
     return (
-        <Text style={[Typography.H3, modelStyle]} numberOfLines={2}>{children}</Text>
+        <Text style={[Typography.Caption, modelStyle]} numberOfLines={2}>{children}</Text>
     );
 };
 
-export default CardTitle;
+export default CardFooter;

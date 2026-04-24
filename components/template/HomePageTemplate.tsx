@@ -1,9 +1,8 @@
 import { ColorValue, ScrollView, View } from "react-native";
-import { ContainerStyle } from "../../utils/BaseStyle";
-import { CardShelf } from "../molecules/CardShelf";
+import InnerContainer from "../atoms/InnerContainer";
+import CardShelf from "../molecules/CardShelf";
 import { AntDesign } from "@expo/vector-icons";
-import { PressableCardProps } from "../molecules/PressableCard";
-import { useTheme } from "../../utils/ThemeContext";
+import { CardBaseProps, PressableCard } from "../molecules/PressableCard";
 
 type RowDataType = {
     title: string,
@@ -18,9 +17,9 @@ export type HomePageTemplateType = {
     }[]
 };
 
-function changeType(item: RowDataType): PressableCardProps {
+function changeType(item: RowDataType): CardBaseProps {
     return {
-        children: item.title,
+        children: <PressableCard.Title>{item.title}</PressableCard.Title>,
         iconProp: {
             color: item.color,
             iconName: item.iconName
@@ -31,12 +30,12 @@ function changeType(item: RowDataType): PressableCardProps {
 
 export const HomePageTemplate = ({ rows }: HomePageTemplateType) => {
     return (
-        <View style={ContainerStyle.InnerContainerStyle}>
+        <InnerContainer>
             <ScrollView>
                 {rows.map((item, index) => (
                     <CardShelf key={index} cardObj={item.data.map((item) => changeType(item))} />
                 ))}
             </ScrollView>
-        </View>
+        </InnerContainer>
     );
 };

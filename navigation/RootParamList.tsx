@@ -1,10 +1,16 @@
 export type RootParamList = {
-
     /**
      * Home (Startup page)
      */
     Home: undefined
 
+    /**
+     * Raport Section
+     */
+    RaportStack: undefined
+}
+
+export type RaportParamList = {
     /**
      * Raport -> Item selection
      */
@@ -19,4 +25,14 @@ export type RootParamList = {
      * Raport -> Raport table
      */
     RaportRTable: { raportId: number };
+
+    /**
+     * Raport -> Create Raport
+     */
+    RaportRUpsert: { raportId?: number };
+
+    /**
+     * Raport -> Create Raport Item
+     */
+    RaportRItemUpsert: { raportId?: number, itemId?: number };
 }

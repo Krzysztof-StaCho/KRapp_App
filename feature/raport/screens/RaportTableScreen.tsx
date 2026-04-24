@@ -1,23 +1,36 @@
 import { NativeStackNavigationOptions, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RaportSheetTemplate, RaportSheetTemplateType } from "../../../components/template/RaportSheetTemplate";
-import { RootParamList } from "../../../navigation/RootParamList";
-import { ThemeProvider } from "../../../utils/ThemeContext";
-import { RaportTheme } from "../Theme";
-import { useEffect } from "react";
+import { RaportParamList } from "../../../navigation/RootParamList";
+import { useTheme } from "../../../utils/ThemeContext";
+import { useContext, useEffect } from "react";
+import { GetRaport } from "../../../data/FakeData";
+import { RaportContext } from "../../../store/RaportContext";
 
-type Props = NativeStackScreenProps<RootParamList, 'RaportRTable'>;
+type Props = NativeStackScreenProps<RaportParamList, 'RaportRTable'>;
 
 export const RaportTableScreen = ({ navigation, route }: Props) => {
+    const theme = useTheme();
+    const raportCtx = useContext(RaportContext);
+
     const raportId = route.params.raportId;
+    const raport = GetRaport(raportId, raportCtx.raports);
 
     useEffect(() => {
         const navHeaderOptions: NativeStackNavigationOptions = {
-            headerStyle: { backgroundColor: RaportTheme.primary.toString() },
-            title: "Kierowcy Zamówienie",
-            headerTintColor: RaportTheme.text.toString()
+            headerStyle: { backgroundColor: theme.primary.toString() },
+            title: raport.title,
+            headerTintColor: theme.primaryText.toString()
         };
         navigation.setOptions(navHeaderOptions);
     }, [navigation]);
+
+    const data = raport.data.map((item) => {
+        return {
+            id: item.id,
+            name: item.name,
+            quantity: item.amount + " " + item.quantity
+        };
+    });
 
     const dummyData: RaportSheetTemplateType = {
         tableData: {
@@ -26,20 +39,15 @@ export const RaportTableScreen = ({ navigation, route }: Props) => {
                 { key: "name", title: "Nazwa", width: "55%" },
                 { key: "quantity", title: "Ilość", width: "30%" }
             ],
-            rows: [
-                { id: 1, name: "Kartony pizza 32 cm", quantity: "1 paczka" },
-                { id: 2, name: "Kartony pizza 45 cm", quantity: "4 paczka" },
-                { id: 3, name: "Pudełka - Burgery Woł.", quantity: "0.9 paczka" }
-            ],
-            onPressFn: (row) => console.log("double click", row)
+            rows: data,
+            onPressFn: (row) => navigation.navigate("RaportRItemUpsert",
+                { raportId: raportId, itemId: row.id })
         },
-        addItemFn: () => console.log("Add more pressed")
-    }
+        addItemFn: () => navigation.navigate("RaportRItemUpsert", { raportId: raportId })
+    };
 
     return (
-        <ThemeProvider theme={RaportTheme}>
-            <RaportSheetTemplate tableData={dummyData.tableData}
-            addItemFn={dummyData.addItemFn} />
-        </ThemeProvider>
+        <RaportSheetTemplate tableData={dummyData.tableData}
+        addItemFn={dummyData.addItemFn} />
     );
 };

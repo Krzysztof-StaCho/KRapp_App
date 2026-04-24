@@ -1,13 +1,13 @@
 import { View, ViewStyle } from "react-native";
-import { PressableCard, PressableCardProps } from "./PressableCard";
+import { PressableCard, CardBaseProps } from "./PressableCard";
 import { CommonStyle } from "../../utils/BaseStyle";
 import { useTheme } from "../../utils/ThemeContext";
 
 type CardShelfProps = {
-    cardObj: PressableCardProps[]
+    cardObj: CardBaseProps[]
 };
 
-export const CardShelf = ({ cardObj }: CardShelfProps) => {
+const CardShelf = ({ cardObj }: CardShelfProps) => {
     const theme = useTheme();
 
     const modelStyle: ViewStyle = {
@@ -22,10 +22,10 @@ export const CardShelf = ({ cardObj }: CardShelfProps) => {
     return (
         <View style={[CommonStyle.FlexRow, modelStyle]}>
             {cardObj.map((item, index) => (
-                <PressableCard key={index} iconProp={item.iconProp} onPressFn={item.onPressFn}>
-                    {item.children}
-                </PressableCard>
+                <PressableCard key={index} {...item} />
             ))}
         </View>
     );
-}
+};
+
+export default CardShelf;
