@@ -22,8 +22,6 @@ export type UpsertRaportTemplateType = {
 };
 
 export const UpsertRaportTemplate = ({ pageInfo, handlers, initData, validations }: UpsertRaportTemplateType) => {
-    const modelStyle = StyleSheet.create({
-    });
 
     const titleInput = useInput({
         name: "Nazwa",

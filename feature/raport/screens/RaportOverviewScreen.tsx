@@ -30,7 +30,7 @@ export const RaportOverviewScreen = ({ navigation, route }: Props) => {
     const dummyData: RaportOverviewTemplateType = {
         buttonFn: {
             seeMoreRaportFn: () => navigation.navigate("RaportRTable", { raportId: raportId }),
-            addRaportItemFn: () => {},
+            addRaportItemFn: () => navigation.navigate("RaportRItemUpsert", { raportId: raportId }),
             runRaportFn: () => {},
             correctRaportFn: () => {},
             seeMoreWarningFn: () => {},

@@ -1,25 +1,45 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { TextInputEndEditingEvent } from "react-native";
 
 //#region Validate functions
 
-const valError_Empty = " jest pusta."
+const valError_Empty = " jest pusta.";
+const valError_NotNumber = " nie jest liczbą.";
 
 function valBasicStringFn(name: string, setError: React.Dispatch<React.SetStateAction<string>>, currentVal: string) {
     if (currentVal.trim().length <= 0) {
         setError(name + valError_Empty);
         return false;
-    } else {
-        setError("");
-        return true;
     }
+
+    setError("");
+    return true;
+};
+
+function valBasicNumberFn(name: string, setError: React.Dispatch<React.SetStateAction<string>>, currentVal: string) {
+    if (currentVal.trim().length <= 0) {
+        setError(name + valError_Empty);
+        return false;
+    }
+    if (Number.isNaN(Number.parseFloat(currentVal))) {
+        setError(name + valError_NotNumber);
+        return false;
+    }
+
+    setError("");
+    return true;
 };
 
 export const validateHandlers = {
     /**
      * Checks if value is empty
      */
-    basicStringHandler: valBasicStringFn
+    basicStringHandler: valBasicStringFn,
+    /**
+     * Checks if value is empty,
+     * Checks if value is number
+     */
+    basicNumberHandler: valBasicNumberFn
 };
 
 //#endregion

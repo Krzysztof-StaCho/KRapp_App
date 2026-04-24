@@ -40,10 +40,11 @@ export const RaportTableScreen = ({ navigation, route }: Props) => {
                 { key: "quantity", title: "Ilość", width: "30%" }
             ],
             rows: data,
-            onPressFn: (row) => console.log("double click", row)
+            onPressFn: (row) => navigation.navigate("RaportRItemUpsert",
+                { raportId: raportId, itemId: row.id })
         },
-        addItemFn: () => console.log("Add more pressed")
-    }
+        addItemFn: () => navigation.navigate("RaportRItemUpsert", { raportId: raportId })
+    };
 
     return (
         <RaportSheetTemplate tableData={dummyData.tableData}

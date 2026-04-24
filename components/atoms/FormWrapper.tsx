@@ -7,7 +7,7 @@ import ButtonGroup from "./ButtonGroup";
 import { BorderedButton } from "./BorderedButton";
 
 export type FormWrapperProps = {
-    children: React.ReactNode,
+    children?: React.ReactNode,
 
     title: string,
     type: string,

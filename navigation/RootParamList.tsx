@@ -29,5 +29,10 @@ export type RaportParamList = {
     /**
      * Raport -> Create Raport
      */
-    RaportRUpsert: { raportId?: number }
+    RaportRUpsert: { raportId?: number };
+
+    /**
+     * Raport -> Create Raport Item
+     */
+    RaportRItemUpsert: { raportId?: number, itemId?: number };
 }

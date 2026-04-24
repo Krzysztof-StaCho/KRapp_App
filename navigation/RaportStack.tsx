@@ -7,6 +7,7 @@ import { UpsertRaportScreen } from "../feature/raport/screens/UpsertRaportScreen
 import { ThemeProvider } from "../utils/ThemeContext";
 import { RaportTheme } from "../utils/Theme";
 import { RaportContextProvider } from "../store/RaportContext";
+import { UpsertRaportItemScreen } from "../feature/raport/screens/UpsertRaportItemScreen";
 
 const Stack = createNativeStackNavigator<RaportParamList>();
 
@@ -20,6 +21,8 @@ export const RaportStack = () => {
                     <Stack.Screen name='RaportRTable' component={RaportTableScreen} />
 
                     <Stack.Screen name='RaportRUpsert' component={UpsertRaportScreen}
+                    options={{ presentation: "formSheet" }} />
+                    <Stack.Screen name='RaportRItemUpsert' component={UpsertRaportItemScreen}
                     options={{ presentation: "formSheet" }} />
                 </Stack.Navigator>
             </RaportContextProvider>
