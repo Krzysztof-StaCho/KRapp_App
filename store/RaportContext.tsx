@@ -47,7 +47,9 @@ const raportReducer = (state: RaportType[], action: RaportAction): RaportType[] 
         if (typeof header === "undefined")
             throw Error(`Error during add new raport. Payload was empty`);
 
-        const id = state[state.length - 1].id + 1;
+        let id = 0;
+        if (state.length !== 0)
+            id = state[state.length - 1].id + 1;
         const newRaport: RaportType = { ...header, id, data: [] };
         return [...state, newRaport];
     };
@@ -85,7 +87,9 @@ const raportReducer = (state: RaportType[], action: RaportAction): RaportType[] 
             throw Error(`Error during searching to update object in dataObj. Given id = ${raportId}`);
         const raport = state[raportIndex];
         
-        const newId = raport.data[raport.data.length - 1].id + 1;
+        let newId = 0;
+        if (raport.data.length !== 0)
+            newId = raport.data[raport.data.length - 1].id + 1;
         const newData: RaportDataType = { ...data, id: newId };
         raport.data = [...raport.data, newData];
         state[raportIndex] = raport;
