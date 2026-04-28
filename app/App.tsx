@@ -1,5 +1,6 @@
 import { BorderedButton } from '@/components/atoms/button/borderedButton';
 import { ButtonGroup } from '@/components/atoms/button/buttonGroup';
+import { SimpleButton } from '@/components/atoms/button/simpleButton';
 import { InnerContainer } from '@/components/atoms/container/innerContainer';
 import { PageFooter } from '@/components/atoms/pageFooter';
 import { Card } from '@/components/molecules/card';
@@ -21,6 +22,7 @@ export default function App() {
                                 <BorderedButton variant='danger' text='I am also button' iconName='area_chart' />
                             </ButtonGroup>
                         </Card>
+                        <SimpleButton text='Tested button' />
                     </FormWrapper>
                 </InnerContainer>
                 <PageFooter />
