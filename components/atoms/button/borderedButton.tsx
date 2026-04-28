@@ -40,7 +40,7 @@ const modelStyle = StyleSheet.create({
     container: {
         borderRadius: 10,
         paddingVertical: 10,
-        paddingHorizontal: 5,
+        paddingHorizontal: 10,
         borderWidth: 2,
         alignItems: "center",
         justifyContent: "center",
