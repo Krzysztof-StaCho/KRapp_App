@@ -17,6 +17,7 @@ export const ButtonGroup = ({variant = 'space-between', children}: GroupProps) =
 const style = StyleSheet.create({
     container: {
         flexDirection: "row",
-        flexWrap: "wrap"
+        flexWrap: "wrap",
+        gap: 5
     }
 });

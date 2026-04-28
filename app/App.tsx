@@ -1,6 +1,7 @@
 import { BorderedButton } from '@/components/atoms/button/borderedButton';
 import { ButtonGroup } from '@/components/atoms/button/buttonGroup';
 import { InnerContainer } from '@/components/atoms/container/innerContainer';
+import { PageFooter } from '@/components/atoms/pageFooter';
 import { Card } from '@/components/molecules/card';
 import { FormWrapper } from '@/components/molecules/formWrapper';
 import { NavigationContainer } from '@react-navigation/native';
@@ -22,6 +23,7 @@ export default function App() {
                         </Card>
                     </FormWrapper>
                 </InnerContainer>
+                <PageFooter />
                 <StatusBar style='light' />
             </SafeAreaView>
         </NavigationContainer>
