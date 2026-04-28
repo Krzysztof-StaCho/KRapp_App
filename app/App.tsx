@@ -1,7 +1,7 @@
 import { BorderedButton } from '@/components/atoms/button/borderedButton';
 import { ButtonGroup } from '@/components/atoms/button/buttonGroup';
+import { CardFooter } from '@/components/atoms/card/cardFooter';
 import { Typography } from '@/theme/typography';
-import { AntDesign } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { Text } from 'react-native';
@@ -17,6 +17,7 @@ export default function App() {
                     <BorderedButton variant='primary' text='I am button' iconName='area_chart' />
                     <BorderedButton variant='warning' text='I am also button' iconName='area_chart' />
                 </ButtonGroup>
+                <CardFooter color={"#111"}>Test footer</CardFooter>
                 <StatusBar style='light' />
             </SafeAreaView>
         </NavigationContainer>
