@@ -15,5 +15,6 @@ export const CardFooter = ({children, color}: FooterProps) => {
 };
 
 const style: TextStyle = {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop: 10
 };
