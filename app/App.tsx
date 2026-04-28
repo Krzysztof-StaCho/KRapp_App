@@ -1,5 +1,6 @@
 import { BorderedButton } from '@/components/atoms/button/borderedButton';
 import { ButtonGroup } from '@/components/atoms/button/buttonGroup';
+import { CloseBtn } from '@/components/atoms/button/closeBtn';
 import { Card } from '@/components/molecules/card';
 import { PressCard } from '@/components/molecules/pressCard';
 import { Typography } from '@/theme/typography';
@@ -22,6 +23,7 @@ export default function App() {
                         </ButtonGroup>
                     </Card>
                     <PressCard.Footer>Test footer</PressCard.Footer>
+                    <CloseBtn color={"#171717"} size={26} />
                 </PressCard>
                 <StatusBar style='light' />
             </SafeAreaView>
