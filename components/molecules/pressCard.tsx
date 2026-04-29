@@ -9,7 +9,7 @@ import { CardFooter } from "../atoms/card/cardFooter";
 type BaseProps = {
     children: ReactNode,
     onPressFn?: () => void,
-    iconName: IconName,
+    iconName?: IconName,
     color?: {
         bg: ColorValue,
         icon: ColorValue
