@@ -5,6 +5,7 @@ import { InnerContainer } from '@/components/atoms/container/innerContainer';
 import { PageFooter } from '@/components/atoms/pageFooter';
 import { Card } from '@/components/molecules/card';
 import { FormWrapper } from '@/components/molecules/formWrapper';
+import { SelectItem } from '@/components/molecules/selectItem';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -23,6 +24,7 @@ export default function App() {
                             </ButtonGroup>
                         </Card>
                         <SimpleButton text='Tested button' />
+                        <SelectItem>Test Select Item</SelectItem>
                     </FormWrapper>
                 </InnerContainer>
                 <PageFooter />

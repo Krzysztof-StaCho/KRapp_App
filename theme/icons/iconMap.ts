@@ -4,7 +4,9 @@ export const IconMap = {
     area_chart: { lib: AntDesign, name: "area-chart" },
     close: { lib: AntDesign, name: "close" },
     delete: { lib: AntDesign, name: "delete" },
-    check: { lib: AntDesign, name: "check" }
+    check: { lib: AntDesign, name: "check" },
+    arrow_right: { lib: AntDesign, name: "arrow-right" },
+    more: { lib: AntDesign, name: "more" }
 };
 
 export type IconName = keyof typeof IconMap;
