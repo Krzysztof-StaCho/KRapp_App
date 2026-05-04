@@ -5,6 +5,7 @@ import { CardShelf } from '@/components/atoms/card/cardShelft';
 import { InnerContainer } from '@/components/atoms/container/innerContainer';
 import { PageFooter } from '@/components/atoms/pageFooter';
 import { Card } from '@/components/molecules/card';
+import { Input } from '@/components/molecules/form/input';
 import { FormWrapper } from '@/components/molecules/formWrapper';
 import { PressCard } from '@/components/molecules/pressCard';
 import { SelectItem } from '@/components/molecules/selectItem';
@@ -40,6 +41,7 @@ export default function App() {
                                 <PressCard.Title>Ustawienia</PressCard.Title>
                             </PressCard>
                         </CardShelf>
+                        <Input label='Username' iconName='check' errorMessage='costam' />
                     </FormWrapper>
                 </InnerContainer>
                 <PageFooter />
