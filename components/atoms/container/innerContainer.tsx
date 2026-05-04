@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { View, ViewStyle } from "react-native";
 
 type ContainerProps = {
-    children: ReactNode
+    children?: ReactNode
 };
 
 export const InnerContainer = ({children}: ContainerProps) => {

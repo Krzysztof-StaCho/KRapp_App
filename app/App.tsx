@@ -3,6 +3,7 @@ import { ButtonGroup } from '@/components/atoms/button/buttonGroup';
 import { SimpleButton } from '@/components/atoms/button/simpleButton';
 import { CardShelf } from '@/components/atoms/card/cardShelft';
 import { InnerContainer } from '@/components/atoms/container/innerContainer';
+import { OuterContainer } from '@/components/atoms/container/outerContainer';
 import { PageFooter } from '@/components/atoms/pageFooter';
 import { Card } from '@/components/molecules/card';
 import { Input } from '@/components/molecules/form/input';
@@ -12,12 +13,11 @@ import { SelectItem } from '@/components/molecules/selectItem';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
     return (
         <NavigationContainer>
-            <SafeAreaView style={{flex: 1}}>
+            <OuterContainer>
                 <InnerContainer>
                     <FormWrapper title='Test Form' type='test' closeFn={() => {}} confirmFn={() => {}}
                     deleteFn={() => {}}>
@@ -46,7 +46,7 @@ export default function App() {
                 </InnerContainer>
                 <PageFooter />
                 <StatusBar style='light' />
-            </SafeAreaView>
+            </OuterContainer>
         </NavigationContainer>
     );
 };
