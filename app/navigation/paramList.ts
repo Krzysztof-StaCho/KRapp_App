@@ -1,3 +1,6 @@
+import { ProductId } from "@/entities/product/model/product.types";
+import { SchemaId } from "@/entities/schema/model/schema.types";
+
 export type RootParamList = {
     /**
      * Home (Startup page)
@@ -19,20 +22,20 @@ export type RaportParamList = {
     /**
      * Raport -> Overview
      */
-    RaportOverview: { raportId: number };
+    RaportOverview: { raportId: SchemaId };
 
     /**
      * Raport -> Raport table
      */
-    RaportRTable: { raportId: number };
+    RaportRTable: { raportId: SchemaId };
 
     /**
      * Raport -> Create Raport
      */
-    RaportRUpsert: { raportId?: number };
+    RaportRUpsert: { raportId?: SchemaId };
 
     /**
      * Raport -> Create Raport Item
      */
-    RaportRItemUpsert: { raportId?: number, itemId?: number };
+    RaportRItemUpsert: { raportId?: SchemaId, itemId?: ProductId };
 }
