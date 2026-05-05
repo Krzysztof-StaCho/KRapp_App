@@ -8,7 +8,8 @@ export const IconMap = {
     arrow_right: { lib: AntDesign, name: "arrow-right" },
     more: { lib: AntDesign, name: "more" },
     bar_chart: { lib: AntDesign, name: "bar-chart" },
-    setting: { lib: AntDesign, name: "setting" }
+    setting: { lib: AntDesign, name: "setting" },
+    account_book: { lib: AntDesign, name: "account-book" }
 };
 
 export type IconName = keyof typeof IconMap;

@@ -4,7 +4,7 @@ import { IconName } from "@/theme/icons/iconMap";
 import { useAppTheme } from "@/theme/themeProvider";
 import { Typography } from "@/theme/typography";
 import { ReactNode } from "react";
-import { ColorValue, StyleSheet, Text, TextInput, TextInputEndEditingEvent, View, ViewStyle } from "react-native";
+import { ColorValue, StyleSheet, Text, TextInput, BlurEvent, View, ViewStyle } from "react-native";
 
 type InputProps = {
     label: string,
@@ -15,8 +15,8 @@ type InputProps = {
     numLines?: number,
     onChangeHandler?: (val: string) => void,
     secure?: boolean,
-    validate?: (e: TextInputEndEditingEvent) => void,
-    errorMessage?: string,
+    validate?: (e: BlurEvent) => void,
+    errorMessage?: string | null,
     style?: {
         bgColor: ColorValue,
         iconColor: ColorValue,
@@ -62,7 +62,7 @@ export const Input = ({
                     <Icon name={iconName} size={style.iconSize} color={style.iconColor} />
                 )}
                 <TextInput secureTextEntry={secure} placeholder={placeholderText}
-                onChangeText={onChangeHandler} onEndEditing={validate} value={value}
+                onChangeText={onChangeHandler} onBlur={validate} value={value}
                 style={[Typography['Body'], modelStyle.textInput]} multiline={(numLines > 1) ? true : false} />
                 {rightComponent}
             </View>
