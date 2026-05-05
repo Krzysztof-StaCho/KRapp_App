@@ -10,12 +10,12 @@ type Props = NativeStackScreenProps<RaportParamList, 'RaportRUpsert'>;
 
 export const UpsertRaportScreen = ({ navigation, route }: Props) => {
     const { raportId } = route.params;
-    const { state, addSchema } = useInventory();
+    const { state, addSchema, updateSchemaTitle, removeSchema } = useInventory();
     const selectedRaport = raportId ? state.schemas[raportId] : undefined;
 
     const confirmFormHandler = (title: string) => {
         if (raportId) {
-            console.log("Not implemented update action");
+            updateSchemaTitle(raportId, title);
         } else {
             addSchema({
                 id: createSchemaId(),
@@ -31,14 +31,14 @@ export const UpsertRaportScreen = ({ navigation, route }: Props) => {
             return;
 
         Alert.alert(`Czy na pewno chcesz usunąć ${selectedRaport?.title}`,
-            "Stracisz dane bezpowrotnie",
+            "Stracisz dane bezpowrotnie. Włącznie z historią.",
             [
                 { text: 'Cofnij', style: 'cancel' },
                 {
                     text: 'Potwierdź',
                     style: 'destructive',
                     onPress: () => {
-                        console.log("Not implemented delete action");
+                        removeSchema(raportId);
                         navigation.goBack();
                     }
                 }
