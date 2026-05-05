@@ -12,27 +12,37 @@ type Column<T> = {
 export type SimpleTableType<T> = {
     columns: Column<T>[],
     rows: T[],
-    onRowDoublePress?: (row: T) => void
+    numbered?: boolean
+    onRowDoublePress?: (id: string) => void
 };
 
-export const SimpleTable = <T extends { id: number }>({columns, rows, onRowDoublePress}: SimpleTableType<T>) => {
+export const SimpleTable = <T extends { id: string }>({columns, rows, numbered = false, onRowDoublePress}: SimpleTableType<T>) => {
     const theme = useAppTheme();
 
     // Double Click Handle
     const lastPress = useRef(0);
-    const lastPressItem = useRef(-1);
-    const handlePress = (row: T) => {
+    const lastPressItem = useRef("");
+    const handlePress = (id: string) => {
         const now = Date.now();
-        if (now - lastPress.current < 300 && lastPressItem.current === row.id)
-            onRowDoublePress?.(row);
+        if (now - lastPress.current < 300 && lastPressItem.current === id)
+            onRowDoublePress?.(id);
         lastPress.current = now;
-        lastPressItem.current = row.id;
+        lastPressItem.current = id;
     }
 
     // Mapping Item in FlatList
-    const renderItem = ({ item }: { item: T }) => (
-        <TouchableOpacity key={item.id} onPress={() => handlePress(item)}>
+    const renderItem = ({ item, index }: { item: T, index: number }) => (
+        <TouchableOpacity key={item.id} onPress={() => handlePress(item.id)}>
             <View style={[modelStyle.tableBody, { borderBottomColor: theme.border }]}>
+                {/* Sr No Row */}
+                { numbered && (
+                    <Text key="Sr No" numberOfLines={2} style={[Typography.Body, {
+                        width: "15%",
+                        textAlign: "center"
+                    }]}>
+                        { index + 1 }
+                    </Text>
+                ) }
                 { columns.map(col => (
                     <Text key={String(col.key)} numberOfLines={2} style={[Typography.Body, {
                         width: col.width || 100,
@@ -49,6 +59,14 @@ export const SimpleTable = <T extends { id: number }>({columns, rows, onRowDoubl
         <View style={modelStyle.tableContainer}>
             { /* Table Head */ }
             <View style={[modelStyle.tableHead, { backgroundColor: theme.primary }]}>
+                {/* Sr No Column */}
+                { numbered && (
+                    <View key="Sr.No" style={{ width: "15%" }}>
+                        <Text style={[Typography.BodyBold, modelStyle.tableCaption, { color: theme.primaryText }]}>
+                            Sr. No
+                        </Text>
+                    </View>
+                ) }
                 { columns.map(col => (
                     <View key={String(col.key)} style={{ width: col.width || 100 }}>
                         <Text style={[Typography.BodyBold, modelStyle.tableCaption, { color: theme.primaryText }]}>
