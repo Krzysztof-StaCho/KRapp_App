@@ -5,6 +5,7 @@ import { RaportTheme } from "@/theme/theme";
 import { InventoryProvider } from "../providers/inventoryProvider";
 import { RaportSelectionScreen } from "@/features/raport_crud/screens/raportSelectionScreen";
 import { UpsertRaportScreen } from "@/features/raport_crud/screens/upsertRaportScreen";
+import { RaportOverviewScreen } from "@/features/raport_crud/screens/raportOverviewScreen";
 
 const Stack = createNativeStackNavigator<RaportParamList>();
 
@@ -20,6 +21,8 @@ export const RaportStack = () => {
                     options={{
                         title: "Wybierz raport"
                     }} />
+                    <Stack.Screen name="RaportOverview" component={RaportOverviewScreen} />
+
                     <Stack.Screen name="RaportRUpsert" component={UpsertRaportScreen}
                     options={{
                         presentation: 'formSheet'
