@@ -7,6 +7,7 @@ import { RaportSelectionScreen } from "@/features/raport_crud/screens/raportSele
 import { UpsertRaportScreen } from "@/features/raport_crud/screens/upsertRaportScreen";
 import { RaportOverviewScreen } from "@/features/raport_crud/screens/raportOverviewScreen";
 import { RaportTableScreen } from "@/features/raport_crud/screens/raportTableScreen";
+import { UpsertRaportItemScreen } from "@/features/raport_crud/screens/upsertRaportItemScreen";
 
 const Stack = createNativeStackNavigator<RaportParamList>();
 
@@ -26,6 +27,10 @@ export const RaportStack = () => {
                     <Stack.Screen name="RaportRTable" component={RaportTableScreen} />
 
                     <Stack.Screen name="RaportRUpsert" component={UpsertRaportScreen}
+                    options={{
+                        presentation: 'formSheet'
+                    }} />
+                    <Stack.Screen name="RaportRItemUpsert" component={UpsertRaportItemScreen}
                     options={{
                         presentation: 'formSheet'
                     }} />

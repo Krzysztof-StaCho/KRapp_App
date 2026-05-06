@@ -13,6 +13,7 @@ type Action =
     { type: "SET_PRODUCTS", payload: Product[] }
     |   { type: "ADD_PRODUCT", payload: Product }
     |   { type: "REMOVE_PRODUCT", payload: ProductId }
+    |   { type: "UPDATE_PRODUCT", payload: { id: ProductId, product: Product } }
     |   { type: "SET_SCHEMAS", payload: Schema[] }
     |   { type: "ADD_SCHEMA", payload: Schema }
     |   { type: "REMOVE_SCHEMA", payload: SchemaId }
@@ -82,6 +83,23 @@ export function InventoryReducer(
                 products: restProducts,
                 schemas: updatedSchemas,
                 snapshot: updatedSnapshots
+            };
+        }
+
+        case "UPDATE_PRODUCT": {
+            const { id, product } = action.payload;
+            product.id = id;
+
+            const currentProduct = state.products[id];
+            if (!currentProduct)
+                return state;
+
+            return {
+                ...state,
+                products: {
+                    ...state.products,
+                    [id]: product
+                }
             };
         }
 

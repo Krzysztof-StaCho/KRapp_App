@@ -16,14 +16,13 @@ export type PageProps = {
     },
     initData?: SchemaHeader,
     validations: {
-        title: Validator[] | undefined
+        title?: Validator[]
     }
 };
 
 export const UpsertRaportTemplate = ({pageInfo, handlers, initData, validations}: PageProps) => {
     const titleInput = useInput({
         initialValue: initData?.title,
-        onChange: undefined,
         validators: validations.title
     });
 

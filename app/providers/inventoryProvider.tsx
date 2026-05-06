@@ -11,6 +11,7 @@ type InventoryContextType = {
     setProducts: (products: Product[]) => void,
     addProduct: (product: Product) => void,
     removeProduct: (id: ProductId) => void,
+    updateProduct: (id: ProductId, product: Product) => void,
 
     setSchemas: (schemas: Schema[]) => void,
     addSchema: (schema: Schema) => void,
@@ -37,6 +38,9 @@ export const InventoryProvider = ({children}: {children: ReactNode }) => {
     };
     const removeProduct = (id: ProductId) => {
         dispatch({ type: "REMOVE_PRODUCT", payload: id });
+    };
+    const updateProduct = (id: ProductId, product: Product) => {
+        dispatch({ type: "UPDATE_PRODUCT", payload: { id, product } });
     };
     const setSchemas = (schemas: Schema[]) => {
         dispatch({ type: "SET_SCHEMAS", payload: schemas });
@@ -66,6 +70,7 @@ export const InventoryProvider = ({children}: {children: ReactNode }) => {
             setProducts,
             addProduct,
             removeProduct,
+            updateProduct,
             setSchemas,
             removeSchema,
             updateSchemaTitle,
