@@ -8,6 +8,6 @@ export const createSnapshotId = () => `snap_${uuid()}`;
 export type Snapshot = {
     id: SnapshotId,
     schemaId: SchemaId,
-    date: string, //ISO
+    date: Date,
     values: Record<ProductId, number>
 };

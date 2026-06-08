@@ -8,20 +8,19 @@ import { createContext, ReactNode, useReducer } from "react";
 type InventoryContextType = {
     state: InventoryState,
 
-    setProducts: (products: Product[]) => void,
-    addProduct: (product: Product) => void,
-    removeProduct: (id: ProductId) => void,
-    updateProduct: (id: ProductId, product: Product) => void,
-
-    setSchemas: (schemas: Schema[]) => void,
+    updateSchemaTitle: (id: SchemaId, title: string) => void,
     addSchema: (schema: Schema) => void,
     removeSchema: (id: SchemaId) => void,
 
-    updateSchemaTitle: (id: SchemaId, title: string) => void,
-    addProductToSchema: (schemaId: SchemaId, productId: ProductId) => void,
-    removeProductFromSchema: (schemaId: SchemaId, productId: ProductId) => void,
+    addProduct: (schemaId: SchemaId, product: Product) => void,
+    removeProduct: (id: ProductId) => void,
+    updateProduct: (id: ProductId, product: Product) => void,
 
-    addSnapshot: (snapshot: Snapshot) => void
+    addSnapshot: (snapshot: Snapshot) => void,
+
+    setSchemas: (schemas: Schema[]) => void,
+    setProducts: (products: Product[]) => void,
+    setSnapshots: (snapshots: Snapshot[]) => void
 };
 
 export const InventoryContext = createContext<InventoryContextType | null>(null);
@@ -30,20 +29,8 @@ export const InventoryProvider = ({children}: {children: ReactNode }) => {
     const [state, dispatch] = useReducer(InventoryReducer, InventoryInitial);
 
     //Action wrappers
-    const setProducts = (products: Product[]) => {
-        dispatch({ type: "SET_PRODUCTS", payload: products });
-    };
-    const addProduct = (product: Product) => {
-        dispatch({ type: "ADD_PRODUCT", payload: product });
-    };
-    const removeProduct = (id: ProductId) => {
-        dispatch({ type: "REMOVE_PRODUCT", payload: id });
-    };
-    const updateProduct = (id: ProductId, product: Product) => {
-        dispatch({ type: "UPDATE_PRODUCT", payload: { id, product } });
-    };
-    const setSchemas = (schemas: Schema[]) => {
-        dispatch({ type: "SET_SCHEMAS", payload: schemas });
+    const updateSchemaTitle = (id: SchemaId, title: string) => {
+        dispatch({ type: "UPDATE_SCHEMA_TITLE", payload: { id, title } });
     };
     const addSchema = (schema: Schema) => {
         dispatch({ type: "ADD_SCHEMA", payload: schema });
@@ -51,33 +38,44 @@ export const InventoryProvider = ({children}: {children: ReactNode }) => {
     const removeSchema = (id: SchemaId) => {
         dispatch({ type: "REMOVE_SCHEMA", payload: id });
     };
-    const updateSchemaTitle = (id: SchemaId, title: string) => {
-        dispatch({ type: "UPDATE_SCHEMA_TITLE", payload: { id, title } });
+
+    const addProduct = (schemaId: SchemaId, product: Product) => {
+        dispatch({ type: "ADD_PRODUCT", payload: { schemaId, product } });
     };
-    const addProductToSchema = (schemaId: SchemaId, productId: ProductId) => {
-        dispatch({ type: "ADD_PRODUCT_TO_SCHEMA", payload: { schemaId, productId } });
+    const removeProduct = (id: ProductId) => {
+        dispatch({ type: "REMOVE_PRODUCT", payload: id });
     };
-    const removeProductFromSchema = (schemaId: SchemaId, productId: ProductId) => {
-        dispatch({ type: "REMOVE_PRODUCT_FROM_SCHEMA", payload: { schemaId, productId } });
+    const updateProduct = (id: ProductId, product: Product) => {
+        dispatch({ type: "UPDATE_PRODUCT", payload: { id, product } });
     };
+
     const addSnapshot = (snapshot: Snapshot) => {
         dispatch({ type: "ADD_SNAPSHOT", payload: snapshot });
+    };
+
+    const setSchemas = (schemas: Schema[]) => {
+        dispatch({ type: "SET_SCHEMAS", payload: schemas });
+    };
+    const setProducts = (products: Product[]) => {
+        dispatch({ type: "SET_PRODUCTS", payload: products });
+    };
+    const setSnapshots = (snapshots: Snapshot[]) => {
+        dispatch({ type: "SET_SNAPSHOTS", payload: snapshots });
     };
 
     return (
         <InventoryContext.Provider value={{
             state,
-            setProducts,
+            updateSchemaTitle,
+            addSchema,
+            removeSchema,
             addProduct,
             removeProduct,
             updateProduct,
+            addSnapshot,
             setSchemas,
-            removeSchema,
-            updateSchemaTitle,
-            addProductToSchema,
-            removeProductFromSchema,
-            addSchema,
-            addSnapshot
+            setProducts,
+            setSnapshots
         }}>
             {children}
         </InventoryContext.Provider>

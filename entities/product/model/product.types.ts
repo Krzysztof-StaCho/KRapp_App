@@ -1,3 +1,4 @@
+import { SchemaId } from "@/entities/schema/model/schema.types";
 import { v4 as uuid } from "uuid";
 
 export type ProductId = string;
@@ -10,6 +11,8 @@ export enum Unit {
 
 export type Product = {
     id: ProductId,
+    schemaId?: SchemaId,
     name: string,
-    unit: Unit
+    unit: Unit,
+    updatedAt: Date
 };

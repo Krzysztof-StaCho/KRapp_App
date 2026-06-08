@@ -1,5 +1,5 @@
-import { Product, ProductId } from "@/entities/product/model/product.types";
-import { Schema, SchemaId } from "@/entities/schema/model/schema.types";
+import { createProductId, Product, ProductId } from "@/entities/product/model/product.types";
+import { createSchemaId, Schema, SchemaId } from "@/entities/schema/model/schema.types";
 import { Snapshot } from "@/entities/snapshot/model/snapshot.types";
 
 export type InventoryState = {
@@ -10,17 +10,19 @@ export type InventoryState = {
 
 //Action TYPES
 type Action = 
-    { type: "SET_PRODUCTS", payload: Product[] }
-    |   { type: "ADD_PRODUCT", payload: Product }
-    |   { type: "REMOVE_PRODUCT", payload: ProductId }
-    |   { type: "UPDATE_PRODUCT", payload: { id: ProductId, product: Product } }
-    |   { type: "SET_SCHEMAS", payload: Schema[] }
-    |   { type: "ADD_SCHEMA", payload: Schema }
-    |   { type: "REMOVE_SCHEMA", payload: SchemaId }
-    |   { type: "UPDATE_SCHEMA_TITLE", payload: { id: SchemaId, title: string } }
-    |   { type: "ADD_PRODUCT_TO_SCHEMA", payload: { schemaId: SchemaId, productId: ProductId } }
-    |   { type: "REMOVE_PRODUCT_FROM_SCHEMA", payload: { schemaId: SchemaId, productId: ProductId } }
-    |   { type: "ADD_SNAPSHOT", payload: Snapshot };
+        { type: 'UPDATE_SCHEMA_TITLE', payload: { id: SchemaId, title: string } }
+    |   { type: 'ADD_SCHEMA', payload: Schema }
+    |   { type: 'REMOVE_SCHEMA', payload: SchemaId }
+
+    |   { type: 'ADD_PRODUCT', payload: { schemaId: SchemaId, product: Product } }
+    |   { type: 'UPDATE_PRODUCT', payload: { id: ProductId, product: Product } }
+    |   { type: 'REMOVE_PRODUCT', payload: ProductId }
+    
+    |   { type: 'ADD_SNAPSHOT', payload: Snapshot }
+
+    |   { type: 'SET_PRODUCTS', payload: Product[] }
+    |   { type: 'SET_SCHEMAS', payload: Schema[] }
+    |   { type: 'SET_SNAPSHOTS', payload: Snapshot[] };
 
 //Reducer
 export function InventoryReducer(
@@ -28,20 +30,18 @@ export function InventoryReducer(
     action: Action
 ): InventoryState {
     switch(action.type) {
-        case "SET_PRODUCTS": {
-            const map = Object.fromEntries(
-                action.payload.map(p => [p.id, p])
-            );
-
-            return { ...state, products: map };
-        }
-
         case "ADD_PRODUCT": {
+            const newProductId = createProductId();
+
             return {
                 ...state,
                 products: {
                     ...state.products,
-                    [action.payload.id]: action.payload
+                    [newProductId]: {
+                        ...action.payload.product,
+                        id: newProductId,
+                        schemaId: action.payload.schemaId
+                    }
                 }
             };
         }
@@ -49,40 +49,30 @@ export function InventoryReducer(
         case "REMOVE_PRODUCT": {
             const id = action.payload;
 
+            //Find if product is used in any snapshot
+            let isUsed = false;
+            Object.entries(state.snapshot).find(([_, snapshot]) => 
+                snapshot.values[id] !== undefined && (isUsed = true));
+
+            if (isUsed) {
+                return {
+                    ...state,
+                    products: {
+                        ...state.products,
+                        [id]: {
+                            ...state.products[id],
+                            schemaId: undefined
+                        }
+                    }
+                };
+            }
+
             //Remove from products
             const { [id]: _, ...restProducts } = state.products;
 
-            //Remove from schemas
-            const updatedSchemas = Object.fromEntries(
-                Object.entries(state.schemas).map(([schemaId, schema]) => [
-                    schemaId,
-                    {
-                        ...schema,
-                        productIds: schema.productIds.filter(pid => pid !== id)
-                    }
-                ])
-            );
-
-            //Remove from snapshots
-            const updatedSnapshots = Object.fromEntries(
-                Object.entries(state.snapshot).map(([snapId, snapshot]) => {
-                    const { [id]: _, ...restValues } = snapshot.values;
-
-                    return [
-                        snapId,
-                        {
-                            ...snapshot,
-                            values: restValues
-                        }
-                    ];
-                })
-            );
-
             return {
                 ...state,
-                products: restProducts,
-                schemas: updatedSchemas,
-                snapshot: updatedSnapshots
+                products: restProducts
             };
         }
 
@@ -103,20 +93,17 @@ export function InventoryReducer(
             };
         }
 
-        case "SET_SCHEMAS": {
-            const map = Object.fromEntries(
-                action.payload.map(s => [s.id, s])
-            );
-
-            return { ...state, schemas: map };
-        }
-
         case "ADD_SCHEMA": {
+            const newSchemaId = createSchemaId();
+
             return {
                 ...state,
                 schemas: {
                     ...state.schemas,
-                    [action.payload.id]: action.payload
+                    [newSchemaId]: {
+                        ...action.payload,
+                        id: newSchemaId
+                    }
                 }
             };
         }
@@ -128,14 +115,43 @@ export function InventoryReducer(
             const { [id]: _, ...restSchemas } = state.schemas;
 
             //Remove related snapshots
+            let snapshotsToRemove: Record<string, Snapshot> = {};
             const filteredSnapshots = Object.fromEntries(
                 Object.entries(state.snapshot).filter(
-                    ([_, snapshot]) => snapshot.schemaId !== id
+                    ([_, snapshot]) => {
+                        if (snapshot.schemaId === id) {
+                            snapshotsToRemove[snapshot.id] = snapshot;
+                            return false;
+                        }
+                        return true;
+                    }
+                )
+            );
+
+            //Remove related products in the schema
+            const filteredProducts = Object.fromEntries(
+                Object.entries(state.products).filter(
+                    ([_, products]) => {
+                        if (products.schemaId === id)
+                            return false;
+
+                        //Find if any product that doesnt belong to the schemas
+                        //is used in any snapshot that belongs to the schema
+                        //if so, remove product from products
+                        if (products.schemaId === undefined) {
+                            let isUsed = false;
+                            Object.entries(snapshotsToRemove).find(([_, snapshot]) => 
+                                snapshot.values[products.id] !== undefined && (isUsed = true));
+                            if (isUsed)
+                                return false;
+                        }
+                        return true;
+                    }
                 )
             );
 
             return {
-                ...state,
+                products: filteredProducts,
                 schemas: restSchemas,
                 snapshot: filteredSnapshots
             };
@@ -160,48 +176,6 @@ export function InventoryReducer(
             };
         }
 
-        case "ADD_PRODUCT_TO_SCHEMA": {
-            const { schemaId, productId } = action.payload;
-            
-            const schema = state.schemas[schemaId];
-            if (!schema)
-                return state;
-
-            //Avoid duplicates
-            if (schema.productIds.includes(productId))
-                return state;
-
-            return {
-                ...state,
-                schemas: {
-                    ...state.schemas,
-                    [schemaId]: {
-                        ...schema,
-                        productIds: [...schema.productIds, productId]
-                    }
-                }
-            };
-        }
-
-        case "REMOVE_PRODUCT_FROM_SCHEMA": {
-            const { schemaId, productId } = action.payload;
-            
-            const schema = state.schemas[schemaId];
-            if (!schema)
-                return state;
-
-            return {
-                ...state,
-                schemas: {
-                    ...state.schemas,
-                    [schemaId]: {
-                        ...schema,
-                        productIds: schema.productIds.filter(id => id !== productId)
-                    }
-                }
-            };
-        }
-
         case "ADD_SNAPSHOT": {
             return {
                 ...state,
@@ -209,6 +183,27 @@ export function InventoryReducer(
                     ...state.snapshot,
                     [action.payload.id]: action.payload
                 }
+            };
+        }
+
+        case "SET_PRODUCTS": {
+            return {
+                ...state,
+                products: Object.fromEntries(action.payload.map(product => [product.id, product]))
+            };
+        }
+
+        case "SET_SCHEMAS": {
+            return {
+                ...state,
+                schemas: Object.fromEntries(action.payload.map(schema => [schema.id, schema]))
+            };
+        }
+
+        case "SET_SNAPSHOTS": {
+            return {
+                ...state,
+                snapshot: Object.fromEntries(action.payload.map(snapshot => [snapshot.id, snapshot]))
             };
         }
 

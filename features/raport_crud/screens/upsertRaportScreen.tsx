@@ -20,7 +20,8 @@ export const UpsertRaportScreen = ({ navigation, route }: Props) => {
             addSchema({
                 id: createSchemaId(),
                 title: title,
-                productIds: []
+                storageType: "local",
+                updatedAt: new Date(),
             });
         }
         navigation.goBack();

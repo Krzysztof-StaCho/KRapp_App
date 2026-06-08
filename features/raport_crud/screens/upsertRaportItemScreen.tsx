@@ -19,16 +19,18 @@ export const UpsertRaportItemScreen = ({ navigation, route} : Props) => {
             inventoryCtx.updateProduct(productId, {
                 id: productId,
                 name: name,
-                unit: unit as Unit
+                unit: unit as Unit,
+                updatedAt: new Date()
             });
         } else {
             const newProductId = createProductId();
-            inventoryCtx.addProduct({
+            inventoryCtx.addProduct(raportId, {
                 id: newProductId,
                 name: name,
-                unit: unit as Unit
+                unit: unit as Unit,
+                updatedAt: new Date()
+                
             });
-            inventoryCtx.addProductToSchema(raportId, newProductId);
         }
         navigation.goBack();
     };
