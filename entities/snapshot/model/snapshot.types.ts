@@ -1,13 +1,13 @@
-import { ProductId } from "@/entities/product/model/product.types";
-import { SchemaId } from "@/entities/schema/model/schema.types";
+import { StoreId, StoreModel } from "@/entities/base/storeModel";
 import { v4 as uuid } from "uuid";
 
-export type SnapshotId = string;
 export const createSnapshotId = () => `snap_${uuid()}`;
 
 export type Snapshot = {
-    id: SnapshotId,
-    schemaId: SchemaId,
-    date: Date,
-    values: Record<ProductId, number>
+  id: StoreId;
+  schemaId: StoreId;
+  date: Date;
+  values: Record<StoreId, number>;
 };
+
+export type SnapshotSM = Snapshot & StoreModel;
