@@ -1,7 +1,7 @@
 import { StoreId, StoreModel } from "@/entities/base/storeModel";
-import { v4 as uuid } from "uuid";
+import { randomUUID } from "expo-crypto";
 
-export const createSnapshotId = () => `snap_${uuid()}`;
+export const createSnapshotId = () => `snap_${randomUUID()}`;
 
 export type Snapshot = {
   schemaId: StoreId;

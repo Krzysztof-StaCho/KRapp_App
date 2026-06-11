@@ -1,11 +1,11 @@
 import { RaportParamList } from "@/app/navigation/paramList";
-import { createProductId, Unit } from "@/entities/product/model/product.types";
+import { Unit } from "@/entities/product/model/product.types";
 import { validateHandlers } from "@/hooks/useInput";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Alert } from "react-native";
 import {
-    PageProps,
-    UpsertRaportItemTemplate,
+  PageProps,
+  UpsertRaportItemTemplate,
 } from "../components/template/upsertRaportItemTemplate";
 import { useInventory } from "../hooks/useInventory";
 
@@ -22,11 +22,11 @@ export const UpsertRaportItemScreen = ({ navigation, route }: Props) => {
   const confirmFormHandler = (name: string, unit: string) => {
     if (productId) {
       inventoryCtx.updateProduct(productId, {
+        schemaId: raportId,
         name: name,
         unit: unit as Unit,
       });
     } else {
-      const newProductId = createProductId();
       inventoryCtx.addProduct(raportId, {
         name: name,
         unit: unit as Unit,

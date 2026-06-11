@@ -1,7 +1,7 @@
 import { StoreModel } from "@/entities/base/storeModel";
-import { v4 as uuid } from "uuid";
+import { randomUUID } from "expo-crypto";
 
-export const createSchemaId = () => `schema_${uuid()}`;
+export const createSchemaId = () => `schema_${randomUUID()}`;
 
 export type Schema = {
   title: string;

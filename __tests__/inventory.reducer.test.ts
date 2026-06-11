@@ -4,7 +4,7 @@ import { Product, Unit } from "@/entities/product/model/product.types";
 import { Schema } from "@/entities/schema/model/schema.types";
 import { Snapshot } from "@/entities/snapshot/model/snapshot.types";
 
-jest.mock("uuid");
+jest.mock("expo-crypto");
 
 function createState() {
   return structuredClone(InventoryInitial);

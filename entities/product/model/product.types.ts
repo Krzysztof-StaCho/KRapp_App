@@ -1,8 +1,7 @@
-import { StoreModel } from "@/entities/base/storeModel";
-import { SchemaId } from "@/entities/schema/model/schema.types";
-import { v4 as uuid } from "uuid";
+import { StoreId, StoreModel } from "@/entities/base/storeModel";
+import { randomUUID } from "expo-crypto";
 
-export const createProductId = () => `prod_${uuid()}`;
+export const createProductId = () => `prod_${randomUUID()}`;
 
 export enum Unit {
   SET = "paczka",
@@ -10,7 +9,7 @@ export enum Unit {
 }
 
 export type Product = {
-  schemaId?: SchemaId;
+  schemaId?: StoreId;
   name: string;
   unit: Unit;
 };

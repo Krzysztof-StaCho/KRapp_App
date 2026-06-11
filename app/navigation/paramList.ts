@@ -1,41 +1,40 @@
-import { ProductId } from "@/entities/product/model/product.types";
-import { SchemaId } from "@/entities/schema/model/schema.types";
+import { StoreId } from "@/entities/base/storeModel";
 
 export type RootParamList = {
-    /**
-     * Home (Startup page)
-     */
-    Home: undefined
+  /**
+   * Home (Startup page)
+   */
+  Home: undefined;
 
-    /**
-     * Raport Section
-     */
-    RaportStack: undefined
-}
+  /**
+   * Raport Section
+   */
+  RaportStack: undefined;
+};
 
 export type RaportParamList = {
-    /**
-     * Raport -> Item selection
-     */
-    RaportSelection: undefined;
+  /**
+   * Raport -> Item selection
+   */
+  RaportSelection: undefined;
 
-    /**
-     * Raport -> Overview
-     */
-    RaportOverview: { raportId: SchemaId };
+  /**
+   * Raport -> Overview
+   */
+  RaportOverview: { raportId: StoreId };
 
-    /**
-     * Raport -> Raport table
-     */
-    RaportRTable: { raportId: SchemaId };
+  /**
+   * Raport -> Raport table
+   */
+  RaportRTable: { raportId: StoreId };
 
-    /**
-     * Raport -> Create Raport
-     */
-    RaportRUpsert: { raportId?: SchemaId };
+  /**
+   * Raport -> Create Raport
+   */
+  RaportRUpsert: { raportId?: StoreId };
 
-    /**
-     * Raport -> Create Raport Item
-     */
-    RaportRItemUpsert: { raportId: SchemaId, productId?: ProductId };
-}
+  /**
+   * Raport -> Create Raport Item
+   */
+  RaportRItemUpsert: { raportId: StoreId; productId?: StoreId };
+};
