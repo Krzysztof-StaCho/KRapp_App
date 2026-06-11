@@ -37,6 +37,7 @@ export function InventoryReducer(
 ): InventoryState {
   switch (action.type) {
     case "ADD_PRODUCT": {
+      const { schemaId, product } = action.payload;
       const newProductId = createProductId();
 
       return {
@@ -44,7 +45,8 @@ export function InventoryReducer(
         products: {
           ...state.products,
           [newProductId]: {
-            ...action.payload.product,
+            ...product,
+            schemaId: schemaId,
             id: newProductId,
             updatedAt: new Date(),
           },
