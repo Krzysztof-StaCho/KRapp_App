@@ -7,3 +7,8 @@ export type StoreModel = {
   id: StoreId;
   updatedAt: Date;
 };
+
+export type StoreRow = {
+  id: string;
+  updatedAt: string; // ISO string
+};

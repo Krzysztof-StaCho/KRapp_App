@@ -53,26 +53,7 @@ export const InventoryInitial: InventoryState = {
       updatedAt: new Date(),
     },
   },
-  schemas: {
-    s1: {
-      id: "s1",
-      title: "Kierowcy Zamówienie",
-      storageType: "local",
-      updatedAt: new Date(),
-    },
-    s2: {
-      id: "s2",
-      title: "Szafka",
-      storageType: "local",
-      updatedAt: new Date(),
-    },
-    s3: {
-      id: "s3",
-      title: "Napoje",
-      storageType: "local",
-      updatedAt: new Date(),
-    },
-  },
+  schemas: {},
   snapshot: {
     snap1: {
       id: "snap1",

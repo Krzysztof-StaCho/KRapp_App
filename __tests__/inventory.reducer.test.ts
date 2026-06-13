@@ -1,7 +1,11 @@
 import { InventoryInitial } from "@/entities/inventory/model/initialState";
 import { InventoryReducer } from "@/entities/inventory/model/inventory.reducer";
 import { Product, Unit } from "@/entities/product/model/product.types";
-import { Schema } from "@/entities/schema/model/schema.types";
+import {
+  createSchemaId,
+  Schema,
+  SchemaSM,
+} from "@/entities/schema/model/schema.types";
 import { Snapshot } from "@/entities/snapshot/model/snapshot.types";
 
 jest.mock("expo-crypto");
@@ -14,19 +18,18 @@ describe("InventoryReducer tests", () => {
   test("Adding schema to inventory", () => {
     const state = createState();
 
-    const newSchema: Schema = {
+    const newSchema: SchemaSM = {
+      id: createSchemaId(),
       title: "Test Schema",
       storageType: "local",
+      updatedAt: new Date(),
     };
 
     const newState = InventoryReducer(state, {
       type: "ADD_SCHEMA",
       payload: newSchema,
     });
-
-    const findedSchema = Object.values(newState.schemas).find(
-      (schema) => schema.title === newSchema.title,
-    ) as Schema | undefined;
+    const findedSchema = newState.schemas[newSchema.id];
 
     expect(findedSchema).toBeDefined();
     expect(findedSchema).toMatchObject(newSchema);

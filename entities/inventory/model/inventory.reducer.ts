@@ -4,11 +4,7 @@ import {
   Product,
   ProductSM,
 } from "@/entities/product/model/product.types";
-import {
-  createSchemaId,
-  Schema,
-  SchemaSM,
-} from "@/entities/schema/model/schema.types";
+import { createSchemaId, SchemaSM } from "@/entities/schema/model/schema.types";
 import { Snapshot, SnapshotSM } from "@/entities/snapshot/model/snapshot.types";
 
 export type InventoryState = {
@@ -19,8 +15,8 @@ export type InventoryState = {
 
 //Action TYPES
 type Action =
-  | { type: "ADD_SCHEMA"; payload: Schema }
-  | { type: "UPDATE_SCHEMA"; payload: { id: StoreId; schema: Schema } }
+  | { type: "ADD_SCHEMA"; payload: SchemaSM }
+  | { type: "UPDATE_SCHEMA"; payload: SchemaSM }
   | { type: "REMOVE_SCHEMA"; payload: StoreId }
   | { type: "ADD_PRODUCT"; payload: { schemaId: StoreId; product: Product } }
   | { type: "UPDATE_PRODUCT"; payload: { id: StoreId; product: Product } }
@@ -106,16 +102,12 @@ export function InventoryReducer(
     }
 
     case "ADD_SCHEMA": {
-      const newSchemaId = createSchemaId();
-
       return {
         ...state,
         schemas: {
           ...state.schemas,
-          [newSchemaId]: {
+          [action.payload.id]: {
             ...action.payload,
-            id: newSchemaId,
-            updatedAt: new Date(),
           },
         },
       };
@@ -167,19 +159,17 @@ export function InventoryReducer(
     }
 
     case "UPDATE_SCHEMA": {
-      const { id, schema } = action.payload;
+      const schema = action.payload;
 
-      const existingSchema = state.schemas[id];
+      const existingSchema = state.schemas[schema.id];
       if (!existingSchema) return state;
 
       return {
         ...state,
         schemas: {
           ...state.schemas,
-          [id]: {
+          [schema.id]: {
             ...schema,
-            id,
-            updatedAt: new Date(),
           },
         },
       };

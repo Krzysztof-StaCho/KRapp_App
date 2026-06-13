@@ -1,93 +1,110 @@
+import { createSchemaSM, updateSchemaSM } from "@/domain/schema/schema.factory";
 import { StoreId } from "@/entities/base/storeModel";
+import { DatabaseError } from "@/entities/errors/database.error";
 import { InventoryInitial } from "@/entities/inventory/model/initialState";
 import {
   InventoryReducer,
   InventoryState,
 } from "@/entities/inventory/model/inventory.reducer";
-import { Product, ProductSM } from "@/entities/product/model/product.types";
-import { Schema, SchemaSM } from "@/entities/schema/model/schema.types";
-import { Snapshot, SnapshotSM } from "@/entities/snapshot/model/snapshot.types";
-import { StorageStore } from "@/services/storage/storageStore";
-import { createContext, ReactNode, useReducer } from "react";
+import { Product } from "@/entities/product/model/product.types";
+import { Schema } from "@/entities/schema/model/schema.types";
+import { Snapshot } from "@/entities/snapshot/model/snapshot.types";
+import { StoreType } from "@/services/storage/storageStore";
+import { createContext, ReactNode, useEffect, useReducer } from "react";
+import { Alert } from "react-native";
 
 type InventoryContextType = {
   state: InventoryState;
 
-  addSchema: (schema: Schema) => void;
-  updateSchema: (id: StoreId, schema: Schema) => void;
-  removeSchema: (id: StoreId) => void;
+  addSchema: (schema: Schema) => Promise<void>;
+  updateSchema: (id: StoreId, schema: Schema) => Promise<void>;
+  removeSchema: (id: StoreId) => Promise<void>;
 
   addProduct: (schemaId: StoreId, product: Product) => void;
   removeProduct: (id: StoreId) => void;
   updateProduct: (id: StoreId, product: Product) => void;
 
   addSnapshot: (snapshot: Snapshot) => void;
-
-  setSchemas: (schemas: SchemaSM[]) => void;
-  setProducts: (products: ProductSM[]) => void;
-  setSnapshots: (snapshots: SnapshotSM[]) => void;
 };
 
 export const InventoryContext = createContext<InventoryContextType | null>(
   null,
 );
 
-export const InventoryProvider = ({ children }: { children: ReactNode }) => {
+export const InventoryProvider = ({
+  children,
+  repositories,
+}: {
+  children: ReactNode;
+  repositories: StoreType;
+}) => {
   const [state, dispatch] = useReducer(InventoryReducer, InventoryInitial);
 
+  useEffect(() => {
+    const loadInventory = async () => {
+      try {
+        const schemas = await repositories.local.schemas.getAll();
+
+        dispatch({
+          type: "SET_SCHEMAS",
+          payload: schemas,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    loadInventory();
+  }, [repositories]);
+
   //Action wrappers
-  const updateSchema = (id: StoreId, schema: Schema) => {
-    dispatch({ type: "UPDATE_SCHEMA", payload: { id, schema } });
+  const updateSchema = async (id: StoreId, schema: Schema) => {
+    const schemaSM = updateSchemaSM(schema, id);
 
-    StorageStore.local.save(state);
+    try {
+      await repositories.local.schemas.update(schemaSM);
+
+      dispatch({ type: "UPDATE_SCHEMA", payload: schemaSM });
+    } catch (error) {
+      if (error instanceof DatabaseError)
+        Alert.alert("Database error", error.message);
+    }
   };
-  const addSchema = (schema: Schema) => {
-    dispatch({ type: "ADD_SCHEMA", payload: schema });
+  const addSchema = async (schema: Schema) => {
+    const schemaSM = createSchemaSM(schema);
 
-    StorageStore.local.save(state);
+    try {
+      await repositories.local.schemas.create(schemaSM);
+
+      dispatch({ type: "ADD_SCHEMA", payload: schemaSM });
+    } catch (error) {
+      if (error instanceof DatabaseError)
+        Alert.alert("Database error", error.message);
+    }
   };
-  const removeSchema = (id: StoreId) => {
-    dispatch({ type: "REMOVE_SCHEMA", payload: id });
+  const removeSchema = async (id: StoreId) => {
+    try {
+      await repositories.local.schemas.delete(id);
 
-    StorageStore.local.save(state);
+      dispatch({ type: "REMOVE_SCHEMA", payload: id });
+    } catch (error) {
+      if (error instanceof DatabaseError)
+        Alert.alert("Database error", error.message);
+    }
   };
 
   const addProduct = (schemaId: StoreId, product: Product) => {
     dispatch({ type: "ADD_PRODUCT", payload: { schemaId, product } });
-
-    StorageStore.local.save(state);
   };
   const removeProduct = (id: StoreId) => {
     dispatch({ type: "REMOVE_PRODUCT", payload: id });
-
-    StorageStore.local.save(state);
   };
   const updateProduct = (id: StoreId, product: Product) => {
     dispatch({ type: "UPDATE_PRODUCT", payload: { id, product } });
-
-    StorageStore.local.save(state);
   };
 
   const addSnapshot = (snapshot: Snapshot) => {
     dispatch({ type: "ADD_SNAPSHOT", payload: snapshot });
-
-    StorageStore.local.save(state);
-  };
-
-  const setSchemas = (schemas: SchemaSM[]) => {
-    dispatch({ type: "SET_SCHEMAS", payload: schemas });
-
-    StorageStore.local.save(state);
-  };
-  const setProducts = (products: ProductSM[]) => {
-    dispatch({ type: "SET_PRODUCTS", payload: products });
-
-    StorageStore.local.save(state);
-  };
-  const setSnapshots = (snapshots: SnapshotSM[]) => {
-    dispatch({ type: "SET_SNAPSHOTS", payload: snapshots });
-
-    StorageStore.local.save(state);
   };
 
   return (
@@ -101,9 +118,6 @@ export const InventoryProvider = ({ children }: { children: ReactNode }) => {
         removeProduct,
         updateProduct,
         addSnapshot,
-        setSchemas,
-        setProducts,
-        setSnapshots,
       }}
     >
       {children}

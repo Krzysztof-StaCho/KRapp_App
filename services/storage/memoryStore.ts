@@ -1,5 +1,5 @@
 import { InventoryState } from "@/entities/inventory/model/inventory.reducer";
-import { InventoryRepository } from "./storeRepository";
+import { InventoryRepository } from "./interfaces/storeRepository";
 
 export class MemoryStore implements InventoryRepository {
   private data: InventoryState;

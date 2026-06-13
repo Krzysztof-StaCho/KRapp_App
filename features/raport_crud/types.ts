@@ -1,6 +1,6 @@
-import { SchemaId } from "@/entities/schema/model/schema.types";
+import { StoreId } from "@/entities/base/storeModel";
 
 export type SchemaHeader = {
-    id: SchemaId,
-    title: string
+  id: StoreId;
+  title: string;
 };
