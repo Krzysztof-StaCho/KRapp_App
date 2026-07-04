@@ -1,8 +1,6 @@
 import { StoreId } from "@/entities/base/storeModel";
 import {
-  createProductId,
-  Product,
-  ProductSM,
+  ProductSM
 } from "@/entities/product/model/product.types";
 import { createSchemaId, SchemaSM } from "@/entities/schema/model/schema.types";
 import { Snapshot, SnapshotSM } from "@/entities/snapshot/model/snapshot.types";
@@ -18,8 +16,8 @@ type Action =
   | { type: "ADD_SCHEMA"; payload: SchemaSM }
   | { type: "UPDATE_SCHEMA"; payload: SchemaSM }
   | { type: "REMOVE_SCHEMA"; payload: StoreId }
-  | { type: "ADD_PRODUCT"; payload: { schemaId: StoreId; product: Product } }
-  | { type: "UPDATE_PRODUCT"; payload: { id: StoreId; product: Product } }
+  | { type: "ADD_PRODUCT"; payload: ProductSM }
+  | { type: "UPDATE_PRODUCT"; payload: ProductSM }
   | { type: "REMOVE_PRODUCT"; payload: StoreId }
   | { type: "ADD_SNAPSHOT"; payload: Snapshot }
   | { type: "SET_PRODUCTS"; payload: ProductSM[] }
@@ -33,18 +31,14 @@ export function InventoryReducer(
 ): InventoryState {
   switch (action.type) {
     case "ADD_PRODUCT": {
-      const { schemaId, product } = action.payload;
-      const newProductId = createProductId();
+      const product = action.payload;
 
       return {
         ...state,
         products: {
           ...state.products,
-          [newProductId]: {
+          [product.id]: {
             ...product,
-            schemaId: schemaId,
-            id: newProductId,
-            updatedAt: new Date(),
           },
         },
       };
@@ -83,19 +77,17 @@ export function InventoryReducer(
     }
 
     case "UPDATE_PRODUCT": {
-      const { id, product } = action.payload;
+      const product = action.payload;
 
-      const currentProduct = state.products[id];
+      const currentProduct = state.products[product.id];
       if (!currentProduct) return state;
 
       return {
         ...state,
         products: {
           ...state.products,
-          [id]: {
+          [product.id]: {
             ...product,
-            id,
-            updatedAt: new Date(),
           },
         },
       };

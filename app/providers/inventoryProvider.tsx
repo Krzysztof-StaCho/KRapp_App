@@ -1,3 +1,7 @@
+import {
+  createProductSM,
+  updateProductSM,
+} from "@/domain/product/product.factory";
 import { createSchemaSM, updateSchemaSM } from "@/domain/schema/schema.factory";
 import { StoreId } from "@/entities/base/storeModel";
 import { DatabaseError } from "@/entities/errors/database.error";
@@ -44,10 +48,15 @@ export const InventoryProvider = ({
     const loadInventory = async () => {
       try {
         const schemas = await repositories.local.schemas.getAll();
+        const products = await repositories.local.products.getAll();
 
         dispatch({
           type: "SET_SCHEMAS",
           payload: schemas,
+        });
+        dispatch({
+          type: "SET_PRODUCTS",
+          payload: products,
         });
       } catch (error) {
         console.error(error);
@@ -66,8 +75,9 @@ export const InventoryProvider = ({
 
       dispatch({ type: "UPDATE_SCHEMA", payload: schemaSM });
     } catch (error) {
-      if (error instanceof DatabaseError)
+      if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
+      } else throw error;
     }
   };
   const addSchema = async (schema: Schema) => {
@@ -78,8 +88,9 @@ export const InventoryProvider = ({
 
       dispatch({ type: "ADD_SCHEMA", payload: schemaSM });
     } catch (error) {
-      if (error instanceof DatabaseError)
+      if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
+      } else throw error;
     }
   };
   const removeSchema = async (id: StoreId) => {
@@ -88,19 +99,52 @@ export const InventoryProvider = ({
 
       dispatch({ type: "REMOVE_SCHEMA", payload: id });
     } catch (error) {
-      if (error instanceof DatabaseError)
+      if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
+      } else throw error;
     }
   };
 
-  const addProduct = (schemaId: StoreId, product: Product) => {
-    dispatch({ type: "ADD_PRODUCT", payload: { schemaId, product } });
+  const addProduct = async (schemaId: StoreId, product: Product) => {
+    const productSM = createProductSM(product, schemaId);
+
+    try {
+      await repositories.local.products.create(productSM);
+
+      dispatch({ type: "ADD_PRODUCT", payload: productSM });
+    } catch (error) {
+      if (error instanceof DatabaseError) {
+        Alert.alert("Database error", error.message);
+      } else throw error;
+    }
   };
-  const removeProduct = (id: StoreId) => {
-    dispatch({ type: "REMOVE_PRODUCT", payload: id });
+
+  const removeProduct = async (id: StoreId) => {
+    try {
+      await repositories.local.products.delete(id);
+
+      dispatch({ type: "REMOVE_PRODUCT", payload: id });
+    } catch (error) {
+      if (error instanceof DatabaseError) {
+        Alert.alert("Database error", error.message);
+      } else throw error;
+    }
   };
-  const updateProduct = (id: StoreId, product: Product) => {
-    dispatch({ type: "UPDATE_PRODUCT", payload: { id, product } });
+
+  const updateProduct = async (id: StoreId, product: Product) => {
+    if (product.schemaId === undefined)
+      throw new Error("Updating undefined product");
+    const productSM = updateProductSM(product, id, product.schemaId);
+
+    try {
+      await repositories.local.products.update(productSM);
+
+      dispatch({ type: "UPDATE_PRODUCT", payload: productSM });
+    } catch (error) {
+      if (error instanceof DatabaseError) {
+        Alert.alert("Database error", error.message);
+      } else throw error;
+    }
   };
 
   const addSnapshot = (snapshot: Snapshot) => {

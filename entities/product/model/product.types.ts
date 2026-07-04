@@ -1,4 +1,4 @@
-import { StoreId, StoreModel } from "@/entities/base/storeModel";
+import { StoreId, StoreModel, StoreRow } from "@/entities/base/storeModel";
 import { randomUUID } from "expo-crypto";
 
 export const createProductId = () => `prod_${randomUUID()}`;
@@ -13,5 +13,11 @@ export type Product = {
   name: string;
   unit: Unit;
 };
+
+export type ProductRow = {
+  schemaId: StoreId;
+  name: string;
+  unit: "SET" | "PIECE";
+} & StoreRow;
 
 export type ProductSM = Product & StoreModel;

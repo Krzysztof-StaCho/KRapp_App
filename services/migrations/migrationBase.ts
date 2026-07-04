@@ -1,8 +1,9 @@
 import { SQLiteDatabase } from "expo-sqlite";
 import createSchemaDatabase from "./001_createSchemaDatabase";
+import createProductTable from "./002_createProductTable";
 
 export async function migrateDbIfNeeded(db: SQLiteDatabase) {
-  const DATABASE_VERSION = 1;
+  const DATABASE_VERSION = 2;
 
   try {
     console.log("Migration started");
@@ -16,8 +17,11 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase) {
     if (currentVersion >= DATABASE_VERSION) return;
 
     console.log("Creating tables");
-    if (currentVersion === 0) {
+    if (currentVersion <= 0) {
       await db.execAsync(createSchemaDatabase);
+    }
+    if (currentVersion <= 1) {
+      await db.execAsync(createProductTable);
     }
     console.log("Tables created");
 
