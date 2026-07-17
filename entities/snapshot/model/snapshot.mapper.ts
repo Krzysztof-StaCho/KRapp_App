@@ -31,6 +31,7 @@ export function rowToSnapshotSM(
     date: new Date(header.date),
     values: values,
     updatedAt: new Date(header.updatedAt),
+    syncStatus: "synced",
   };
 }
 
@@ -43,6 +44,7 @@ export function snapshotSMToRow(
       productId: item[0],
       quantity: item[1],
       updatedAt: new Date().toISOString(),
+      syncStatus: "synced",
     };
   });
 
@@ -52,6 +54,7 @@ export function snapshotSMToRow(
       schemaId: snapshot.schemaId,
       date: snapshot.date.toISOString(),
       updatedAt: snapshot.updatedAt.toISOString(),
+      syncStatus: "synced",
     },
     items,
   ];
@@ -64,5 +67,6 @@ export function createSnapshotSM(snapshot: Snapshot): SnapshotSM {
     values: snapshot.values,
     id: createSnapshotId(),
     updatedAt: new Date(),
+    syncStatus: "synced",
   };
 }

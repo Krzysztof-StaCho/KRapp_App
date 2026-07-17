@@ -2,9 +2,10 @@ import { SQLiteDatabase } from "expo-sqlite";
 import createSchemaDatabase from "./001_createSchemaDatabase";
 import createProductTable from "./002_createProductTable";
 import createSnapshotTable from "./003_createSnapshotTable";
+import addSyncFieldToTables from "./004_addSyncFieldToTables";
 
 export async function migrateDbIfNeeded(db: SQLiteDatabase) {
-  const DATABASE_VERSION = 3;
+  const DATABASE_VERSION = 4;
 
   try {
     console.log("Migration started");
@@ -26,6 +27,9 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase) {
     }
     if (currentVersion <= 2) {
       await db.execAsync(createSnapshotTable);
+    }
+    if (currentVersion <= 3) {
+      await db.execAsync(addSyncFieldToTables);
     }
     console.log("Tables created");
 

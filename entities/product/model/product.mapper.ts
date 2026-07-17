@@ -21,6 +21,7 @@ export function rowToProductSM(row: ProductRow): ProductSM {
     name: row.name,
     unit: unit,
     updatedAt: new Date(row.updatedAt),
+    syncStatus: "synced",
   };
 }
 
@@ -47,5 +48,6 @@ export function productSMToRow(product: ProductSM): ProductRow {
     name: product.name,
     unit: unit,
     updatedAt: product.updatedAt.toISOString(),
+    syncStatus: "synced",
   };
 }
