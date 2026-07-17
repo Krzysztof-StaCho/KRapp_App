@@ -1,8 +1,6 @@
 import { StoreId } from "@/entities/base/storeModel";
-import {
-  ProductSM
-} from "@/entities/product/model/product.types";
-import { createSchemaId, SchemaSM } from "@/entities/schema/model/schema.types";
+import { ProductSM } from "@/entities/product/model/product.types";
+import { SchemaSM } from "@/entities/schema/model/schema.types";
 import { Snapshot, SnapshotSM } from "@/entities/snapshot/model/snapshot.types";
 
 export type InventoryState = {
@@ -19,7 +17,7 @@ type Action =
   | { type: "ADD_PRODUCT"; payload: ProductSM }
   | { type: "UPDATE_PRODUCT"; payload: ProductSM }
   | { type: "REMOVE_PRODUCT"; payload: StoreId }
-  | { type: "ADD_SNAPSHOT"; payload: Snapshot }
+  | { type: "ADD_SNAPSHOT"; payload: SnapshotSM }
   | { type: "SET_PRODUCTS"; payload: ProductSM[] }
   | { type: "SET_SCHEMAS"; payload: SchemaSM[] }
   | { type: "SET_SNAPSHOTS"; payload: SnapshotSM[] };
@@ -168,16 +166,12 @@ export function InventoryReducer(
     }
 
     case "ADD_SNAPSHOT": {
-      const newSnapshotId = createSchemaId();
-
       return {
         ...state,
         snapshot: {
           ...state.snapshot,
-          [newSnapshotId]: {
+          [action.payload.id]: {
             ...action.payload,
-            id: newSnapshotId,
-            updatedAt: new Date(),
           },
         },
       };

@@ -12,6 +12,7 @@ import {
 } from "@/entities/inventory/model/inventory.reducer";
 import { Product } from "@/entities/product/model/product.types";
 import { Schema } from "@/entities/schema/model/schema.types";
+import { createSnapshotSM } from "@/entities/snapshot/model/snapshot.mapper";
 import { Snapshot } from "@/entities/snapshot/model/snapshot.types";
 import { StoreType } from "@/services/storage/storageStore";
 import { createContext, ReactNode, useEffect, useReducer } from "react";
@@ -49,6 +50,7 @@ export const InventoryProvider = ({
       try {
         const schemas = await repositories.local.schemas.getAll();
         const products = await repositories.local.products.getAll();
+        const snapshots = await repositories.local.snapshots.getAll();
 
         dispatch({
           type: "SET_SCHEMAS",
@@ -57,6 +59,10 @@ export const InventoryProvider = ({
         dispatch({
           type: "SET_PRODUCTS",
           payload: products,
+        });
+        dispatch({
+          type: "SET_SNAPSHOTS",
+          payload: snapshots,
         });
       } catch (error) {
         console.error(error);
@@ -147,8 +153,18 @@ export const InventoryProvider = ({
     }
   };
 
-  const addSnapshot = (snapshot: Snapshot) => {
-    dispatch({ type: "ADD_SNAPSHOT", payload: snapshot });
+  const addSnapshot = async (snapshot: Snapshot) => {
+    const snapshotSM = createSnapshotSM(snapshot);
+
+    try {
+      await repositories.local.snapshots.create(snapshotSM);
+
+      dispatch({ type: "ADD_SNAPSHOT", payload: snapshotSM });
+    } catch (error) {
+      if (error instanceof DatabaseError) {
+        Alert.alert("Database error", error.message);
+      } else throw error;
+    }
   };
 
   return (

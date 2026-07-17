@@ -1,4 +1,4 @@
-import { StoreId, StoreModel } from "@/entities/base/storeModel";
+import { StoreId, StoreModel, StoreRow } from "@/entities/base/storeModel";
 import { randomUUID } from "expo-crypto";
 
 export const createSnapshotId = () => `snap_${randomUUID()}`;
@@ -8,5 +8,15 @@ export type Snapshot = {
   date: Date;
   values: Record<StoreId, number>;
 };
+
+export type SnapshotHeaderRow = {
+  schemaId: StoreId;
+  date: string;
+} & StoreRow;
+
+export type SnapshotItemRow = {
+  productId: StoreId;
+  quantity: number;
+} & StoreRow;
 
 export type SnapshotSM = Snapshot & StoreModel;
