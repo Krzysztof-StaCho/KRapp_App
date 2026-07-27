@@ -1,8 +1,10 @@
-import {
-  createProductSM,
-  updateProductSM,
-} from "@/domain/product/product.factory";
-import { createSchemaSM, updateSchemaSM } from "@/domain/schema/schema.factory";
+import { AddProductUseCase } from "@/domain/useCases/addProductUseCase";
+import { AddSchemaUseCase } from "@/domain/useCases/addSchemaUseCase";
+import { AddSnapshotUseCase } from "@/domain/useCases/addSnapshotUseCase";
+import { EditProductUseCase } from "@/domain/useCases/editProductUseCase";
+import { EditSchemaUseCase } from "@/domain/useCases/editSchemaUseCase";
+import { RemoveProductUseCase } from "@/domain/useCases/removeProductUseCase";
+import { RemoveSchemaUseCase } from "@/domain/useCases/removeSchemaUseCase";
 import { StoreId } from "@/entities/base/storeModel";
 import { DatabaseError } from "@/entities/errors/database.error";
 import { InventoryInitial } from "@/entities/inventory/model/initialState";
@@ -12,7 +14,6 @@ import {
 } from "@/entities/inventory/model/inventory.reducer";
 import { Product } from "@/entities/product/model/product.types";
 import { Schema } from "@/entities/schema/model/schema.types";
-import { createSnapshotSM } from "@/entities/snapshot/model/snapshot.mapper";
 import { Snapshot } from "@/entities/snapshot/model/snapshot.types";
 import { StoreType } from "@/services/storage/storageStore";
 import { createContext, ReactNode, useEffect, useReducer } from "react";
@@ -45,6 +46,44 @@ export const InventoryProvider = ({
 }) => {
   const [state, dispatch] = useReducer(InventoryReducer, InventoryInitial);
 
+  const addSchemaUseCase = new AddSchemaUseCase(
+    repositories,
+    dispatch,
+    () => state,
+  );
+  const editSchemaUseCase = new EditSchemaUseCase(
+    repositories,
+    dispatch,
+    () => state,
+  );
+  const removeSchemaUseCase = new RemoveSchemaUseCase(
+    repositories,
+    dispatch,
+    () => state,
+  );
+
+  const addProductUseCase = new AddProductUseCase(
+    repositories,
+    dispatch,
+    () => state,
+  );
+  const removeProductUseCase = new RemoveProductUseCase(
+    repositories,
+    dispatch,
+    () => state,
+  );
+  const editProductUseCase = new EditProductUseCase(
+    repositories,
+    dispatch,
+    () => state,
+  );
+
+  const addSnapshotUseCase = new AddSnapshotUseCase(
+    repositories,
+    dispatch,
+    () => state,
+  );
+
   useEffect(() => {
     const loadInventory = async () => {
       try {
@@ -74,12 +113,8 @@ export const InventoryProvider = ({
 
   //Action wrappers
   const updateSchema = async (id: StoreId, schema: Schema) => {
-    const schemaSM = updateSchemaSM(schema, id);
-
     try {
-      await repositories.local.schemas.update(schemaSM);
-
-      dispatch({ type: "UPDATE_SCHEMA", payload: schemaSM });
+      await editSchemaUseCase.execute(id, schema);
     } catch (error) {
       if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
@@ -87,12 +122,8 @@ export const InventoryProvider = ({
     }
   };
   const addSchema = async (schema: Schema) => {
-    const schemaSM = createSchemaSM(schema);
-
     try {
-      await repositories.local.schemas.create(schemaSM);
-
-      dispatch({ type: "ADD_SCHEMA", payload: schemaSM });
+      await addSchemaUseCase.execute(schema);
     } catch (error) {
       if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
@@ -101,9 +132,7 @@ export const InventoryProvider = ({
   };
   const removeSchema = async (id: StoreId) => {
     try {
-      await repositories.local.schemas.delete(id);
-
-      dispatch({ type: "REMOVE_SCHEMA", payload: id });
+      await removeSchemaUseCase.execute(id);
     } catch (error) {
       if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
@@ -112,12 +141,8 @@ export const InventoryProvider = ({
   };
 
   const addProduct = async (schemaId: StoreId, product: Product) => {
-    const productSM = createProductSM(product, schemaId);
-
     try {
-      await repositories.local.products.create(productSM);
-
-      dispatch({ type: "ADD_PRODUCT", payload: productSM });
+      await addProductUseCase.execute(product, schemaId);
     } catch (error) {
       if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
@@ -127,9 +152,7 @@ export const InventoryProvider = ({
 
   const removeProduct = async (id: StoreId) => {
     try {
-      await repositories.local.products.delete(id);
-
-      dispatch({ type: "REMOVE_PRODUCT", payload: id });
+      await removeProductUseCase.execute(id);
     } catch (error) {
       if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
@@ -138,14 +161,8 @@ export const InventoryProvider = ({
   };
 
   const updateProduct = async (id: StoreId, product: Product) => {
-    if (product.schemaId === undefined)
-      throw new Error("Updating undefined product");
-    const productSM = updateProductSM(product, id, product.schemaId);
-
     try {
-      await repositories.local.products.update(productSM);
-
-      dispatch({ type: "UPDATE_PRODUCT", payload: productSM });
+      await editProductUseCase.execute(id, product);
     } catch (error) {
       if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);
@@ -154,12 +171,8 @@ export const InventoryProvider = ({
   };
 
   const addSnapshot = async (snapshot: Snapshot) => {
-    const snapshotSM = createSnapshotSM(snapshot);
-
     try {
-      await repositories.local.snapshots.create(snapshotSM);
-
-      dispatch({ type: "ADD_SNAPSHOT", payload: snapshotSM });
+      await addSnapshotUseCase.execute(snapshot);
     } catch (error) {
       if (error instanceof DatabaseError) {
         Alert.alert("Database error", error.message);

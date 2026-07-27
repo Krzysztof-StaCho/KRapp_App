@@ -10,7 +10,7 @@ export type InventoryState = {
 };
 
 //Action TYPES
-type Action =
+export type Action =
   | { type: "ADD_SCHEMA"; payload: SchemaSM }
   | { type: "UPDATE_SCHEMA"; payload: SchemaSM }
   | { type: "REMOVE_SCHEMA"; payload: StoreId }

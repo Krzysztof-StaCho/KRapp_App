@@ -1,8 +1,8 @@
 import { StoreId } from "@/entities/base/storeModel";
 import {
-    createProductId,
-    Product,
-    ProductSM,
+  createProductId,
+  Product,
+  ProductSM,
 } from "@/entities/product/model/product.types";
 
 export function createProductSM(input: Product, schemaId: StoreId): ProductSM {
@@ -12,6 +12,7 @@ export function createProductSM(input: Product, schemaId: StoreId): ProductSM {
     name: input.name,
     unit: input.unit,
     updatedAt: new Date(),
+    syncStatus: "synced",
   };
 }
 
@@ -26,5 +27,14 @@ export function updateProductSM(
     name: input.name,
     unit: input.unit,
     updatedAt: new Date(),
+    syncStatus: "synced",
+  };
+}
+
+export function deleteProductSM(input: ProductSM): ProductSM {
+  return {
+    ...input,
+    updatedAt: new Date(),
+    syncStatus: "deleted",
   };
 }
